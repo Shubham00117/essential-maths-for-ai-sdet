@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Variables & Expressions - Complete Guide</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .section {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        .section h2 {
+            color: white;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            border-radius: 10px;
+            margin: -40px -40px 30px -40px;
+            text-align: center;
+            font-size: 1.8em;
+        }
+        
+        .section h3 {
+            color: #667eea;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-size: 1.4em;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+        
+        .explanation {
+            background: #e3f2fd;
+            border-left: 5px solid #2196f3;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-size: 1.1em;
+            line-height: 1.8;
+        }
+        
+        .explanation strong {
+            color: #1565c0;
+        }
+        
+        .example-box {
+            background: #f0f7ff;
+            border: 3px solid #667eea;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 25px 0;
+        }
+        
+        .example-box h4 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+        
+        .step {
+            background: #fff9e6;
+            border-left: 5px solid #ffc107;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            font-size: 1.05em;
+            line-height: 1.8;
+        }
+        
+        .step-number {
+            display: inline-block;
+            background: #ffc107;
+            color: #333;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 35px;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        
+        .highlight {
+            background: #ffeb3b;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+        
+        .formula-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 12px;
+            margin: 25px 0;
+            font-size: 1.15em;
+            text-align: center;
+            font-weight: bold;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .key-concept {
+            background: #e8f5e9;
+            border-left: 5px solid #4caf50;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-size: 1.1em;
+            line-height: 1.8;
+        }
+        
+        .key-concept strong {
+            color: #2e7d32;
+        }
+        
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .grid-3 {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .visual-item {
+            background: #f5f5f5;
+            padding: 20px;
+            border-radius: 10px;
+            border: 2px solid #667eea;
+            text-align: center;
+        }
+        
+        .visual-item strong {
+            color: #667eea;
+            display: block;
+            margin-bottom: 10px;
+        }
+        
+        .answer-box {
+            background: #e8f5e9;
+            border-left: 5px solid #4caf50;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            text-align: center;
+            font-size: 1.1em;
+        }
+        
+        .answer-box strong {
+            color: #2e7d32;
+            display: block;
+            font-size: 1.3em;
+            margin-top: 10px;
+        }
+        
+        .note-box {
+            background: #fce4ec;
+            border-left: 5px solid #e91e63;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-size: 1.05em;
+        }
+        
+        .note-box strong {
+            color: #c2185b;
+        }
+        
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 1.05em;
+        }
+        
+        .table th {
+            background: #667eea;
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: bold;
+        }
+        
+        .table td {
+            padding: 12px 15px;
+            border-bottom: 2px solid #ddd;
+        }
+        
+        .table tr:hover {
+            background: #f5f5f5;
+        }
+        
+        .code-box {
+            background: #f5f5f5;
+            border: 2px solid #667eea;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 1.1em;
+            overflow-x: auto;
+        }
+        
+        @media (max-width: 768px) {
+            .grid-2 {
+                grid-template-columns: 1fr;
+            }
+            
+            .grid-3 {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📝 VARIABLES & EXPRESSIONS - Complete Guide</h1>
+        
+        <!-- WHAT ARE VARIABLES -->
+        <div class="section">
+            <h2>What is a Variable?</h2>
+            
+            <div class="explanation">
+                A <strong>variable</strong> is a <strong>symbol (usually a letter) that represents an unknown or changing number</strong>.
+                <br><br>
+                Instead of writing specific numbers, we use letters like x, y, a, b to represent numbers that can change.
+                <br><br>
+                <strong>Think of it as: "A box that holds a number"</strong>
+            </div>
+            
+            <h3>Real-World Examples:</h3>
+            
+            <div class="grid-2">
+                <div class="visual-item">
+                    <strong>📦 A Box with Unknown Contents</strong>
+                    <br><br>
+                    <div style="background: #667eea; color: white; padding: 40px; border-radius: 8px; margin: 15px 0;">
+                        <div style="font-size: 3em;">x</div>
+                        <div style="font-size: 1.2em;">Could be any number!</div>
+                    </div>
+                    <br>
+                    x = 5, 10, 25, 100...
+                </div>
+                
+                <div class="visual-item">
+                    <strong>🎓 Student's Age</strong>
+                    <br><br>
+                    Let age = a
+                    <br><br>
+                    a could be 10, 15, 20...
+                    <br><br>
+                    We use 'a' instead of writing specific ages
+                </div>
+            </div>
+            
+            <div class="key-concept">
+                <strong>✨ REMEMBER:</strong>
+                <br>
+                A variable is just a letter that stands for a number we don't know yet
+                <br>
+                Common variables: x, y, a, b, c, n, m
+            </div>
+        </div>
+        
+        <!-- TYPES OF VARIABLES -->
+        <div class="section">
+            <h2>Types of Variables</h2>
+            
+            <h3>1. Unknown Variable (Solve for it)</h3>
+            
+            <div class="example-box">
+                <h4>Example: x + 5 = 12</h4>
+                
+                <div style="text-align: center; margin: 20px 0;">
+                    <p style="font-size: 1.2em; font-weight: bold;">
+                        Here, <span class="highlight">x is unknown</span>
+                    </p>
+                    <p style="margin-top: 10px;">
+                        We need to find what number x represents
+                    </p>
+                    <p style="margin-top: 10px; color: #667eea; font-weight: bold;">
+                        Answer: x = 7
+                    </p>
+                </div>
+            </div>
+            
+            <h3 style="margin-top: 40px;">2. Variable in a Formula</h3>
+            
+            <div class="example-box">
+                <h4>Example: A = l × w (Area = length × width)</h4>
+                
+                <div style="text-align: center; margin: 20px 0;">
+                    <p style="font-size: 1.1em;">
+                        <strong>A</strong> = area (what we're finding)
+                        <br>
+                        <strong>l</strong> = length (changes depending on the rectangle)
+                        <br>
+                        <strong>w</strong> = width (changes depending on the rectangle)
+                    </p>
+                </div>
+            </div>
+            
+            <h3 style="margin-top: 40px;">3. Variable Representing Quantities</h3>
+            
+            <div class="example-box">
+                <h4>Example: A store has n apples</h4>
+                
+                <div style="text-align: center; margin: 20px 0;">
+                    <p style="font-size: 1.1em;">
+                        <strong>n</strong> represents the number of apples
+                        <br><br>
+                        If they sell 5 apples, remaining = <span class="highlight">n - 5</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- WHAT ARE EXPRESSIONS -->
+        <div class="section">
+            <h2>What is an Expression?</h2>
+            
+            <div class="explanation">
+                An <strong>expression</strong> is a <strong>combination of variables, numbers, and operations</strong> (like +, -, ×, ÷).
+                <br><br>
+                It's a mathematical phrase (not a complete sentence with = sign).
+                <br><br>
+                <strong>Expression examples:</strong> 2x + 5, 3a - 7, n/2 + 10
+            </div>
+            
+            <h3>Parts of an Expression:</h3>
+            
+            <div class="code-box">
+                <strong style="color: #667eea;">Expression: 3x + 5</strong>
+                <br><br>
+                <span style="color: #ff6b6b;">3</span> = Coefficient (the number multiplied by the variable)
+                <br>
+                <span style="color: #2196f3;">x</span> = Variable (the unknown)
+                <br>
+                <span style="color: #4caf50;">+</span> = Operation (plus sign)
+                <br>
+                <span style="color: #ff9800;">5</span> = Constant (a fixed number)
+            </div>
+            
+            <h3 style="margin-top: 40px;">Terms in an Expression:</h3>
+            
+            <div class="explanation">
+                A <strong>term</strong> is a single part of an expression separated by + or - signs.
+                <br><br>
+                Expression: <span class="highlight">2x + 5 - 3y</span>
+                <br><br>
+                This has <strong>3 terms:</strong>
+                <br>
+                • <strong>2x</strong> (first term)
+                <br>
+                • <strong>5</strong> (second term)
+                <br>
+                • <strong>3y</strong> (third term)
+            </div>
+            
+            <h3 style="margin-top: 40px;">Like Terms vs Unlike Terms:</h3>
+            
+            <div class="grid-2">
+                <div class="visual-item">
+                    <strong style="color: #4caf50;">✓ LIKE TERMS</strong>
+                    <br><br>
+                    Have the SAME variable
+                    <br><br>
+                    <span style="color: #333; font-weight: bold;">
+                        3x and 5x
+                        <br>
+                        2a and 7a
+                        <br>
+                        4y and y
+                    </span>
+                    <br><br>
+                    <span style="font-size: 0.9em; color: #666;">
+                        Can be combined!
+                    </span>
+                </div>
+                
+                <div class="visual-item">
+                    <strong style="color: #d32f2f;">✗ UNLIKE TERMS</strong>
+                    <br><br>
+                    Have DIFFERENT variables
+                    <br><br>
+                    <span style="color: #333; font-weight: bold;">
+                        3x and 5y
+                        <br>
+                        2a and 3b
+                        <br>
+                        4x and 7
+                    </span>
+                    <br><br>
+                    <span style="font-size: 0.9em; color: #666;">
+                        Cannot be combined
+                    </span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- SIMPLIFYING EXPRESSIONS -->
+        <div class="section">
+            <h2>Simplifying Expressions</h2>
+            
+            <div class="explanation">
+                <strong>Simplifying</strong> means combining like terms to make the expression shorter and easier to use.
+            </div>
+            
+            <h3>Example 1: Combining Like Terms</h3>
+            
+            <div class="example-box">
+                <h4>Simplify: 3x + 5x</h4>
+                
+                <div class="step">
+                    <span class="step-number">1</span>
+                    <strong>Identify like terms:</strong>
+                    <br>
+                    3x and 5x are like terms (both have x)
+                </div>
+                
+                <div class="step">
+                    <span class="step-number">2</span>
+                    <strong>Add the coefficients:</strong>
+                    <br>
+                    3 + 5 = 8
+                </div>
+                
+                <div class="step">
+                    <span class="step-number">3</span>
+                    <strong>Keep the variable:</strong>
+                    <br>
+                    Result: <span class="highlight">8x</span>
+                </div>
+                
+                <div class="answer-box">
+                    <strong>✓ 3x + 5x = 8x</strong>
+                </div>
+            </div>
+            
+            <h3 style="margin-top: 40px;">Example 2: Combining Multiple Terms</h3>
+            
+            <div class="example-box">
+                <h4>Simplify: 2x + 7 + 5x + 3</h4>
+                
+                <div class="step">
+                    <span class="step-number">1</span>
+                    <strong>Group like terms:</strong>
+                    <br>
+                    (2x + 5x) + (7 + 3)
+                </div>
+                
+                <div class="step">
+                    <span class="step-number">2</span>
+                    <strong>Combine x terms:</strong>
+                    <br>
+                    2x + 5x = 7x
+                </div>
+                
+                <div class="step">
+                    <span class="step-number">3</span>
+                    <strong>Combine number terms:</strong>
+                    <br>
+                    7 + 3 = 10
+                </div>
+                
+                <div class="step">
+                    <span class="step-number">4</span>
+                    <strong>Write simplified expression:</strong>
+                    <br>
+                    <span class="highlight">7x + 10</span>
+                </div>
+                
+                <div class="answer-box">
+                    <strong>✓ 2x + 7 + 5x + 3 = 7x + 10</strong>
+                </div>
+            </div>
+            
+            <h3 style="margin-top: 40px;">Example 3: With Subtraction</h3>
+            
+            <div class="example-box">
+                <h4>Simplify: 9a - 3a + 5</h4>
+                
+                <div class="step">
+                    <span class="step-number">1</span>
+                    <strong>Combine a terms:</strong>
+                    <br>
+                    9a - 3a = 6a
+                </div>
+                
+                <div class="step">
+                    <span class="step-number">2</span>
+                    <strong>Keep the constant:</strong>
+                    <br>
+                    <span class="highlight">6a + 5</span>
+                </div>
+                
+                <div class="answer-box">
+                    <strong>✓ 9a - 3a + 5 = 6a + 5</strong>
+                </div>
+            </div>
+        </div>
+        
+        <!-- EVALUATING EXPRESSIONS -->
+        <div class="section">
+            <h2>Evaluating Expressions (Substitution)</h2>
+            
+            <div class="explanation">
+                <strong>Evaluating</strong> an expression means <strong>replacing the variable with a number</strong> and calculating the result.
+                <br><br>
+                This is also called <strong>substitution</strong>.
+            </div>
+            
+            <h3>Example 1: Simple Substitution</h3>
+            
+            <div class="example-box">
+                <h4>Evaluate: 3x + 5, when x = 2</h4>
+                
+                <div class="step">
+                    <span class="step-number">1</span>
+                    <strong>Replace x with 2:</strong>
+                    <br>
+                    3(2) + 5
+                </div>
+                
+                <div class="step">
+                    <span class="step-number">2</span>
+                    <strong>Multiply:</strong>
+                    <br>
+                    3 × 2 = 6
+                </div>
+                
+                <div class="step">
+                    <span class="step-number">3</span>
+                    <strong>Add:</strong>
+                    <br>
+                    6 + 5 = <span class="highlight">11</span>
+                </div>
+                
+                <div class="answer-box">
+                    <strong>✓ When x = 2, the expression equals 11</strong>
+                </div>
+            </div>
+            
+            <h3 style="margin-top: 40px;">Example 2: Multiple Variables</h3>
+            
+            <div class="example-box">
+                <h4>Evaluate: 2a + 3b, when a = 4 and b = 5</h4>
+                
+                <div class="step">
+                    <span class="step-number">1</span>
+                    <strong>Replace variables with values:</strong>
+                    <br>
+                    2(4) + 3(5)
+                </div>
+                
+                <div class="step">
+                    <span class="step-number">2</span>
+                    <strong>Multiply:</strong>
+                    <br>
+                    2 × 4 = 8
+                    <br>
+                    3 × 5 = 15
+                </div>
+                
+                <div class="step">
+                    <span class="step-number">3</span>
+                    <strong>Add:</strong>
+                    <br>
+                    8 + 15 = <span class="highlight">23</span>
+                </div>
+                
+                <div class="answer-box">
+                    <strong>✓ When a = 4 and b = 5, the expression equals 23</strong>
+                </div>
+            </div>
+            
+            <h3 style="margin-top: 40px;">Example 3: With Powers</h3>
+            
+            <div class="example-box">
+                <h4>Evaluate: x² + 3x, when x = 4</h4>
+                
+                <div class="step">
+                    <span class="step-number">1</span>
+                    <strong>Replace x with 4:</strong>
+                    <br>
+                    4² + 3(4)
+                </div>
+                
+                <div class="step">
+                    <span class="step-number">2</span>
+                    <strong>Calculate powers:</strong>
+                    <br>
+                    4² = 4 × 4 = 16
+                </div>
+                
+                <div class="step">
+                    <span class="step-number">3</span>
+                    <strong>Multiply:</strong>
+                    <br>
+                    3 × 4 = 12
+                </div>
+                
+                <div class="step">
+                    <span class="step-number">4</span>
+                    <strong>Add:</strong>
+                    <br>
+                    16 + 12 = <span class="highlight">28</span>
+                </div>
+                
+                <div class="answer-box">
+                    <strong>✓ When x = 4, the expression equals 28</strong>
+                </div>
+            </div>
+        </div>
+        
+        <!-- WRITING EXPRESSIONS -->
+        <div class="section">
+            <h2>Writing Expressions from Words</h2>
+            
+            <div class="explanation">
+                We often need to convert <strong>word problems into mathematical expressions</strong>.
+                <br><br>
+                Understanding key words is important!
+            </div>
+            
+            <h3>Key Words to Watch:</h3>
+            
+            <table class="table">
+                <tr>
+                    <th>Operation</th>
+                    <th>Key Words</th>
+                    <th>Example</th>
+                    <th>Expression</th>
+                </tr>
+                <tr>
+                    <td><strong>Addition</strong></td>
+                    <td>plus, add, sum, more than, increased by</td>
+                    <td>"5 more than x"</td>
+                    <td>x + 5</td>
+                </tr>
+                <tr>
+                    <td><strong>Subtraction</strong></td>
+                    <td>minus, subtract, difference, less than, decreased by</td>
+                    <td>"7 less than y"</td>
+                    <td>y - 7</td>
+                </tr>
+                <tr>
+                    <td><strong>Multiplication</strong></td>
+                    <td>times, product, of, multiplied by</td>
+                    <td>"3 times a"</td>
+                    <td>3a</td>
+                </tr>
+                <tr>
+                    <td><strong>Division</strong></td>
+                    <td>divided by, quotient, per, split</td>
+                    <td>"b divided by 4"</td>
+                    <td>b/4 or b ÷ 4</td>
+                </tr>
+            </table>
+            
+            <h3 style="margin-top: 40px;">Examples of Writing Expressions:</h3>
+            
+            <div class="grid-2">
+                <div class="visual-item">
+                    <strong>💰 Money Problem</strong>
+                    <br><br>
+                    "Sarah has x dollars. She earns 10 more dollars."
+                    <br><br>
+                    <span style="color: #667eea; font-weight: bold;">
+                        Expression: x + 10
+                    </span>
+                </div>
+                
+                <div class="visual-item">
+                    <strong>🍎 Apple Problem</strong>
+                    <br><br>
+                    "There are n apples. 5 are eaten."
+                    <br><br>
+                    <span style="color: #667eea; font-weight: bold;">
+                        Expression: n - 5
+                    </span>
+                </div>
+            </div>
+            
+            <div class="grid-2" style="margin-top: 20px;">
+                <div class="visual-item">
+                    <strong>📏 Rectangle Problem</strong>
+                    <br><br>
+                    "Length is 3 times the width w"
+                    <br><br>
+                    <span style="color: #667eea; font-weight: bold;">
+                        Expression: 3w
+                    </span>
+                </div>
+                
+                <div class="visual-item">
+                    <strong>🎂 Sharing Problem</strong>
+                    <br><br>
+                    "Pizza split equally among 8 people"
+                    <br><br>
+                    <span style="color: #667eea; font-weight: bold;">
+                        Expression: p/8
+                    </span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- ALGEBRAIC OPERATIONS -->
+        <div class="section">
+            <h2>Operations with Variables (Order of Operations)</h2>
+            
+            <div class="explanation">
+                When evaluating expressions with variables, follow <strong>PEMDAS/BODMAS</strong>:
+                <br><br>
+                <strong>P</strong>arentheses / <strong>B</strong>rackets
+                <br>
+                <strong>E</strong>xponents / <strong>O</strong>rders
+                <br>
+                <strong>M</strong>ultiplication & <strong>D</strong>ivision (left to right)
+                <br>
+                <strong>A</strong>ddition & <strong>S</strong>ubtraction (left to right)
+            </div>
+            
+            <h3>Example: Order of Operations</h3>
+            
+            <div class="example-box">
+                <h4>Evaluate: 2 + 3 × x, when x = 4</h4>
+                
+                <div class="step">
+                    <span class="step-number">1</span>
+                    <strong>Replace x with 4:</strong>
+                    <br>
+                    2 + 3 × 4
+                </div>
+                
+                <div class="step">
+                    <span class="step-number">2</span>
+                    <strong>Multiply FIRST (before adding):</strong>
+                    <br>
+                    3 × 4 = 12
+                </div>
+                
+                <div class="step">
+                    <span class="step-number">3</span>
+                    <strong>Then add:</strong>
+                    <br>
+                    2 + 12 = <span class="highlight">14</span>
+                </div>
+                
+                <div class="answer-box">
+                    <strong>✓ Answer: 14</strong>
+                    <br><br>
+                    <span style="font-size: 0.9em;">Note: If we did addition first: 2 + 3 = 5, then 5 × 4 = 20 (WRONG!)</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- PRACTICAL APPLICATIONS -->
+        <div class="section">
+            <h2>Real-World Applications</h2>
+            
+            <h3>Example 1: Temperature Conversion 🌡️</h3>
+            
+            <div class="example-box">
+                <h4>Formula: F = (9/5)C + 32 (Celsius to Fahrenheit)</h4>
+                
+                <div class="step">
+                    <span class="step-number">1</span>
+                    <strong>Find F when C = 20</strong>
+                </div>
+                
+                <div class="step">
+                    <span class="step-number">2</span>
+                    <strong>Substitute:</strong>
+                    <br>
+                    F = (9/5)(20) + 32
+                </div>
+                
+                <div class="step">
+                    <span class="step-number">3</span>
+                    <strong>Calculate:</strong>
+                    <br>
+                    F = 36 + 32 = <span class="highlight">68°F</span>
+                </div>
+            </div>
+            
+            <h3 style="margin-top: 40px;">Example 2: Profit Calculation 💰</h3>
+            
+            <div class="example-box">
+                <h4>Expression: Profit = Revenue - Cost</h4>
+                
+                <div class="step">
+                    <span class="step-number">1</span>
+                    <strong>If Revenue = 5x and Cost = 2x + 10</strong>
+                </div>
+                
+                <div class="step">
+                    <span class="step-number">2</span>
+                    <strong>Write expression for Profit:</strong>
+                    <br>
+                    P = 5x - (2x + 10)
+                    <br>
+                    P = 5x - 2x - 10
+                    <br>
+                    P = <span class="highlight">3x - 10</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- COMMON MISTAKES -->
+        <div class="section">
+            <h2>Common Mistakes</h2>
+            
+            <div class="grid-2">
+                <div style="background: #ffebee; padding: 20px; border-radius: 10px; border-left: 5px solid #d32f2f;">
+                    <strong style="color: #d32f2f; font-size: 1.1em;">❌ WRONG</strong>
+                    <br><br>
+                    Combining unlike terms:
+                    <br>
+                    3x + 5y = 8xy
+                    <br><br>
+                    (Can't combine!)
+                </div>
+                
+                <div style="background: #e8f5e9; padding: 20px; border-radius: 10px; border-left: 5px solid #2e7d32;">
+                    <strong style="color: #2e7d32; font-size: 1.1em;">✅ CORRECT</strong>
+                    <br><br>
+                    3x + 5y stays as is
+                    <br><br>
+                    (Different variables!)
+                </div>
+            </div>
+            
+            <div class="grid-2" style="margin-top: 20px;">
+                <div style="background: #ffebee; padding: 20px; border-radius: 10px; border-left: 5px solid #d32f2f;">
+                    <strong style="color: #d32f2f; font-size: 1.1em;">❌ WRONG</strong>
+                    <br><br>
+                    Not following order:
+                    <br>
+                    2 + 3 × 4 = 5 × 4 = 20
+                    <br><br>
+                    (Multiply first!)
+                </div>
+                
+                <div style="background: #e8f5e9; padding: 20px; border-radius: 10px; border-left: 5px solid #2e7d32;">
+                    <strong style="color: #2e7d32; font-size: 1.1em;">✅ CORRECT</strong>
+                    <br><br>
+                    2 + 3 × 4 = 2 + 12 = 14
+                    <br><br>
+                    (Multiply 3×4 first!)
+                </div>
+            </div>
+            
+            <div class="grid-2" style="margin-top: 20px;">
+                <div style="background: #ffebee; padding: 20px; border-radius: 10px; border-left: 5px solid #d32f2f;">
+                    <strong style="color: #d32f2f; font-size: 1.1em;">❌ WRONG</strong>
+                    <br><br>
+                    Forgetting negative signs:
+                    <br>
+                    10 - 3x when x = 2:
+                    <br>
+                    10 - 3(2) = 10 - 6 = 4 ✓
+                    <br>(But writing 10 - 32 ✗)
+                </div>
+                
+                <div style="background: #e8f5e9; padding: 20px; border-radius: 10px; border-left: 5px solid #2e7d32;">
+                    <strong style="color: #2e7d32; font-size: 1.1em;">✅ CORRECT</strong>
+                    <br><br>
+                    Always substitute carefully:
+                    <br>
+                    -3x means "-3 times x"
+                    <br><br>
+                    When x = 2: -3(2) = -6
+                </div>
+            </div>
+        </div>
+        
+        <!-- KEY POINTS -->
+        <div class="section" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
+            <h2 style="color: white; background: none; padding: 0; margin: 0 0 30px 0;">📌 KEY POINTS TO REMEMBER</h2>
+            
+            <div style="font-size: 1.1em; line-height: 2;">
+                <div style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 8px; margin: 15px 0;">
+                    ✓ <strong>Variable:</strong> A letter representing an unknown number (x, y, a, b, etc.)
+                </div>
+                
+                <div style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 8px; margin: 15px 0;">
+                    ✓ <strong>Expression:</strong> Combination of variables, numbers, and operations (NOT an equation)
+                </div>
+                
+                <div style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 8px; margin: 15px 0;">
+                    ✓ <strong>Like Terms:</strong> Same variable - CAN be combined (3x + 5x = 8x)
+                </div>
+                
+                <div style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 8px; margin: 15px 0;">
+                    ✓ <strong>Unlike Terms:</strong> Different variables - CANNOT be combined (3x + 5y)
+                </div>
+                
+                <div style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 8px; margin: 15px 0;">
+                    ✓ <strong>Simplifying:</strong> Combining like terms to make expression shorter
+                </div>
+                
+                <div style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 8px; margin: 15px 0;">
+                    ✓ <strong>Evaluating:</strong> Replace variable with a number and calculate
+                </div>
+                
+                <div style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 8px; margin: 15px 0;">
+                    ✓ <strong>PEMDAS:</strong> Parentheses → Exponents → Multiply & Divide → Add & Subtract
+                </div>
+                
+                <div style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 8px; margin: 15px 0;">
+                    ✓ <strong>Coefficient:</strong> The number in front of a variable (in 3x, the coefficient is 3)
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

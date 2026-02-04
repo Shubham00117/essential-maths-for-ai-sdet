@@ -1,0 +1,978 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Absolute Values - Complete Guide</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .section {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        .section h2 {
+            color: white;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            border-radius: 10px;
+            margin: -40px -40px 30px -40px;
+            text-align: center;
+            font-size: 1.8em;
+        }
+        
+        .section h3 {
+            color: #667eea;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+        
+        /* BALANCED LAYOUT */
+        .balanced-3-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 30px;
+            margin: 30px 0;
+            align-items: start;
+        }
+        
+        .visual-column {
+            background: linear-gradient(135deg, #e3f2fd 0%, #f0f7ff 100%);
+            padding: 30px;
+            border-radius: 12px;
+            border: 3px solid #667eea;
+        }
+        
+        .calculation-column {
+            background: linear-gradient(135deg, #fffde7 0%, #fff9e6 100%);
+            padding: 30px;
+            border-radius: 12px;
+            border: 3px solid #ffc107;
+        }
+        
+        .logic-column {
+            background: linear-gradient(135deg, #e8f5e9 0%, #f1f8e9 100%);
+            padding: 30px;
+            border-radius: 12px;
+            border: 3px solid #4caf50;
+        }
+        
+        .column-title {
+            font-weight: bold;
+            font-size: 1.15em;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid;
+        }
+        
+        .visual-column .column-title {
+            color: #1565c0;
+            border-bottom-color: #667eea;
+        }
+        
+        .calculation-column .column-title {
+            color: #f57f17;
+            border-bottom-color: #ffc107;
+        }
+        
+        .logic-column .column-title {
+            color: #2e7d32;
+            border-bottom-color: #4caf50;
+        }
+        
+        /* NUMBER LINE */
+        .number-line {
+            background: white;
+            border: 3px solid #333;
+            height: 50px;
+            margin: 20px 0;
+            position: relative;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .tick {
+            position: absolute;
+            width: 2px;
+            height: 100%;
+            background: #333;
+        }
+        
+        .number {
+            position: absolute;
+            font-size: 0.85em;
+            font-weight: bold;
+            transform: translateX(-50%);
+            bottom: -25px;
+        }
+        
+        .distance-marker {
+            position: absolute;
+            height: 50px;
+            top: 0;
+            background: linear-gradient(to right, #667eea, #764ba2);
+            opacity: 0.6;
+            border-radius: 8px;
+            animation: slide 2s infinite;
+        }
+        
+        @keyframes slide {
+            0%, 100% { opacity: 0.6; }
+            50% { opacity: 0.8; }
+        }
+        
+        .dot {
+            position: absolute;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #667eea;
+            border: 3px solid #667eea;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(102, 126, 234, 0.7); }
+            50% { box-shadow: 0 0 0 8px rgba(102, 126, 234, 0); }
+        }
+        
+        /* CALCULATION STEPS */
+        .calc-step {
+            background: white;
+            border: 2px solid #ffc107;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 12px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            line-height: 1.7;
+        }
+        
+        .calc-step strong {
+            color: #f57f17;
+            display: block;
+            margin-bottom: 8px;
+            font-family: 'Segoe UI', sans-serif;
+        }
+        
+        .formula {
+            background: #fff9e6;
+            border-left: 4px solid #ffc107;
+            padding: 10px;
+            margin: 8px 0;
+            border-radius: 4px;
+        }
+        
+        .answer {
+            background: #e8f5e9;
+            border: 2px solid #4caf50;
+            padding: 10px;
+            border-radius: 6px;
+            color: #2e7d32;
+            font-weight: bold;
+            margin-top: 8px;
+            font-size: 0.95em;
+        }
+        
+        /* LOGIC FLOW */
+        .logic-flow {
+            background: white;
+            border: 2px solid #4caf50;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 12px 0;
+        }
+        
+        .logic-flow strong {
+            color: #2e7d32;
+            display: block;
+            margin-bottom: 8px;
+            font-family: 'Segoe UI', sans-serif;
+        }
+        
+        .logic-box {
+            background: #f1f8e9;
+            border-left: 4px solid #4caf50;
+            padding: 10px;
+            margin: 8px 0;
+            border-radius: 4px;
+            font-size: 0.95em;
+        }
+        
+        .decision {
+            background: #c8e6c9;
+            border: 2px solid #2e7d32;
+            padding: 10px;
+            border-radius: 6px;
+            color: #1b5e20;
+            font-weight: bold;
+            margin-top: 8px;
+            text-align: center;
+        }
+        
+        /* ABSOLUTE VALUE BOX NOTATION */
+        .abs-notation {
+            background: white;
+            border: 3px solid #667eea;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 15px 0;
+            text-align: center;
+        }
+        
+        .abs-notation strong {
+            font-size: 1.3em;
+            color: #667eea;
+            display: block;
+            margin: 10px 0;
+        }
+        
+        .abs-example {
+            font-family: 'Courier New', monospace;
+            font-size: 1.15em;
+            font-weight: bold;
+            color: #333;
+        }
+        
+        /* COMPARISON TABLE */
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .comparison-table th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 1em;
+        }
+        
+        .comparison-table td {
+            padding: 12px;
+            text-align: center;
+            border-bottom: 1px solid #f0f0f0;
+            font-size: 0.95em;
+        }
+        
+        .comparison-table tr:hover {
+            background: #f9f9f9;
+        }
+        
+        /* GRID */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 30px 0;
+        }
+        
+        .grid-3 {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .badge {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.85em;
+            margin: 4px 3px;
+        }
+        
+        .badge-good { background: #e8f5e9; color: #2e7d32; border: 1px solid #4caf50; }
+        .badge-warning { background: #fff3e0; color: #e65100; border: 1px solid #ff9800; }
+        
+        .icon { font-size: 2em; }
+        
+        .step {
+            background: #fff9e6;
+            border-left: 5px solid #ffc107;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            font-size: 1.05em;
+            line-height: 1.8;
+        }
+        
+        .step-number {
+            display: inline-block;
+            background: #ffc107;
+            color: #333;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 40px;
+            font-weight: bold;
+            margin-right: 15px;
+            box-shadow: 0 2px 8px rgba(255, 193, 7, 0.4);
+        }
+        
+        .highlight {
+            background: #ffeb3b;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+        
+        @media (max-width: 1024px) {
+            .balanced-3-layout { grid-template-columns: 1fr 1fr; }
+            .grid-3 { grid-template-columns: 1fr 1fr; }
+        }
+        
+        @media (max-width: 768px) {
+            .balanced-3-layout { grid-template-columns: 1fr; }
+            .grid-2 { grid-template-columns: 1fr; }
+            .grid-3 { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📏 ABSOLUTE VALUES - Complete Guide</h1>
+        <p style="text-align: center; color: white; font-size: 1.1em; margin-bottom: 30px;">
+            🎨 Visuals | 🧮 Calculations | 💡 Logic - All Perfectly Balanced
+        </p>
+        
+        <!-- MINIMAL THEORY SECTION -->
+        <div class="section">
+            <h2>Theory: What is Absolute Value?</h2>
+            
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin: 20px 0;">
+                <div style="background: linear-gradient(135deg, #e3f2fd 0%, #f0f7ff 100%); padding: 25px; border-radius: 12px; border: 3px solid #667eea;">
+                    <strong style="color: #1565c0; font-size: 1.2em; display: block; margin-bottom: 15px;">📏 ABSOLUTE VALUE</strong>
+                    <p style="line-height: 1.8; color: #333; margin-bottom: 15px;">
+                        <strong>Definition:</strong> The <strong>DISTANCE</strong> from a number to ZERO on a number line. Always POSITIVE!
+                    </p>
+                    <p style="line-height: 1.8; color: #333; margin-bottom: 15px;">
+                        <strong>Simple Words:</strong> How FAR is it from zero? Ignore the direction!
+                    </p>
+                    <p style="background: #fff; padding: 12px; border-radius: 6px; border-left: 4px solid #667eea; font-size: 0.95em;">
+                        <strong>Notation:</strong> |x| means "absolute value of x"
+                        <br>
+                        <strong>Example:</strong> |5| = 5, |-5| = 5
+                        <br>
+                        <strong>Goal:</strong> Always a POSITIVE answer
+                    </p>
+                </div>
+                
+                <div style="background: linear-gradient(135deg, #fff9e6 0%, #fffde7 100%); padding: 25px; border-radius: 12px; border: 3px solid #ffc107;">
+                    <strong style="color: #f57f17; font-size: 1.2em; display: block; margin-bottom: 15px;">📍 Distance Concept</strong>
+                    <p style="line-height: 1.8; color: #333; margin-bottom: 15px;">
+                        <strong>Key Idea:</strong> Absolute value measures HOW FAR, not WHICH DIRECTION
+                    </p>
+                    <p style="line-height: 1.8; color: #333; margin-bottom: 15px; font-size: 0.95em;">
+                        • Going LEFT 5 steps: -5
+                        <br>
+                        • Going RIGHT 5 steps: +5
+                        <br>
+                        • Distance is same: 5
+                    </p>
+                    <p style="background: #fff; padding: 12px; border-radius: 6px; border-left: 4px solid #ffc107; font-size: 0.95em;">
+                        <strong>Remember:</strong> Distance is NEVER negative!
+                    </p>
+                </div>
+            </div>
+            
+            <div style="background: linear-gradient(135deg, #e8f5e9 0%, #f1f8e9 100%); padding: 25px; border-radius: 12px; border: 3px solid #4caf50; margin-top: 30px;">
+                <strong style="color: #2e7d32; font-size: 1.15em; display: block; margin-bottom: 15px;">✨ WHY IMPORTANT?</strong>
+                <p style="line-height: 1.9; color: #333; font-size: 0.95em;">
+                    Absolute values are useful for:
+                    <br>
+                    • Measuring distances
+                    <br>
+                    • Finding errors or deviations
+                    <br>
+                    • Solving equations with multiple solutions
+                    <br>
+                    • Real-world: temperature change, speed (not velocity)
+                </p>
+            </div>
+        </div>
+        
+        <!-- SECTION 1: BASIC ABSOLUTE VALUE -->
+        <div class="section">
+            <h2>Understanding Absolute Value Basics</h2>
+            
+            <div class="balanced-3-layout">
+                <div class="visual-column">
+                    <div class="column-title"><span class="icon">📍</span> Number Line</div>
+                    
+                    <p style="margin-bottom: 15px; font-size: 0.95em; font-weight: bold; color: #667eea;">|5| = Distance from 0 to 5</p>
+                    
+                    <div class="number-line">
+                        <div class="tick" style="left: 0%;"></div>
+                        <div class="tick" style="left: 25%;"></div>
+                        <div class="tick" style="left: 50%;"></div>
+                        <div class="tick" style="left: 75%;"></div>
+                        <div class="tick" style="left: 100%;"></div>
+                        
+                        <div class="number" style="left: 0%;">-5</div>
+                        <div class="number" style="left: 25%;">-2.5</div>
+                        <div class="number" style="left: 50%;">0</div>
+                        <div class="number" style="left: 75%;">2.5</div>
+                        <div class="number" style="left: 100%;">5</div>
+                        
+                        <div class="distance-marker" style="left: 50%; right: 0;"></div>
+                        <div class="dot" style="left: 50%;"></div>
+                        <div class="dot" style="left: 100%;"></div>
+                    </div>
+                    
+                    <p style="margin-top: 20px; text-align: center; color: #667eea; font-weight: bold;">Distance = 5 units</p>
+                    
+                    <p style="margin-top: 30px; margin-bottom: 15px; font-size: 0.95em; font-weight: bold; color: #667eea;">|-5| = Distance from 0 to -5</p>
+                    
+                    <div class="number-line">
+                        <div class="tick" style="left: 0%;"></div>
+                        <div class="tick" style="left: 25%;"></div>
+                        <div class="tick" style="left: 50%;"></div>
+                        <div class="tick" style="left: 75%;"></div>
+                        <div class="tick" style="left: 100%;"></div>
+                        
+                        <div class="number" style="left: 0%;">-5</div>
+                        <div class="number" style="left: 25%;">-2.5</div>
+                        <div class="number" style="left: 50%;">0</div>
+                        <div class="number" style="left: 75%;">2.5</div>
+                        <div class="number" style="left: 100%;">5</div>
+                        
+                        <div class="distance-marker" style="left: 0; right: 50%;"></div>
+                        <div class="dot" style="left: 0%;"></div>
+                        <div class="dot" style="left: 50%;"></div>
+                    </div>
+                    
+                    <p style="margin-top: 20px; text-align: center; color: #667eea; font-weight: bold;">Distance = 5 units (SAME!)</p>
+                </div>
+                
+                <div class="calculation-column">
+                    <div class="column-title"><span class="icon">🧮</span> Examples</div>
+                    
+                    <div class="abs-notation">
+                        <strong>|5| = ?</strong>
+                        <div class="abs-example">Answer: 5</div>
+                        <div style="font-size: 0.85em; color: #666; margin-top: 8px;">5 is 5 units from 0</div>
+                    </div>
+                    
+                    <div class="abs-notation">
+                        <strong>|-5| = ?</strong>
+                        <div class="abs-example">Answer: 5</div>
+                        <div style="font-size: 0.85em; color: #666; margin-top: 8px;">-5 is also 5 units from 0</div>
+                    </div>
+                    
+                    <div class="abs-notation">
+                        <strong>|0| = ?</strong>
+                        <div class="abs-example">Answer: 0</div>
+                        <div style="font-size: 0.85em; color: #666; margin-top: 8px;">0 is 0 units from 0</div>
+                    </div>
+                    
+                    <div class="abs-notation">
+                        <strong>|-3.5| = ?</strong>
+                        <div class="abs-example">Answer: 3.5</div>
+                        <div style="font-size: 0.85em; color: #666; margin-top: 8px;">-3.5 is 3.5 units from 0</div>
+                    </div>
+                </div>
+                
+                <div class="logic-column">
+                    <div class="column-title"><span class="icon">💡</span> Logic</div>
+                    
+                    <div class="logic-flow">
+                        <strong>Understanding |x|:</strong>
+                        <div class="logic-box">
+                            IF x is positive
+                            <br>THEN |x| = x
+                            <br>Example: |5| = 5
+                        </div>
+                    </div>
+                    
+                    <div class="logic-flow">
+                        <strong>Understanding |x|:</strong>
+                        <div class="logic-box">
+                            IF x is negative
+                            <br>THEN |x| = -x (remove negative)
+                            <br>Example: |-5| = -(-5) = 5
+                        </div>
+                    </div>
+                    
+                    <div class="logic-flow">
+                        <strong>Key Rule:</strong>
+                        <div class="decision">
+                            |positive| = same
+                            <br>
+                            |negative| = opposite
+                            <br>
+                            (result ALWAYS positive)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- SECTION 2: ABSOLUTE VALUE EQUATIONS -->
+        <div class="section">
+            <h2>Solving Absolute Value Equations</h2>
+            
+            <div class="balanced-3-layout">
+                <div class="visual-column">
+                    <div class="column-title"><span class="icon">🎯</span> Visual</div>
+                    
+                    <p style="margin-bottom: 15px; font-size: 0.95em; font-weight: bold; color: #667eea;">|x| = 3 (What numbers are 3 away from 0?)</p>
+                    
+                    <div class="number-line">
+                        <div class="tick" style="left: 0%;"></div>
+                        <div class="tick" style="left: 20%;"></div>
+                        <div class="tick" style="left: 40%;"></div>
+                        <div class="tick" style="left: 60%;"></div>
+                        <div class="tick" style="left: 80%;"></div>
+                        <div class="tick" style="left: 100%;"></div>
+                        
+                        <div class="number" style="left: 0%;">-4</div>
+                        <div class="number" style="left: 20%;">-3</div>
+                        <div class="number" style="left: 40%;">-2</div>
+                        <div class="number" style="left: 60%;">0</div>
+                        <div class="number" style="left: 80%;">2</div>
+                        <div class="number" style="left: 100%;">4</div>
+                        
+                        <div class="distance-marker" style="left: 20%; width: 40%;"></div>
+                        <div class="dot" style="left: 20%; background: #4caf50; border-color: #4caf50;"></div>
+                        <div class="dot" style="left: 100%; background: #4caf50; border-color: #4caf50;"></div>
+                        <div class="dot" style="left: 60%; background: #333; border-color: #333;"></div>
+                    </div>
+                    
+                    <p style="margin-top: 20px; text-align: center;">
+                        <span class="badge badge-good">x = 3</span>
+                        <span class="badge badge-good">x = -3</span>
+                    </p>
+                    
+                    <div style="margin-top: 15px; padding: 12px; background: #e3f2fd; border-radius: 8px; border-left: 4px solid #667eea; font-size: 0.9em;">
+                        <strong>TWO SOLUTIONS!</strong>
+                        <br>
+                        Both 3 and -3 are 3 units from 0
+                    </div>
+                </div>
+                
+                <div class="calculation-column">
+                    <div class="column-title"><span class="icon">🧮</span> Solving</div>
+                    
+                    <div class="calc-step">
+                        <strong>Solve: |x + 2| = 5</strong>
+                    </div>
+                    
+                    <div class="step">
+                        <span class="step-number">1</span>
+                        <strong>Remove absolute value:</strong>
+                        <br>
+                        Create TWO equations:
+                        <br>
+                        x + 2 = 5  OR  x + 2 = -5
+                    </div>
+                    
+                    <div class="step">
+                        <span class="step-number">2</span>
+                        <strong>Solve first equation:</strong>
+                        <br>
+                        x + 2 = 5
+                        <br>
+                        x = 3
+                    </div>
+                    
+                    <div class="step">
+                        <span class="step-number">3</span>
+                        <strong>Solve second equation:</strong>
+                        <br>
+                        x + 2 = -5
+                        <br>
+                        x = -7
+                    </div>
+                    
+                    <div class="step">
+                        <span class="step-number">4</span>
+                        <strong>Check both:</strong>
+                        <br>
+                        |3 + 2| = 5 ✓ → |5| = 5 ✓
+                        <br>
+                        |-7 + 2| = 5 ✓ → |-5| = 5 ✓
+                    </div>
+                    
+                    <div class="answer">
+                        ✓ Solutions: x = 3 OR x = -7
+                    </div>
+                </div>
+                
+                <div class="logic-column">
+                    <div class="column-title"><span class="icon">💡</span> Logic</div>
+                    
+                    <div class="logic-flow">
+                        <strong>Key Insight:</strong>
+                        <div class="logic-box">
+                            |expression| = a
+                            <br><br>
+                            Means:
+                            <br>
+                            expression = a
+                            <br>
+                            OR
+                            <br>
+                            expression = -a
+                        </div>
+                    </div>
+                    
+                    <div class="logic-flow">
+                        <strong>Why two solutions?</strong>
+                        <div class="logic-box">
+                            Distance of 5 from 0
+                            <br>
+                            can be from +5
+                            <br>
+                            OR from -5
+                        </div>
+                    </div>
+                    
+                    <div class="logic-flow">
+                        <strong>Process:</strong>
+                        <div class="decision">
+                            1. Remove |  |
+                            <br>
+                            2. Make 2 equations
+                            <br>
+                            3. Solve both
+                            <br>
+                            4. Check both!
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- SECTION 3: ABSOLUTE VALUE INEQUALITIES -->
+        <div class="section">
+            <h2>Solving Absolute Value Inequalities</h2>
+            
+            <div class="balanced-3-layout">
+                <div class="visual-column">
+                    <div class="column-title"><span class="icon">📍</span> Visual</div>
+                    
+                    <p style="margin-bottom: 15px; font-size: 0.95em; font-weight: bold; color: #667eea;">|x| < 2 (Distance less than 2)</p>
+                    
+                    <div class="number-line">
+                        <div class="tick" style="left: 0%;"></div>
+                        <div class="tick" style="left: 25%;"></div>
+                        <div class="tick" style="left: 50%;"></div>
+                        <div class="tick" style="left: 75%;"></div>
+                        <div class="tick" style="left: 100%;"></div>
+                        
+                        <div class="number" style="left: 0%;">-3</div>
+                        <div class="number" style="left: 25%;">-2</div>
+                        <div class="number" style="left: 50%;">0</div>
+                        <div class="number" style="left: 75%;">2</div>
+                        <div class="number" style="left: 100%;">3</div>
+                        
+                        <div class="distance-marker" style="left: 25%; right: 25%;"></div>
+                    </div>
+                    
+                    <p style="margin-top: 20px; text-align: center; color: #667eea; font-weight: bold;">-2 < x < 2</p>
+                    
+                    <p style="margin-top: 30px; margin-bottom: 15px; font-size: 0.95em; font-weight: bold; color: #667eea;">|x| > 2 (Distance greater than 2)</p>
+                    
+                    <div class="number-line">
+                        <div class="tick" style="left: 0%;"></div>
+                        <div class="tick" style="left: 25%;"></div>
+                        <div class="tick" style="left: 50%;"></div>
+                        <div class="tick" style="left: 75%;"></div>
+                        <div class="tick" style="left: 100%;"></div>
+                        
+                        <div class="number" style="left: 0%;">-3</div>
+                        <div class="number" style="left: 25%;">-2</div>
+                        <div class="number" style="left: 50%;">0</div>
+                        <div class="number" style="left: 75%;">2</div>
+                        <div class="number" style="left: 100%;">3</div>
+                        
+                        <div class="distance-marker" style="left: 0; width: 25%;"></div>
+                        <div class="distance-marker" style="left: 75%; right: 0;"></div>
+                    </div>
+                    
+                    <p style="margin-top: 20px; text-align: center; color: #667eea; font-weight: bold;">x < -2 OR x > 2</p>
+                </div>
+                
+                <div class="calculation-column">
+                    <div class="column-title"><span class="icon">🧮</span> Solving</div>
+                    
+                    <div class="calc-step">
+                        <strong>Solve: |x - 3| ≤ 2</strong>
+                    </div>
+                    
+                    <div class="step">
+                        <span class="step-number">1</span>
+                        <strong>Type: "Less than" (inclusive)</strong>
+                        <br>
+                        Write as compound AND:
+                        <br>
+                        -2 ≤ x - 3 ≤ 2
+                    </div>
+                    
+                    <div class="step">
+                        <span class="step-number">2</span>
+                        <strong>Add 3 to all parts:</strong>
+                        <br>
+                        -2 + 3 ≤ x ≤ 2 + 3
+                        <br>
+                        1 ≤ x ≤ 5
+                    </div>
+                    
+                    <div class="step">
+                        <span class="step-number">3</span>
+                        <strong>Check boundaries:</strong>
+                        <br>
+                        |1 - 3| = 2 ✓
+                        <br>
+                        |5 - 3| = 2 ✓
+                    </div>
+                    
+                    <div class="answer">
+                        ✓ Solution: 1 ≤ x ≤ 5
+                    </div>
+                </div>
+                
+                <div class="logic-column">
+                    <div class="column-title"><span class="icon">💡</span> Logic Rules</div>
+                    
+                    <div class="logic-flow">
+                        <strong>IF |x| < a (less):</strong>
+                        <div class="logic-box">
+                            -a < x < a
+                            <br><br>
+                            Compound AND
+                            <br>
+                            Between two values
+                        </div>
+                    </div>
+                    
+                    <div class="logic-flow">
+                        <strong>IF |x| > a (greater):</strong>
+                        <div class="logic-box">
+                            x < -a OR x > a
+                            <br><br>
+                            Compound OR
+                            <br>
+                            Outside two values
+                        </div>
+                    </div>
+                    
+                    <div class="logic-flow">
+                        <strong>Remember:</strong>
+                        <div class="decision">
+                            < = narrow (between)
+                            <br>
+                            > = wide (outside)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- SECTION 4: REAL-WORLD APPLICATION -->
+        <div class="section">
+            <h2>Real-World Application: Manufacturing Tolerance</h2>
+            
+            <div class="balanced-3-layout">
+                <div class="visual-column">
+                    <div class="column-title"><span class="icon">🔧</span> Problem</div>
+                    
+                    <div style="background: white; padding: 20px; border-radius: 8px; border: 2px solid #667eea; margin: 15px 0;">
+                        <p style="font-weight: bold; color: #667eea; margin-bottom: 10px;">Factory makes bolts</p>
+                        <p style="margin-bottom: 10px;">Target diameter: 10 mm</p>
+                        <p style="margin-bottom: 10px;">Allowed error: ±0.5 mm</p>
+                        <p style="font-weight: bold; color: #667eea;">What's acceptable range?</p>
+                    </div>
+                </div>
+                
+                <div class="calculation-column">
+                    <div class="column-title"><span class="icon">🧮</span> Solution</div>
+                    
+                    <div class="step">
+                        <span class="step-number">1</span>
+                        <strong>Set up absolute value:</strong>
+                        <br>
+                        |actual - target| ≤ error
+                        <br>
+                        |d - 10| ≤ 0.5
+                    </div>
+                    
+                    <div class="step">
+                        <span class="step-number">2</span>
+                        <strong>Convert to inequality:</strong>
+                        <br>
+                        -0.5 ≤ d - 10 ≤ 0.5
+                    </div>
+                    
+                    <div class="step">
+                        <span class="step-number">3</span>
+                        <strong>Add 10 to all parts:</strong>
+                        <br>
+                        9.5 ≤ d ≤ 10.5
+                    </div>
+                    
+                    <div class="answer">
+                        ✓ Acceptable: 9.5 to 10.5 mm
+                    </div>
+                </div>
+                
+                <div class="logic-column">
+                    <div class="column-title"><span class="icon">💡</span> Interpretation</div>
+                    
+                    <div class="logic-flow">
+                        <strong>Solution: 9.5 ≤ d ≤ 10.5</strong>
+                        <div class="logic-box">
+                            Bolts TOO SMALL:
+                            <br>
+                            < 9.5 mm ✗
+                            <br><br>
+                            Bolts ACCEPTABLE:
+                            <br>
+                            9.5-10.5 mm ✓
+                            <br><br>
+                            Bolts TOO LARGE:
+                            <br>
+                            > 10.5 mm ✗
+                        </div>
+                    </div>
+                    
+                    <div class="logic-flow">
+                        <strong>Quality Control:</strong>
+                        <div class="decision">
+                            Reject anything
+                            <br>
+                            outside 9.5-10.5 mm!
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- SECTION 5: QUICK REFERENCE -->
+        <div class="section">
+            <h2>Quick Reference: Absolute Value Rules</h2>
+            
+            <table class="comparison-table">
+                <tr>
+                    <th>Type</th>
+                    <th>Example</th>
+                    <th>Becomes</th>
+                    <th>Solution</th>
+                </tr>
+                <tr>
+                    <td><strong>Basic</strong></td>
+                    <td>|5| = ?</td>
+                    <td>5 (positive)</td>
+                    <td>5</td>
+                </tr>
+                <tr>
+                    <td><strong>Basic</strong></td>
+                    <td>|-5| = ?</td>
+                    <td>5 (make positive)</td>
+                    <td>5</td>
+                </tr>
+                <tr>
+                    <td><strong>Equation</strong></td>
+                    <td>|x| = 3</td>
+                    <td>x = 3 OR x = -3</td>
+                    <td>Two answers</td>
+                </tr>
+                <tr>
+                    <td><strong>Less Than</strong></td>
+                    <td>|x| < 3</td>
+                    <td>-3 < x < 3</td>
+                    <td>Between</td>
+                </tr>
+                <tr>
+                    <td><strong>Greater Than</strong></td>
+                    <td>|x| > 3</td>
+                    <td>x < -3 OR x > 3</td>
+                    <td>Outside</td>
+                </tr>
+            </table>
+        </div>
+        
+        <!-- SECTION 6: KEY POINTS -->
+        <div class="section" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
+            <h2 style="color: white; background: none; padding: 0; margin: 0 0 30px 0;">📌 COMPLETE SUMMARY</h2>
+            
+            <div class="grid-3" style="margin: 0;">
+                <div style="background: rgba(255,255,255,0.15); padding: 20px; border-radius: 8px;">
+                    <strong style="font-size: 1.15em; display: block; margin-bottom: 15px;">📏 BASICS</strong>
+                    <ul style="list-style: none; line-height: 1.9; font-size: 0.95em;">
+                        <li>✓ |x| = distance from 0</li>
+                        <li>✓ Always ≥ 0</li>
+                        <li>✓ |5| = 5, |-5| = 5</li>
+                        <li>✓ |0| = 0</li>
+                    </ul>
+                </div>
+                
+                <div style="background: rgba(255,255,255,0.15); padding: 20px; border-radius: 8px;">
+                    <strong style="font-size: 1.15em; display: block; margin-bottom: 15px;">📐 EQUATIONS</strong>
+                    <ul style="list-style: none; line-height: 1.9; font-size: 0.95em;">
+                        <li>✓ |x| = a → TWO solutions</li>
+                        <li>✓ x = a AND x = -a</li>
+                        <li>✓ Always check both</li>
+                        <li>✓ Can have 0, 1, or 2 sols</li>
+                    </ul>
+                </div>
+                
+                <div style="background: rgba(255,255,255,0.15); padding: 20px; border-radius: 8px;">
+                    <strong style="font-size: 1.15em; display: block; margin-bottom: 15px;">📊 INEQUALITIES</strong>
+                    <ul style="list-style: none; line-height: 1.9; font-size: 0.95em;">
+                        <li>✓ |x| < a: narrow range</li>
+                        <li>✓ -a < x < a (between)</li>
+                        <li>✓ |x| > a: wide range</li>
+                        <li>✓ x < -a OR x > a</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
