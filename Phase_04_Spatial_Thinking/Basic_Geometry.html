@@ -1,0 +1,1105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basic Geometry - Complete Guide</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .section {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .section h2 {
+            color: white;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            border-radius: 10px;
+            margin: -40px -40px 30px -40px;
+            text-align: center;
+            font-size: 1.8em;
+        }
+
+        .section h3 {
+            color: #667eea;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-size: 1.4em;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+
+        .explanation {
+            background: #e3f2fd;
+            border-left: 5px solid #2196f3;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-size: 1.1em;
+            line-height: 1.8;
+        }
+
+        .explanation strong {
+            color: #1565c0;
+        }
+
+        .example-box {
+            background: #f0f7ff;
+            border: 3px solid #667eea;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 25px 0;
+        }
+
+        .example-box h4 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        .step {
+            background: #fff9e6;
+            border-left: 5px solid #ffc107;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            font-size: 1.05em;
+            line-height: 1.8;
+        }
+
+        .step-number {
+            display: inline-block;
+            background: #ffc107;
+            color: #333;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 35px;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .highlight {
+            background: #ffeb3b;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+
+        .visual-box {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .visual-item {
+            background: #f5f5f5;
+            padding: 20px;
+            border-radius: 10px;
+            border: 2px solid #667eea;
+            text-align: center;
+        }
+
+        .visual-item strong {
+            color: #667eea;
+            display: block;
+            margin-bottom: 15px;
+        }
+
+        .key-concept {
+            background: #e8f5e9;
+            border-left: 5px solid #4caf50;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-size: 1.1em;
+            line-height: 1.8;
+        }
+
+        .key-concept strong {
+            color: #2e7d32;
+        }
+
+        .formula-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 12px;
+            margin: 25px 0;
+            font-size: 1.15em;
+            text-align: center;
+            font-weight: bold;
+            font-family: 'Courier New', monospace;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .grid-item {
+            background: #f5f5f5;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 5px solid #667eea;
+        }
+
+        .grid-item strong {
+            color: #667eea;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .note-box {
+            background: #fce4ec;
+            border-left: 5px solid #e91e63;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-size: 1.05em;
+        }
+
+        .note-box strong {
+            color: #c2185b;
+        }
+
+        .answer-box {
+            background: #e8f5e9;
+            border-left: 5px solid #4caf50;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            text-align: center;
+            font-size: 1.1em;
+        }
+
+        .answer-box strong {
+            color: #2e7d32;
+            display: block;
+            font-size: 1.3em;
+            margin-top: 10px;
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 1.05em;
+        }
+
+        .table th {
+            background: #667eea;
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: bold;
+        }
+
+        .table td {
+            padding: 12px 15px;
+            border-bottom: 2px solid #ddd;
+        }
+
+        .table tr:hover {
+            background: #f5f5f5;
+        }
+
+        .shape-diagram {
+            background: white;
+            border: 2px solid #667eea;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .visual-box {
+                grid-template-columns: 1fr;
+            }
+
+            .grid-2 {
+                grid-template-columns: 1fr;
+            }
+
+            .grid-3 {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>📐 BASIC GEOMETRY - Complete Guide</h1>
+
+        <!-- WHAT IS GEOMETRY -->
+        <div class="section">
+            <h2>What is Geometry?</h2>
+
+            <div class="explanation">
+                <strong>Geometry</strong> is the branch of mathematics that deals with <strong>shapes, sizes, and
+                    positions</strong> of objects.
+                <br><br>
+                <strong>Think of it as: "The study of shapes and how to measure them"</strong>
+            </div>
+
+            <h3>Basic Elements of Geometry:</h3>
+
+            <div class="grid-3">
+                <div class="visual-item">
+                    <strong>📍 Point</strong>
+                    <br><br>
+                    A location in space
+                    <br>
+                    Has no size
+                    <br><br>
+                    <span style="font-size: 2em;">•</span>
+                    <br>
+                    Example: A dot on paper
+                </div>
+
+                <div class="visual-item">
+                    <strong>➖ Line</strong>
+                    <br><br>
+                    Straight path
+                    <br>
+                    Extends infinitely
+                    <br><br>
+                    <span style="font-size: 1.5em;">←―――――→</span>
+                    <br>
+                    Example: Edge of a ruler
+                </div>
+
+                <div class="visual-item">
+                    <strong>📐 Angle</strong>
+                    <br><br>
+                    Two lines meeting at a point
+                    <br>
+                    Measured in degrees (°)
+                    <br><br>
+                    <span style="font-size: 2em;">∠</span>
+                    <br>
+                    Example: Corner of a book
+                </div>
+            </div>
+
+            <div class="key-concept">
+                <strong>✨ Why Learn Geometry?</strong>
+                <br>
+                • Architecture and construction
+                <br>
+                • Computer graphics and games
+                <br>
+                • Art and design
+                <br>
+                • Navigation and maps
+                <br>
+                • Science and engineering
+            </div>
+        </div>
+
+        <!-- TYPES OF ANGLES -->
+        <div class="section">
+            <h2>Understanding Angles</h2>
+
+            <div class="explanation">
+                An <strong>angle</strong> is formed when two lines meet at a point.
+                <br><br>
+                Angles are measured in <strong>degrees (°)</strong>. A full circle = 360°
+            </div>
+
+            <h3>Types of Angles:</h3>
+
+            <div class="grid-2">
+                <div class="visual-item">
+                    <strong>🔺 Acute Angle</strong>
+                    <br><br>
+                    Less than 90°
+                    <br><br>
+                    <svg width="100" height="80" viewBox="0 0 100 80">
+                        <line x1="20" y1="60" x2="80" y2="60" stroke="#667eea" stroke-width="3" />
+                        <line x1="20" y1="60" x2="50" y2="20" stroke="#667eea" stroke-width="3" />
+                        <path d="M 30 60 A 10 10 0 0 1 28 52" fill="none" stroke="#ffc107" stroke-width="2" />
+                    </svg>
+                    <br>
+                    Examples: 30°, 45°, 60°
+                </div>
+
+                <div class="visual-item">
+                    <strong>📐 Right Angle</strong>
+                    <br><br>
+                    Exactly 90°
+                    <br><br>
+                    <svg width="100" height="80" viewBox="0 0 100 80">
+                        <line x1="20" y1="70" x2="80" y2="70" stroke="#667eea" stroke-width="3" />
+                        <line x1="20" y1="70" x2="20" y2="20" stroke="#667eea" stroke-width="3" />
+                        <rect x="20" y="60" width="10" height="10" fill="none" stroke="#ffc107" stroke-width="2" />
+                    </svg>
+                    <br>
+                    Forms an "L" shape
+                </div>
+
+                <div class="visual-item">
+                    <strong>📏 Obtuse Angle</strong>
+                    <br><br>
+                    More than 90° but less than 180°
+                    <br><br>
+                    <svg width="100" height="80" viewBox="0 0 100 80">
+                        <line x1="20" y1="60" x2="90" y2="60" stroke="#667eea" stroke-width="3" />
+                        <line x1="20" y1="60" x2="10" y2="25" stroke="#667eea" stroke-width="3" />
+                        <path d="M 30 60 A 15 15 0 0 1 16 45" fill="none" stroke="#ffc107" stroke-width="2" />
+                    </svg>
+                    <br>
+                    Examples: 100°, 120°, 150°
+                </div>
+
+                <div class="visual-item">
+                    <strong>➖ Straight Angle</strong>
+                    <br><br>
+                    Exactly 180°
+                    <br><br>
+                    <svg width="100" height="60" viewBox="0 0 100 60">
+                        <line x1="10" y1="40" x2="90" y2="40" stroke="#667eea" stroke-width="3" />
+                        <path d="M 40 40 A 10 10 0 0 1 60 40" fill="none" stroke="#ffc107" stroke-width="2" />
+                    </svg>
+                    <br>
+                    Forms a straight line
+                </div>
+            </div>
+
+            <div class="key-concept">
+                <strong>✨ Quick Reference:</strong>
+                <br>
+                Acute: 0° < angle < 90° <br>
+                    Right: angle = 90°
+                    <br>
+                    Obtuse: 90° < angle < 180° <br>
+                        Straight: angle = 180°
+                        <br>
+                        Reflex: 180° < angle < 360° </div>
+            </div>
+
+            <!-- TRIANGLES -->
+            <div class="section">
+                <h2>Triangles</h2>
+
+                <div class="explanation">
+                    A <strong>triangle</strong> is a shape with <strong>3 sides</strong> and <strong>3 angles</strong>.
+                    <br><br>
+                    <strong>Important Rule:</strong> The sum of all angles in a triangle = 180°
+                </div>
+
+                <h3>Types of Triangles (By Sides):</h3>
+
+                <div class="grid-3">
+                    <div class="visual-item">
+                        <strong>Equilateral Triangle</strong>
+                        <br><br>
+                        <svg width="100" height="90" viewBox="0 0 100 90">
+                            <polygon points="50,10 10,80 90,80" fill="#e3f2fd" stroke="#667eea" stroke-width="3" />
+                        </svg>
+                        <br>
+                        All 3 sides equal
+                        <br>
+                        All 3 angles = 60°
+                    </div>
+
+                    <div class="visual-item">
+                        <strong>Isosceles Triangle</strong>
+                        <br><br>
+                        <svg width="100" height="90" viewBox="0 0 100 90">
+                            <polygon points="50,10 20,80 80,80" fill="#e3f2fd" stroke="#667eea" stroke-width="3" />
+                        </svg>
+                        <br>
+                        2 sides equal
+                        <br>
+                        2 angles equal
+                    </div>
+
+                    <div class="visual-item">
+                        <strong>Scalene Triangle</strong>
+                        <br><br>
+                        <svg width="100" height="90" viewBox="0 0 100 90">
+                            <polygon points="30,15 10,80 90,75" fill="#e3f2fd" stroke="#667eea" stroke-width="3" />
+                        </svg>
+                        <br>
+                        All sides different
+                        <br>
+                        All angles different
+                    </div>
+                </div>
+
+                <h3>Types of Triangles (By Angles):</h3>
+
+                <div class="grid-3">
+                    <div class="visual-item">
+                        <strong>Acute Triangle</strong>
+                        <br><br>
+                        All angles < 90° </div>
+
+                            <div class="visual-item">
+                                <strong>Right Triangle</strong>
+                                <br><br>
+                                One angle = 90°
+                            </div>
+
+                            <div class="visual-item">
+                                <strong>Obtuse Triangle</strong>
+                                <br><br>
+                                One angle > 90°
+                            </div>
+                    </div>
+
+                    <h3>Example: Finding Triangle Area</h3>
+
+                    <div class="example-box">
+                        <h4>🔺 Find the area of a triangle with base 8 cm and height 5 cm</h4>
+
+                        <div class="formula-box">
+                            Area of Triangle = (1/2) × Base × Height
+                        </div>
+
+                        <div class="step">
+                            <span class="step-number">1</span>
+                            <strong>Identify what you know:</strong>
+                            <br>
+                            Base = 8 cm
+                            <br>
+                            Height = 5 cm
+                        </div>
+
+                        <div class="step">
+                            <span class="step-number">2</span>
+                            <strong>Use the formula:</strong>
+                            <br>
+                            Area = (1/2) × 8 × 5
+                        </div>
+
+                        <div class="step">
+                            <span class="step-number">3</span>
+                            <strong>Calculate:</strong>
+                            <br>
+                            Area = (1/2) × 40
+                            <br>
+                            Area = <span class="highlight">20 cm²</span>
+                        </div>
+
+                        <div class="answer-box">
+                            <strong>✓ Area = 20 cm²</strong>
+                        </div>
+                    </div>
+
+                    <h3 style="margin-top: 40px;">Example: Finding Perimeter</h3>
+
+                    <div class="example-box">
+                        <h4>🔺 Find the perimeter of a triangle with sides 5 cm, 7 cm, and 9 cm</h4>
+
+                        <div class="formula-box">
+                            Perimeter = Side 1 + Side 2 + Side 3
+                        </div>
+
+                        <div class="step">
+                            <span class="step-number">1</span>
+                            <strong>Add all sides:</strong>
+                            <br>
+                            Perimeter = 5 + 7 + 9
+                        </div>
+
+                        <div class="step">
+                            <span class="step-number">2</span>
+                            <strong>Calculate:</strong>
+                            <br>
+                            Perimeter = <span class="highlight">21 cm</span>
+                        </div>
+
+                        <div class="answer-box">
+                            <strong>✓ Perimeter = 21 cm</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- RECTANGLES & SQUARES -->
+                <div class="section">
+                    <h2>Rectangles & Squares</h2>
+
+                    <div class="explanation">
+                        A <strong>rectangle</strong> has 4 sides and 4 right angles (90°).
+                        <br>
+                        Opposite sides are equal in length.
+                        <br><br>
+                        A <strong>square</strong> is a special rectangle where ALL 4 sides are equal.
+                    </div>
+
+                    <h3>Visual Comparison:</h3>
+
+                    <div class="visual-box">
+                        <div class="visual-item">
+                            <strong>▭ Rectangle</strong>
+                            <br><br>
+                            <svg width="150" height="100" viewBox="0 0 150 100">
+                                <rect x="20" y="20" width="110" height="60" fill="#e3f2fd" stroke="#667eea"
+                                    stroke-width="3" />
+                                <text x="75" y="15" font-size="12" text-anchor="middle" fill="#ff6b6b">length</text>
+                                <text x="145" y="55" font-size="12" fill="#ff6b6b">width</text>
+                            </svg>
+                            <br>
+                            Length ≠ Width
+                            <br>
+                            4 right angles
+                        </div>
+
+                        <div class="visual-item">
+                            <strong>◾ Square</strong>
+                            <br><br>
+                            <svg width="100" height="100" viewBox="0 0 100 100">
+                                <rect x="20" y="20" width="60" height="60" fill="#e3f2fd" stroke="#667eea"
+                                    stroke-width="3" />
+                                <text x="50" y="15" font-size="12" text-anchor="middle" fill="#ff6b6b">side</text>
+                                <text x="90" y="55" font-size="12" fill="#ff6b6b">side</text>
+                            </svg>
+                            <br>
+                            All sides equal
+                            <br>
+                            4 right angles
+                        </div>
+                    </div>
+
+                    <h3>Example 1: Rectangle Area and Perimeter</h3>
+
+                    <div class="example-box">
+                        <h4>▭ Find the area and perimeter of a rectangle with length 10 cm and width 6 cm</h4>
+
+                        <div class="formula-box">
+                            Rectangle Area = Length × Width
+                            <br><br>
+                            Rectangle Perimeter = 2 × (Length + Width)
+                        </div>
+
+                        <div class="step">
+                            <span class="step-number">1</span>
+                            <strong>Find the Area:</strong>
+                            <br>
+                            Area = Length × Width
+                            <br>
+                            Area = 10 × 6
+                            <br>
+                            Area = <span class="highlight">60 cm²</span>
+                        </div>
+
+                        <div class="step">
+                            <span class="step-number">2</span>
+                            <strong>Find the Perimeter:</strong>
+                            <br>
+                            Perimeter = 2 × (Length + Width)
+                            <br>
+                            Perimeter = 2 × (10 + 6)
+                            <br>
+                            Perimeter = 2 × 16
+                            <br>
+                            Perimeter = <span class="highlight">32 cm</span>
+                        </div>
+
+                        <div class="answer-box">
+                            <strong>✓ Area = 60 cm² | Perimeter = 32 cm</strong>
+                        </div>
+                    </div>
+
+                    <h3 style="margin-top: 40px;">Example 2: Square Area and Perimeter</h3>
+
+                    <div class="example-box">
+                        <h4>◾ Find the area and perimeter of a square with side 7 cm</h4>
+
+                        <div class="formula-box">
+                            Square Area = Side × Side = Side²
+                            <br><br>
+                            Square Perimeter = 4 × Side
+                        </div>
+
+                        <div class="step">
+                            <span class="step-number">1</span>
+                            <strong>Find the Area:</strong>
+                            <br>
+                            Area = Side²
+                            <br>
+                            Area = 7²
+                            <br>
+                            Area = <span class="highlight">49 cm²</span>
+                        </div>
+
+                        <div class="step">
+                            <span class="step-number">2</span>
+                            <strong>Find the Perimeter:</strong>
+                            <br>
+                            Perimeter = 4 × Side
+                            <br>
+                            Perimeter = 4 × 7
+                            <br>
+                            Perimeter = <span class="highlight">28 cm</span>
+                        </div>
+
+                        <div class="answer-box">
+                            <strong>✓ Area = 49 cm² | Perimeter = 28 cm</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CIRCLES -->
+                <div class="section">
+                    <h2>Circles</h2>
+
+                    <div class="explanation">
+                        A <strong>circle</strong> is a shape where all points are at the <strong>same distance</strong>
+                        from the center.
+                        <br><br>
+                        That distance is called the <strong>radius</strong>.
+                    </div>
+
+                    <h3>Parts of a Circle:</h3>
+
+                    <div class="shape-diagram">
+                        <svg width="250" height="250" viewBox="0 0 250 250">
+                            <!-- Circle -->
+                            <circle cx="125" cy="125" r="80" fill="#e3f2fd" stroke="#667eea" stroke-width="3" />
+
+                            <!-- Center point -->
+                            <circle cx="125" cy="125" r="4" fill="#ff6b6b" />
+                            <text x="135" y="120" font-size="14" fill="#333">Center (O)</text>
+
+                            <!-- Radius line -->
+                            <line x1="125" y1="125" x2="205" y2="125" stroke="#ff6b6b" stroke-width="2" />
+                            <text x="160" y="115" font-size="12" fill="#ff6b6b" font-weight="bold">Radius (r)</text>
+
+                            <!-- Diameter line -->
+                            <line x1="45" y1="125" x2="205" y2="125" stroke="#4caf50" stroke-width="2"
+                                stroke-dasharray="5,5" />
+                            <text x="115" y="145" font-size="12" fill="#4caf50" font-weight="bold">Diameter (d)</text>
+                        </svg>
+                    </div>
+
+                    <div class="grid-2">
+                        <div class="visual-item">
+                            <strong>Radius (r)</strong>
+                            <br><br>
+                            Distance from center to edge
+                            <br><br>
+                            r = d ÷ 2
+                        </div>
+
+                        <div class="visual-item">
+                            <strong>Diameter (d)</strong>
+                            <br><br>
+                            Distance across the circle (through center)
+                            <br><br>
+                            d = 2 × r
+                        </div>
+                    </div>
+
+                    <div class="key-concept">
+                        <strong>✨ What is π (Pi)?</strong>
+                        <br>
+                        Pi (π) is a special number ≈ 3.14159...
+                        <br>
+                        It's the ratio of circumference to diameter
+                        <br>
+                        Use π ≈ 3.14 or 22/7 for calculations
+                    </div>
+
+                    <h3>Example 1: Finding Circle Area</h3>
+
+                    <div class="example-box">
+                        <h4>⭕ Find the area of a circle with radius 5 cm</h4>
+
+                        <div class="formula-box">
+                            Area of Circle = π × r²
+                            <br><br>
+                            (or πr²)
+                        </div>
+
+                        <div class="step">
+                            <span class="step-number">1</span>
+                            <strong>Identify what you know:</strong>
+                            <br>
+                            Radius (r) = 5 cm
+                            <br>
+                            π ≈ 3.14
+                        </div>
+
+                        <div class="step">
+                            <span class="step-number">2</span>
+                            <strong>Use the formula:</strong>
+                            <br>
+                            Area = π × r²
+                            <br>
+                            Area = 3.14 × 5²
+                            <br>
+                            Area = 3.14 × 25
+                        </div>
+
+                        <div class="step">
+                            <span class="step-number">3</span>
+                            <strong>Calculate:</strong>
+                            <br>
+                            Area = <span class="highlight">78.5 cm²</span>
+                        </div>
+
+                        <div class="answer-box">
+                            <strong>✓ Area = 78.5 cm²</strong>
+                        </div>
+                    </div>
+
+                    <h3 style="margin-top: 40px;">Example 2: Finding Circumference</h3>
+
+                    <div class="example-box">
+                        <h4>⭕ Find the circumference of a circle with radius 7 cm</h4>
+
+                        <div class="formula-box">
+                            Circumference = 2 × π × r
+                            <br><br>
+                            (or 2πr)
+                        </div>
+
+                        <div class="step">
+                            <span class="step-number">1</span>
+                            <strong>Identify what you know:</strong>
+                            <br>
+                            Radius (r) = 7 cm
+                            <br>
+                            π ≈ 22/7
+                        </div>
+
+                        <div class="step">
+                            <span class="step-number">2</span>
+                            <strong>Use the formula:</strong>
+                            <br>
+                            Circumference = 2 × π × r
+                            <br>
+                            Circumference = 2 × (22/7) × 7
+                        </div>
+
+                        <div class="step">
+                            <span class="step-number">3</span>
+                            <strong>Calculate:</strong>
+                            <br>
+                            Circumference = 2 × 22
+                            <br>
+                            Circumference = <span class="highlight">44 cm</span>
+                        </div>
+
+                        <div class="answer-box">
+                            <strong>✓ Circumference = 44 cm</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PYTHAGOREAN THEOREM -->
+                <div class="section">
+                    <h2>Pythagorean Theorem</h2>
+
+                    <div class="explanation">
+                        The <strong>Pythagorean Theorem</strong> works only for <strong>right triangles</strong>
+                        (triangles with one 90° angle).
+                        <br><br>
+                        It relates the three sides of a right triangle!
+                    </div>
+
+                    <h3>The Formula:</h3>
+
+                    <div class="shape-diagram">
+                        <svg width="280" height="220" viewBox="0 0 280 220">
+                            <!-- Right Triangle -->
+                            <polygon points="50,180 50,50 230,180" fill="#e3f2fd" stroke="#667eea" stroke-width="3" />
+
+                            <!-- Right angle marker -->
+                            <rect x="50" y="165" width="15" height="15" fill="none" stroke="#ffc107" stroke-width="2" />
+
+                            <!-- Labels -->
+                            <text x="35" y="120" font-size="18" font-weight="bold" fill="#667eea">a</text>
+                            <text x="140" y="200" font-size="18" font-weight="bold" fill="#667eea">b</text>
+                            <text x="150" y="105" font-size="18" font-weight="bold" fill="#ff6b6b">c (hypotenuse)</text>
+                        </svg>
+                    </div>
+
+                    <div class="formula-box">
+                        a² + b² = c²
+                        <br><br>
+                        Where c is the longest side (hypotenuse)
+                    </div>
+
+                    <div class="key-concept">
+                        <strong>✨ Important:</strong>
+                        <br>
+                        • The hypotenuse (c) is ALWAYS the longest side
+                        <br>
+                        • The hypotenuse is OPPOSITE the right angle
+                        <br>
+                        • a and b are the two shorter sides
+                    </div>
+
+                    <h3>Example 1: Finding the Hypotenuse</h3>
+
+                    <div class="example-box">
+                        <h4>📐 A right triangle has sides a = 3 cm and b = 4 cm. Find the hypotenuse (c).</h4>
+
+                        <div class="step">
+                            <span class="step-number">1</span>
+                            <strong>Write the formula:</strong>
+                            <br>
+                            a² + b² = c²
+                        </div>
+
+                        <div class="step">
+                            <span class="step-number">2</span>
+                            <strong>Substitute values:</strong>
+                            <br>
+                            3² + 4² = c²
+                            <br>
+                            9 + 16 = c²
+                            <br>
+                            25 = c²
+                        </div>
+
+                        <div class="step">
+                            <span class="step-number">3</span>
+                            <strong>Find c (take square root):</strong>
+                            <br>
+                            c = √25
+                            <br>
+                            c = <span class="highlight">5 cm</span>
+                        </div>
+
+                        <div class="answer-box">
+                            <strong>✓ Hypotenuse = 5 cm</strong>
+                            <br><br>
+                            This is the famous 3-4-5 triangle!
+                        </div>
+                    </div>
+
+                    <h3 style="margin-top: 40px;">Example 2: Finding a Missing Side</h3>
+
+                    <div class="example-box">
+                        <h4>📐 A right triangle has hypotenuse c = 13 cm and one side a = 5 cm. Find side b.</h4>
+
+                        <div class="step">
+                            <span class="step-number">1</span>
+                            <strong>Write the formula:</strong>
+                            <br>
+                            a² + b² = c²
+                        </div>
+
+                        <div class="step">
+                            <span class="step-number">2</span>
+                            <strong>Rearrange to find b:</strong>
+                            <br>
+                            b² = c² - a²
+                        </div>
+
+                        <div class="step">
+                            <span class="step-number">3</span>
+                            <strong>Substitute values:</strong>
+                            <br>
+                            b² = 13² - 5²
+                            <br>
+                            b² = 169 - 25
+                            <br>
+                            b² = 144
+                        </div>
+
+                        <div class="step">
+                            <span class="step-number">4</span>
+                            <strong>Find b (take square root):</strong>
+                            <br>
+                            b = √144
+                            <br>
+                            b = <span class="highlight">12 cm</span>
+                        </div>
+
+                        <div class="answer-box">
+                            <strong>✓ Side b = 12 cm</strong>
+                            <br><br>
+                            This is the 5-12-13 triangle!
+                        </div>
+                    </div>
+
+                    <h3 style="margin-top: 40px;">Famous Pythagorean Triples:</h3>
+
+                    <table class="table">
+                        <tr>
+                            <th>a</th>
+                            <th>b</th>
+                            <th>c (Hypotenuse)</th>
+                            <th>Check: a² + b² = c²</th>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>4</td>
+                            <td>5</td>
+                            <td>9 + 16 = 25 ✓</td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td>12</td>
+                            <td>13</td>
+                            <td>25 + 144 = 169 ✓</td>
+                        </tr>
+                        <tr>
+                            <td>8</td>
+                            <td>15</td>
+                            <td>17</td>
+                            <td>64 + 225 = 289 ✓</td>
+                        </tr>
+                        <tr>
+                            <td>7</td>
+                            <td>24</td>
+                            <td>25</td>
+                            <td>49 + 576 = 625 ✓</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <!-- AREA AND PERIMETER COMPARISON -->
+                <div class="section">
+                    <h2>Shape Formulas - Quick Reference</h2>
+
+                    <table class="table">
+                        <tr>
+                            <th>Shape</th>
+                            <th>Area Formula</th>
+                            <th>Perimeter Formula</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Triangle</strong></td>
+                            <td>(1/2) × base × height</td>
+                            <td>a + b + c (sum of all sides)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Rectangle</strong></td>
+                            <td>length × width</td>
+                            <td>2 × (length + width)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Square</strong></td>
+                            <td>side × side (or side²)</td>
+                            <td>4 × side</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Circle</strong></td>
+                            <td>π × r² (πr²)</td>
+                            <td>2 × π × r (circumference)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Parallelogram</strong></td>
+                            <td>base × height</td>
+                            <td>2 × (a + b)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Trapezoid</strong></td>
+                            <td>(1/2) × (a + b) × height</td>
+                            <td>a + b + c + d</td>
+                        </tr>
+                    </table>
+
+                    <div class="note-box">
+                        <strong>💡 Remember:</strong>
+                        <br>
+                        • Area is measured in square units (cm², m², etc.)
+                        <br>
+                        • Perimeter is measured in regular units (cm, m, etc.)
+                        <br>
+                        • For circles, "perimeter" is called "circumference"
+                    </div>
+                </div>
+
+                <!-- KEY POINTS -->
+                <div class="section"
+                    style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
+                    <h2 style="color: white; background: none; padding: 0; margin: 0 0 30px 0;">📌 KEY POINTS TO
+                        REMEMBER</h2>
+
+                    <div style="font-size: 1.1em; line-height: 2;">
+                        <div
+                            style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 8px; margin: 15px 0;">
+                            ✓ <strong>Angles:</strong> Sum of angles in a triangle = 180°
+                        </div>
+
+                        <div
+                            style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 8px; margin: 15px 0;">
+                            ✓ <strong>Triangle Area:</strong> (1/2) × base × height
+                        </div>
+
+                        <div
+                            style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 8px; margin: 15px 0;">
+                            ✓ <strong>Rectangle Area:</strong> length × width
+                        </div>
+
+                        <div
+                            style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 8px; margin: 15px 0;">
+                            ✓ <strong>Circle Area:</strong> π × r² (where π ≈ 3.14)
+                        </div>
+
+                        <div
+                            style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 8px; margin: 15px 0;">
+                            ✓ <strong>Circumference:</strong> 2 × π × r
+                        </div>
+
+                        <div
+                            style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 8px; margin: 15px 0;">
+                            ✓ <strong>Pythagorean Theorem:</strong> a² + b² = c² (for right triangles only!)
+                        </div>
+
+                        <div
+                            style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 8px; margin: 15px 0;">
+                            ✓ <strong>Square:</strong> Special rectangle with all sides equal
+                        </div>
+
+                        <div
+                            style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 8px; margin: 15px 0;">
+                            ✓ <strong>Diameter:</strong> d = 2 × radius
+                        </div>
+                    </div>
+                </div>
+            </div>
+</body>
+
+</html>
