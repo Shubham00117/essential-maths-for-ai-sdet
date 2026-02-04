@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proportional Reasoning - Complete Guide</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .section {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        .section h2 {
+            color: white;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            border-radius: 10px;
+            margin: -40px -40px 30px -40px;
+            text-align: center;
+            font-size: 1.8em;
+        }
+        
+        .section h3 {
+            color: #667eea;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-size: 1.4em;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+        
+        .explanation {
+            background: #e3f2fd;
+            border-left: 5px solid #2196f3;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-size: 1.1em;
+            line-height: 1.8;
+        }
+        
+        .explanation strong {
+            color: #1565c0;
+        }
+        
+        .example-box {
+            background: #f0f7ff;
+            border: 3px solid #667eea;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 25px 0;
+        }
+        
+        .example-box h4 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+        
+        .step {
+            background: #fff9e6;
+            border-left: 5px solid #ffc107;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            font-size: 1.05em;
+            line-height: 1.8;
+        }
+        
+        .step-number {
+            display: inline-block;
+            background: #ffc107;
+            color: #333;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 35px;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        
+        .highlight {
+            background: #ffeb3b;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+        
+        .visual-box {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .visual-item {
+            background: #f5f5f5;
+            padding: 20px;
+            border-radius: 10px;
+            border: 2px solid #667eea;
+            text-align: center;
+        }
+        
+        .visual-item strong {
+            color: #667eea;
+            display: block;
+            margin-bottom: 15px;
+        }
+        
+        .key-concept {
+            background: #e8f5e9;
+            border-left: 5px solid #4caf50;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-size: 1.1em;
+            line-height: 1.8;
+        }
+        
+        .key-concept strong {
+            color: #2e7d32;
+        }
+        
+        .formula-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 12px;
+            margin: 25px 0;
+            font-size: 1.15em;
+            text-align: center;
+            font-weight: bold;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .grid-3 {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .grid-item {
+            background: #f5f5f5;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 5px solid #667eea;
+        }
+        
+        .grid-item strong {
+            color: #667eea;
+            display: block;
+            margin-bottom: 10px;
+        }
+        
+        .note-box {
+            background: #fce4ec;
+            border-left: 5px solid #e91e63;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-size: 1.05em;
+        }
+        
+        .note-box strong {
+            color: #c2185b;
+        }
+        
+        .answer-box {
+            background: #e8f5e9;
+            border-left: 5px solid #4caf50;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            text-align: center;
+            font-size: 1.1em;
+        }
+        
+        .answer-box strong {
+            color: #2e7d32;
+            display: block;
+            font-size: 1.3em;
+            margin-top: 10px;
+        }
+        
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 1.05em;
+        }
+        
+        .table th {
+            background: #667eea;
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: bold;
+        }
+        
+        .table td {
+            padding: 12px 15px;
+            border-bottom: 2px solid #ddd;
+        }
+        
+        .table tr:hover {
+            background: #f5f5f5;
+        }
+        
+        .graph-container {
+            background: white;
+            border: 2px solid #667eea;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+        }
+        
+        @media (max-width: 768px) {
+            .visual-box {
+                grid-template-columns: 1fr;
+            }
+            
+            .grid-2 {
+                grid-template-columns: 1fr;
+            }
+            
+            .grid-3 {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>⚖️ PROPORTIONAL REASONING - Complete Guide</h1>
+        
+        <!-- WHAT IS PROPORTIONAL REASONING -->
+        <div class="section">
+            <h2>What is Proportional Reasoning?</h2>
+            
+            <div class="explanation">
+                <strong>Proportional reasoning</strong> is understanding and using the relationship between quantities that change together in a consistent way.
+                <br><br>
+                <strong>In simple terms:</strong> When one quantity increases, the other increases in the SAME ratio (or pattern).
+                <br><br>
+                <strong>Key Idea:</strong> The ratio between two quantities STAYS THE SAME
+            </div>
+            
+            <h3>Real-World Examples:</h3>
+            
+            <div class="grid-2">
+                <div class="visual-item">
+                    <strong>🍔 Recipe Scaling</strong>
+                    <br><br>
+                    Recipe calls for 2 cups flour
+                    <br>If you double the recipe, you need 4 cups
+                    <br><br>
+                    If you triple it, you need 6 cups
+                    <br><br>
+                    <span style="color: #667eea; font-weight: bold;">
+                        Pattern: 2 → 4 → 6
+                        <br>(Always multiply by same factor)
+                    </span>
+                </div>
+                
+                <div class="visual-item">
+                    <strong>🚗 Speed & Distance</strong>
+                    <br><br>
+                    Drive 60 mph for 1 hour = 60 miles
+                    <br>Drive 60 mph for 2 hours = 120 miles
+                    <br>Drive 60 mph for 3 hours = 180 miles
+                    <br><br>
+                    <span style="color: #667eea; font-weight: bold;">
+                        Double time = Double distance
+                    </span>
+                </div>
+            </div>
+            
+            <div class="key-concept">
+                <strong>✨ CORE IDEA:</strong>
+                <br>
+                If one quantity doubles, triples, or halves,
+                <br>
+                the other quantity does the SAME!
+            </div>
+        </div>
+        
+        <!-- PROPORTIONS & RATIOS -->
+        <div class="section">
+            <h2>Proportions: Comparing Ratios</h2>
+            
+            <div class="explanation">
+                A <strong>proportion</strong> is a statement that <strong>two ratios are equal</strong>.
+                <br><br>
+                Written as: a/b = c/d (or a:b = c:d)
+                <br><br>
+                This means the ratios are equivalent - they have the same relationship!
+            </div>
+            
+            <h3>Example: Understanding Proportions</h3>
+            
+            <div class="example-box">
+                <h4>🍎 Fruit Stand</h4>
+                
+                <div class="step">
+                    <span class="step-number">1</span>
+                    <strong>First day: 2 apples for $4</strong>
+                    <br>
+                    Ratio: 2 apples : $4
+                    <br>
+                    Or: 2/4 = 1/2 (simplest form)
+                </div>
+                
+                <div class="step">
+                    <span class="step-number">2</span>
+                    <strong>Second day: 6 apples for $12</strong>
+                    <br>
+                    Ratio: 6 apples : $12
+                    <br>
+                    Or: 6/12 = 1/2 (simplest form)
+                </div>
+                
+                <div class="step">
+                    <span class="step-number">3</span>
+                    <strong>Are these proportional?</strong>
+                    <br>
+                    2/4 = 6/12? 
+                    <br>
+                    Both equal 1/2! <span class="highlight">YES ✓</span>
+                </div>
+                
+                <div style="background: #e3f2fd; padding: 20px; border-radius: 8px; margin: 15px 0;">
+                    <strong style="color: #1565c0;">This is a PROPORTION:</strong>
+                    <br><br>
+                    2/4 = 6/12
+                    <br>(or 2:4 = 6:12)
+                </div>
+            </div>
+        </div>
+        
+        <!-- CROSS MULTIPLICATION -->
+        <div class="section">
+            <h2>Testing Proportions: Cross Multiplication</h2>
+            
+            <div class="explanation">
+                To check if two ratios form a proportion, use <strong>cross multiplication</strong>.
+                <br><br>
+                If a/b = c/d, then a × d = b × c
+            </div>
+            
+            <h3>Example 1: Are these proportional?</h3>
+            
+            <div class="example-box">
+                <h4>Is 2/4 = 6/12?</h4>
+                
+                <div style="text-align: center; margin: 20px 0;">
+                    <div style="font-size: 1.2em; font-weight: bold;">
+                        <span style="color: #667eea;">2</span>
+                        <span>/</span>
+                        <span style="color: #ff6b6b;">4</span>
+                        <span style="margin: 0 10px;">=</span>
+                        <span style="color: #667eea;">6</span>
+                        <span>/</span>
+                        <span style="color: #ff6b6b;">12</span>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <span class="step-number">1</span>
+                    <strong>Cross multiply:</strong>
+                    <br>
+                    Multiply top-left × bottom-right: 2 × 12 = <span class="highlight">24</span>
+                </div>
+                
+                <div class="step">
+                    <span class="step-number">2</span>
+                    <strong>Cross multiply other way:</strong>
+                    <br>
+                    Multiply bottom-left × top-right: 4 × 6 = <span class="highlight">24</span>
+                </div>
+                
+                <div class="step">
+                    <span class="step-number">3</span>
+                    <strong>Compare:</strong>
+                    <br>
+                    24 = 24? <span class="highlight">YES! ✓</span>
+                    <br>
+                    These ARE proportional!
+                </div>
+            </div>
+            
+            <h3 style="margin-top: 40px;">Example 2: Not Proportional</h3>
+            
+            <div class="example-box">
+                <h4>Is 3/4 = 5/8?</h4>
+                
+                <div class="step">
+                    <span class="step-number">1</span>
+                    <strong>Cross multiply:</strong>
+                    <br>
+                    3 × 8 = <span class="highlight">24</span>
+                    <br>
+                    4 × 5 = <span class="highlight">20</span>
+                </div>
+                
+                <div class="step">
+                    <span class="step-number">2</span>
+                    <strong>Compare:</strong>
+                    <br>
+                    24 ≠ 20
+                    <br>
+                    These are NOT proportional! <span class="highlight">✗</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- SOLVING PROPORTIONS -->
+        <div class="section">
+            <h2>Solving Proportions (Finding Missing Values)</h2>
+            
+            <div class="explanation">
+                When one value in a proportion is missing, we can <strong>use cross multiplication to find it</strong>.
+                <br><br>
+                This is very useful in real-world problems!
+            </div>
+            
+            <h3>Example 1: Basic Proportion Problem</h3>
+            
+            <div class="example-box">
+                <h4>🍎 If 3 apples cost $2, how much do 9 apples cost?</h4>
+                
+                <div class="step">
+                    <span class="step-number">1</span>
+                    <strong>Set up the proportion:</strong>
+                    <br>
+                    <span style="font-size: 1.1em;">3/2 = 9/x</span>
+                    <br>
+                    (3 apples : $2 = 9 apples : $x)
+                </div>
+                
+                <div class="step">
+                    <span class="step-number">2</span>
+                    <strong>Cross multiply:</strong>
+                    <br>
+                    3 × x = 2 × 9
+                    <br>
+                    3x = 18
+                </div>
+                
+                <div class="step">
+                    <span class="step-number">3</span>
+                    <strong>Solve for x:</strong>
+                    <br>
+                    x = 18 ÷ 3
+                    <br>
+                    x = <span class="highlight">6</span>
+                </div>
+                
+                <div class="answer-box">
+                    <strong>✓ 9 apples cost $6</strong>
+                </div>
+            </div>
+            
+            <h3 style="margin-top: 40px;">Example 2: Scale Factor Problem</h3>
+            
+            <div class="example-box">
+                <h4>🗺️ Map Scale: If 1 inch on map = 50 miles, what distance does 3 inches represent?</h4>
+                
+                <div class="step">
+                    <span class="step-number">1</span>
+                    <strong>Set up the proportion:</strong>
+                    <br>
+                    <span style="font-size: 1.1em;">1/50 = 3/x</span>
+                    <br>
+                    (1 inch : 50 miles = 3 inches : x miles)
+                </div>
+                
+                <div class="step">
+                    <span class="step-number">2</span>
+                    <strong>Cross multiply:</strong>
+                    <br>
+                    1 × x = 50 × 3
+                    <br>
+                    x = 150
+                </div>
+                
+                <div class="answer-box">
+                    <strong>✓ 3 inches = 150 miles</strong>
+                </div>
+            </div>
+            
+            <h3 style="margin-top: 40px;">Example 3: Recipe Scaling</h3>
+            
+            <div class="example-box">
+                <h4>🍰 Recipe needs 2 cups flour for 12 cookies. How much flour for 30 cookies?</h4>
+                
+                <div class="step">
+                    <span class="step-number">1</span>
+                    <strong>Set up the proportion:</strong>
+                    <br>
+                    <span style="font-size: 1.1em;">2/12 = x/30</span>
+                    <br>
+                    (2 cups : 12 cookies = x cups : 30 cookies)
+                </div>
+                
+                <div class="step">
+                    <span class="step-number">2</span>
+                    <strong>Cross multiply:</strong>
+                    <br>
+                    2 × 30 = 12 × x
+                    <br>
+                    60 = 12x
+                </div>
+                
+                <div class="step">
+                    <span class="step-number">3</span>
+                    <strong>Solve for x:</strong>
+                    <br>
+                    x = 60 ÷ 12
+                    <br>
+                    x = <span class="highlight">5</span>
+                </div>
+                
+                <div class="answer-box">
+                    <strong>✓ Need 5 cups flour for 30 cookies</strong>
+                </div>
+            </div>
+        </div>
+        
+        <!-- DIRECT VS INVERSE -->
+        <div class="section">
+            <h2>Direct vs Inverse Proportions</h2>
+            
+            <h3>Direct Proportion (Direct Relationship)</h3>
+            
+            <div class="explanation">
+                When one quantity increases, the other <strong>also increases</strong> in the same ratio.
+                <br><br>
+                Formula: y = kx (where k is a constant)
+            </div>
+            
+            <div class="grid-2">
+                <div class="visual-item">
+                    <strong>🍔 Burgers & Cost</strong>
+                    <br><br>
+                    1 burger = $5
+                    <br>2 burgers = $10
+                    <br>3 burgers = $15
+                    <br>4 burgers = $20
+                    <br><br>
+                    <span style="color: #667eea; font-weight: bold;">
+                        More burgers = More cost
+                        <br>(Direct)
+                    </span>
+                </div>
+                
+                <div class="visual-item">
+                    <strong>📚 Hours Worked & Pay</strong>
+                    <br><br>
+                    1 hour = $10
+                    <br>2 hours = $20
+                    <br>3 hours = $30
+                    <br>5 hours = $50
+                    <br><br>
+                    <span style="color: #667eea; font-weight: bold;">
+                        More hours = More pay
+                        <br>(Direct)
+                    </span>
+                </div>
+            </div>
+            
+            <h3 style="margin-top: 40px;">Inverse Proportion (Inverse Relationship)</h3>
+            
+            <div class="explanation">
+                When one quantity increases, the other <strong>decreases</strong> in the opposite ratio.
+                <br><br>
+                Formula: y = k/x (where k is a constant)
+            </div>
+            
+            <div class="grid-2">
+                <div class="visual-item">
+                    <strong>⏱️ Speed & Time</strong>
+                    <br><br>
+                    Speed 60 mph = 2 hours
+                    <br>Speed 40 mph = 3 hours
+                    <br>Speed 30 mph = 4 hours
+                    <br>Speed 20 mph = 6 hours
+                    <br><br>
+                    <span style="color: #667eea; font-weight: bold;">
+                        Higher speed = Less time
+                        <br>(Inverse)
+                    </span>
+                </div>
+                
+                <div class="visual-item">
+                    <strong>👥 Workers & Time</strong>
+                    <br><br>
+                    1 worker = 10 days
+                    <br>2 workers = 5 days
+                    <br>5 workers = 2 days
+                    <br>10 workers = 1 day
+                    <br><br>
+                    <span style="color: #667eea; font-weight: bold;">
+                        More workers = Less time
+                        <br>(Inverse)
+                    </span>
+                </div>
+            </div>
+            
+            <h3 style="margin-top: 40px;">Comparison Table:</h3>
+            
+            <table class="table">
+                <tr>
+                    <th>Aspect</th>
+                    <th>Direct Proportion</th>
+                    <th>Inverse Proportion</th>
+                </tr>
+                <tr>
+                    <td><strong>Pattern</strong></td>
+                    <td>Both increase/decrease together</td>
+                    <td>One increases, other decreases</td>
+                </tr>
+                <tr>
+                    <td><strong>Formula</strong></td>
+                    <td>y = kx</td>
+                    <td>y = k/x or xy = k</td>
+                </tr>
+                <tr>
+                    <td><strong>Example</strong></td>
+                    <td>Burgers → Cost (more = more)</td>
+                    <td>Speed → Time (more = less)</td>
+                </tr>
+                <tr>
+                    <td><strong>Graph</strong></td>
+                    <td>Straight line through origin</td>
+                    <td>Curved line (hyperbola)</td>
+                </tr>
+            </table>
+        </div>
+        
+        <!-- UNIT RATES -->
+        <div class="section">
+            <h2>Unit Rates (Part of Proportional Reasoning)</h2>
+            
+            <div class="explanation">
+                A <strong>unit rate</strong> compares a quantity to ONE unit of another quantity.
+                <br><br>
+                Examples: price per item, miles per hour, cost per pound
+            </div>
+            
+            <h3>Finding Unit Rates:</h3>
+            
+            <div class="example-box">
+                <h4>🍎 Example: 6 apples cost $12. What's the unit rate (price per apple)?</h4>
+                
+                <div class="step">
+                    <span class="step-number">1</span>
+                    <strong>Divide total by quantity:</strong>
+                    <br>
+                    $12 ÷ 6 apples = <span class="highlight">$2 per apple</span>
+                </div>
+                
+                <div class="answer-box">
+                    <strong>✓ Unit Rate: $2 per apple</strong>
+                </div>
+            </div>
+            
+            <h3 style="margin-top: 40px;">Using Unit Rates to Solve Problems:</h3>
+            
+            <div class="example-box">
+                <h4>If 1 apple costs $2, how much do 8 apples cost?</h4>
+                
+                <div class="step">
+                    <span class="step-number">1</span>
+                    <strong>We know the unit rate:</strong>
+                    <br>
+                    $2 per apple
+                </div>
+                
+                <div class="step">
+                    <span class="step-number">2</span>
+                    <strong>Multiply unit rate by quantity:</strong>
+                    <br>
+                    $2/apple × 8 apples = <span class="highlight">$16</span>
+                </div>
+                
+                <div class="answer-box">
+                    <strong>✓ 8 apples cost $16</strong>
+                </div>
+            </div>
+        </div>
+        
+        <!-- REAL WORLD APPLICATIONS -->
+        <div class="section">
+            <h2>Real-World Applications of Proportional Reasoning</h2>
+            
+            <h3>1. Scaling Recipes 🍰</h3>
+            
+            <div class="example-box">
+                <h4>Recipe serves 4 people with 2 cups flour. How much flour for 10 people?</h4>
+                
+                <div class="step">
+                    <span class="step-number">1</span>
+                    <strong>Set up proportion:</strong>
+                    <br>
+                    2/4 = x/10
+                </div>
+                
+                <div class="step">
+                    <span class="step-number">2</span>
+                    <strong>Cross multiply:</strong>
+                    <br>
+                    2 × 10 = 4 × x
+                    <br>
+                    20 = 4x
+                    <br>
+                    x = 5 cups
+                </div>
+                
+                <div class="answer-box">
+                    <strong>✓ Need 5 cups flour for 10 people</strong>
+                </div>
+            </div>
+            
+            <h3 style="margin-top: 40px;">2. Map Scales 🗺️</h3>
+            
+            <div class="example-box">
+                <h4>Map scale: 1 inch = 25 miles. Two cities are 4 inches apart on map. Real distance?</h4>
+                
+                <div class="step">
+                    <span class="step-number">1</span>
+                    <strong>Set up proportion:</strong>
+                    <br>
+                    1/25 = 4/x
+                </div>
+                
+                <div class="step">
+                    <span class="step-number">2</span>
+                    <strong>Cross multiply:</strong>
+                    <br>
+                    1 × x = 25 × 4
+                    <br>
+                    x = 100 miles
+                </div>
+                
+                <div class="answer-box">
+                    <strong>✓ Cities are 100 miles apart</strong>
+                </div>
+            </div>
+            
+            <h3 style="margin-top: 40px;">3. Similar Figures 📐</h3>
+            
+            <div class="example-box">
+                <h4>Two similar triangles. Small has side 4 cm. Large has corresponding side 8 cm. If small has perimeter 12 cm, what's large's perimeter?</h4>
+                
+                <div class="step">
+                    <span class="step-number">1</span>
+                    <strong>Find scale factor:</strong>
+                    <br>
+                    8 ÷ 4 = <span class="highlight">2</span> (large is 2× bigger)
+                </div>
+                
+                <div class="step">
+                    <span class="step-number">2</span>
+                    <strong>Multiply perimeter by scale factor:</strong>
+                    <br>
+                    12 cm × 2 = <span class="highlight">24 cm</span>
+                </div>
+                
+                <div class="answer-box">
+                    <strong>✓ Large triangle's perimeter = 24 cm</strong>
+                </div>
+            </div>
+            
+            <h3 style="margin-top: 40px;">4. Discounts & Sales 🛍️</h3>
+            
+            <div class="example-box">
+                <h4>Item normally $60. On sale for 25% off. What's the sale price?</h4>
+                
+                <div class="step">
+                    <span class="step-number">1</span>
+                    <strong>If 25% off, you pay 75%:</strong>
+                    <br>
+                    Set up: 75/100 = x/60
+                </div>
+                
+                <div class="step">
+                    <span class="step-number">2</span>
+                    <strong>Cross multiply:</strong>
+                    <br>
+                    75 × 60 = 100 × x
+                    <br>
+                    4500 = 100x
+                    <br>
+                    x = 45
+                </div>
+                
+                <div class="answer-box">
+                    <strong>✓ Sale price = $45</strong>
+                </div>
+            </div>
+        </div>
+        
+        <!-- COMMON MISTAKES -->
+        <div class="section">
+            <h2>Common Mistakes in Proportional Reasoning</h2>
+            
+            <div class="grid-2">
+                <div style="background: #ffebee; padding: 20px; border-radius: 10px; border-left: 5px solid #d32f2f;">
+                    <strong style="color: #d32f2f; font-size: 1.1em;">❌ WRONG</strong>
+                    <br><br>
+                    Setting up wrong:
+                    <br>
+                    2/4 ≠ 10/x
+                    <br><br>
+                    Should be:
+                    <br>
+                    2/4 = x/10
+                </div>
+                
+                <div style="background: #e8f5e9; padding: 20px; border-radius: 10px; border-left: 5px solid #2e7d32;">
+                    <strong style="color: #2e7d32; font-size: 1.1em;">✅ CORRECT</strong>
+                    <br><br>
+                    Keep the same units together:
+                    <br>
+                    cups/people = cups/people
+                    <br><br>
+                    Or: apples/dollars = apples/dollars
+                </div>
+            </div>
+            
+            <div class="grid-2" style="margin-top: 20px;">
+                <div style="background: #ffebee; padding: 20px; border-radius: 10px; border-left: 5px solid #d32f2f;">
+                    <strong style="color: #d32f2f; font-size: 1.1em;">❌ WRONG</strong>
+                    <br><br>
+                    Forgetting to cross multiply:
+                    <br>
+                    2/4 = x/10
+                    <br>
+                    2 = x (NO!)
+                </div>
+                
+                <div style="background: #e8f5e9; padding: 20px; border-radius: 10px; border-left: 5px solid #2e7d32;">
+                    <strong style="color: #2e7d32; font-size: 1.1em;">✅ CORRECT</strong>
+                    <br><br>
+                    Always cross multiply:
+                    <br>
+                    2 × 10 = 4 × x
+                    <br>
+                    20 = 4x, so x = 5
+                </div>
+            </div>
+            
+            <div class="grid-2" style="margin-top: 20px;">
+                <div style="background: #ffebee; padding: 20px; border-radius: 10px; border-left: 5px solid #d32f2f;">
+                    <strong style="color: #d32f2f; font-size: 1.1em;">❌ WRONG</strong>
+                    <br><br>
+                    Confusing direct and inverse:
+                    <br>
+                    "More speed = more time"
+                    <br>
+                    (It's actually LESS time!)
+                </div>
+                
+                <div style="background: #e8f5e9; padding: 20px; border-radius: 10px; border-left: 5px solid #2e7d32;">
+                    <strong style="color: #2e7d32; font-size: 1.1em;">✅ CORRECT</strong>
+                    <br><br>
+                    Direct: Both increase together
+                    <br>
+                    Inverse: One up, one down
+                </div>
+            </div>
+        </div>
+        
+        <!-- KEY POINTS -->
+        <div class="section" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
+            <h2 style="color: white; background: none; padding: 0; margin: 0 0 30px 0;">📌 KEY POINTS TO REMEMBER</h2>
+            
+            <div style="font-size: 1.1em; line-height: 2;">
+                <div style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 8px; margin: 15px 0;">
+                    ✓ <strong>Proportional:</strong> Quantities change together in a consistent ratio
+                </div>
+                
+                <div style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 8px; margin: 15px 0;">
+                    ✓ <strong>Proportion:</strong> Two equal ratios (a/b = c/d)
+                </div>
+                
+                <div style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 8px; margin: 15px 0;">
+                    ✓ <strong>Cross Multiply:</strong> a × d = b × c to check proportions
+                </div>
+                
+                <div style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 8px; margin: 15px 0;">
+                    ✓ <strong>Direct:</strong> Both increase together (y = kx)
+                </div>
+                
+                <div style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 8px; margin: 15px 0;">
+                    ✓ <strong>Inverse:</strong> One increases, other decreases (y = k/x)
+                </div>
+                
+                <div style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 8px; margin: 15px 0;">
+                    ✓ <strong>Unit Rate:</strong> Quantity per ONE unit (e.g., $2 per apple)
+                </div>
+                
+                <div style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 8px; margin: 15px 0;">
+                    ✓ <strong>Set up correctly:</strong> Keep same units in same positions
+                </div>
+                
+                <div style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 8px; margin: 15px 0;">
+                    ✓ <strong>Real-world uses:</strong> Recipes, maps, similar figures, discounts, ratios
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

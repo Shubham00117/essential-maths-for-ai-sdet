@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ratio - Complete Guide</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .section {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        .section h2 {
+            color: white;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            border-radius: 10px;
+            margin: -40px -40px 30px -40px;
+            text-align: center;
+            font-size: 1.8em;
+        }
+        
+        .section h3 {
+            color: #667eea;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-size: 1.4em;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+        
+        .explanation {
+            background: #e3f2fd;
+            border-left: 5px solid #2196f3;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-size: 1.1em;
+            line-height: 1.8;
+        }
+        
+        .explanation strong {
+            color: #1565c0;
+        }
+        
+        .example-box {
+            background: #f0f7ff;
+            border: 3px solid #667eea;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 25px 0;
+        }
+        
+        .example-box h4 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+        
+        .step {
+            background: #fff9e6;
+            border-left: 5px solid #ffc107;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            font-size: 1.05em;
+            line-height: 1.8;
+        }
+        
+        .step-number {
+            display: inline-block;
+            background: #ffc107;
+            color: #333;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 35px;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        
+        .highlight {
+            background: #ffeb3b;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+        
+        .visual-box {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .visual-item {
+            background: #f5f5f5;
+            padding: 20px;
+            border-radius: 10px;
+            border: 2px solid #667eea;
+            text-align: center;
+        }
+        
+        .visual-item strong {
+            color: #667eea;
+            display: block;
+            margin-bottom: 15px;
+        }
+        
+        .circles {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 15px 0;
+        }
+        
+        .circle {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: white;
+            font-size: 1.2em;
+        }
+        
+        .circle.apple {
+            background: #ff6b6b;
+        }
+        
+        .circle.banana {
+            background: #ffc107;
+        }
+        
+        .circle.orange {
+            background: #ff9800;
+        }
+        
+        .key-concept {
+            background: #e8f5e9;
+            border-left: 5px solid #4caf50;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-size: 1.1em;
+            line-height: 1.8;
+        }
+        
+        .key-concept strong {
+            color: #2e7d32;
+        }
+        
+        .formula-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 12px;
+            margin: 25px 0;
+            font-size: 1.15em;
+            text-align: center;
+            font-weight: bold;
+        }
+        
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .grid-item {
+            background: #f5f5f5;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 5px solid #667eea;
+        }
+        
+        .grid-item strong {
+            color: #667eea;
+            display: block;
+            margin-bottom: 10px;
+        }
+        
+        .note-box {
+            background: #fce4ec;
+            border-left: 5px solid #e91e63;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-size: 1.05em;
+        }
+        
+        .note-box strong {
+            color: #c2185b;
+        }
+        
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 1.05em;
+        }
+        
+        .table th {
+            background: #667eea;
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: bold;
+        }
+        
+        .table td {
+            padding: 12px 15px;
+            border-bottom: 2px solid #ddd;
+        }
+        
+        .table tr:hover {
+            background: #f5f5f5;
+        }
+        
+        .correct {
+            color: #2e7d32;
+            font-weight: bold;
+        }
+        
+        .wrong {
+            color: #d32f2f;
+            font-weight: bold;
+        }
+        
+        @media (max-width: 768px) {
+            .visual-box {
+                grid-template-columns: 1fr;
+            }
+            
+            .grid-2 {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📊 RATIO - Complete Guide</h1>
+        
+        <!-- WHAT IS RATIO -->
+        <div class="section">
+            <h2>What is a Ratio?</h2>
+            
+            <div class="explanation">
+                A <strong>ratio</strong> is a way to compare two or more quantities. It tells you <strong>how much of one thing there is compared to another</strong>.
+                <br><br>
+                <strong>Think of it as: "For every X of this, there is Y of that"</strong>
+            </div>
+            
+            <h3>Real-World Examples:</h3>
+            
+            <div class="visual-box">
+                <div class="visual-item">
+                    <strong>🍎 Apples to Oranges</strong>
+                    <div class="circles">
+                        <div class="circle apple">🍎</div>
+                        <div class="circle apple">🍎</div>
+                        <div class="circle apple">🍎</div>
+                    </div>
+                    <div style="margin: 10px 0;">3 Apples</div>
+                    <div class="circles">
+                        <div class="circle orange">🍊</div>
+                        <div class="circle orange">🍊</div>
+                    </div>
+                    <div style="margin: 10px 0;">2 Oranges</div>
+                    <div style="color: #667eea; font-weight: bold; margin-top: 15px;">
+                        Ratio: 3:2
+                    </div>
+                </div>
+                
+                <div class="visual-item">
+                    <strong>👦 Boys to Girls</strong>
+                    <div class="circles">
+                        <div class="circle" style="background: #2196f3;">👦</div>
+                        <div class="circle" style="background: #2196f3;">👦</div>
+                        <div class="circle" style="background: #2196f3;">👦</div>
+                        <div class="circle" style="background: #2196f3;">👦</div>
+                    </div>
+                    <div style="margin: 10px 0;">4 Boys</div>
+                    <div class="circles">
+                        <div class="circle" style="background: #e91e63;">👧</div>
+                        <div class="circle" style="background: #e91e63;">👧</div>
+                        <div class="circle" style="background: #e91e63;">👧</div>
+                    </div>
+                    <div style="margin: 10px 0;">3 Girls</div>
+                    <div style="color: #667eea; font-weight: bold; margin-top: 15px;">
+                        Ratio: 4:3
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- HOW TO WRITE RATIOS -->
+        <div class="section">
+            <h2>How to Write a Ratio</h2>
+            
+            <div class="explanation">
+                There are <strong>3 ways</strong> to write a ratio:
+            </div>
+            
+            <div class="visual-box">
+                <div class="visual-item">
+                    <strong>Method 1: Using Colon (:)</strong>
+                    <br><br>
+                    <div style="font-size: 1.4em; color: #667eea; font-weight: bold;">
+                        3 : 2
+                    </div>
+                    <br>
+                    (Read as "3 to 2")
+                </div>
+                
+                <div class="visual-item">
+                    <strong>Method 2: Using the Word "to"</strong>
+                    <br><br>
+                    <div style="font-size: 1.4em; color: #667eea; font-weight: bold;">
+                        3 to 2
+                    </div>
+                </div>
+            </div>
+            
+            <div class="visual-item" style="width: 100%; margin: 20px 0;">
+                <strong>Method 3: As a Fraction</strong>
+                <br><br>
+                <div style="font-size: 1.4em; color: #667eea; font-weight: bold;">
+                    3/2
+                </div>
+            </div>
+            
+            <div class="key-concept">
+                <strong>✨ All three mean the same thing:</strong>
+                <br>3:2 = 3 to 2 = 3/2
+            </div>
+        </div>
+        
+        <!-- EXAMPLE WITH VISUAL -->
+        <div class="section">
+            <h2>Example: Understanding Ratio</h2>
+            
+            <div class="example-box">
+                <h4>🍕 Pizza Party Example</h4>
+                
+                <div class="step">
+                    <span class="step-number">1</span>
+                    <strong>Situation:</strong>
+                    <br>You have 2 pizzas and 3 sodas
+                </div>
+                
+                <div style="text-align: center; margin: 30px 0;">
+                    <div class="circles">
+                        <div class="circle" style="background: #FFD700; border: 2px solid #333;">🍕</div>
+                        <div class="circle" style="background: #FFD700; border: 2px solid #333;">🍕</div>
+                    </div>
+                    <div style="font-weight: bold; color: #333;">2 Pizzas</div>
+                    
+                    <div class="circles" style="margin: 20px 0;">
+                        <div class="circle" style="background: #4caf50;">🥤</div>
+                        <div class="circle" style="background: #4caf50;">🥤</div>
+                        <div class="circle" style="background: #4caf50;">🥤</div>
+                    </div>
+                    <div style="font-weight: bold; color: #333;">3 Sodas</div>
+                </div>
+                
+                <div class="step">
+                    <span class="step-number">2</span>
+                    <strong>What is the ratio of pizzas to sodas?</strong>
+                    <br>
+                    Count: 2 pizzas and 3 sodas
+                </div>
+                
+                <div class="step">
+                    <span class="step-number">3</span>
+                    <strong>Write the ratio:</strong>
+                    <br>
+                    <span class="highlight">2 : 3</span>
+                    <br>(or "2 to 3" or 2/3)
+                </div>
+                
+                <div class="step">
+                    <span class="step-number">4</span>
+                    <strong>What does it mean?</strong>
+                    <br>
+                    "For every 2 pizzas, there are 3 sodas"
+                </div>
+            </div>
+        </div>
+        
+        <!-- EQUIVALENT RATIOS -->
+        <div class="section">
+            <h2>Equivalent Ratios</h2>
+            
+            <div class="explanation">
+                Just like with fractions, <strong>ratios can be equivalent</strong> (mean the same thing).
+                <br><br>
+                If you multiply or divide both parts of a ratio by the same number, you get an equivalent ratio.
+            </div>
+            
+            <h3>Example: Making Equivalent Ratios</h3>
+            
+            <div class="example-box">
+                <h4>Starting Ratio: 2:3</h4>
+                
+                <div style="text-align: center; margin: 20px 0;">
+                    <div style="font-size: 1.3em; color: #667eea; font-weight: bold;">
+                        2 : 3
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <span class="step-number">1</span>
+                    <strong>Multiply both by 2:</strong>
+                    <br>
+                    (2 × 2) : (3 × 2) = <span class="highlight">4 : 6</span>
+                    <br>
+                    <span style="color: #666; font-size: 0.95em;">These are equivalent! 2:3 = 4:6</span>
+                </div>
+                
+                <div class="step">
+                    <span class="step-number">2</span>
+                    <strong>Multiply both by 3:</strong>
+                    <br>
+                    (2 × 3) : (3 × 3) = <span class="highlight">6 : 9</span>
+                    <br>
+                    <span style="color: #666; font-size: 0.95em;">These are equivalent! 2:3 = 6:9</span>
+                </div>
+                
+                <div class="step">
+                    <span class="step-number">3</span>
+                    <strong>Divide both by 1 (if possible):</strong>
+                    <br>
+                    (2 ÷ 1) : (3 ÷ 1) = <span class="highlight">2 : 3</span>
+                    <br>
+                    <span style="color: #666; font-size: 0.95em;">This is the simplest form</span>
+                </div>
+            </div>
+            
+            <div class="key-concept">
+                <strong>✨ All of these are EQUIVALENT:</strong>
+                <br>
+                2:3 = 4:6 = 6:9 = 8:12 = 10:15
+                <br><br>
+                They all mean the same relationship!
+            </div>
+        </div>
+        
+        <!-- SIMPLIFYING RATIOS -->
+        <div class="section">
+            <h2>Simplifying Ratios (Finding the Simplest Form)</h2>
+            
+            <div class="explanation">
+                To simplify a ratio, divide both parts by their <strong>GCD (Greatest Common Divisor)</strong>.
+            </div>
+            
+            <h3>Example 1: Simplify 6:9</h3>
+            
+            <div class="example-box">
+                <div class="step">
+                    <span class="step-number">1</span>
+                    <strong>Find the GCD of 6 and 9:</strong>
+                    <br>
+                    Factors of 6: 1, 2, 3, 6
+                    <br>
+                    Factors of 9: 1, 3, 9
+                    <br>
+                    <span class="highlight">GCD = 3</span>
+                </div>
+                
+                <div class="step">
+                    <span class="step-number">2</span>
+                    <strong>Divide both by 3:</strong>
+                    <br>
+                    (6 ÷ 3) : (9 ÷ 3) = <span class="highlight">2 : 3</span>
+                </div>
+                
+                <div class="step">
+                    <span class="step-number">3</span>
+                    <strong>Check:</strong> Can we divide further? NO! ✓
+                    <br>
+                    2 and 3 have no common factors (except 1)
+                </div>
+                
+                <div style="background: #e8f5e9; padding: 20px; border-radius: 8px; margin-top: 20px; text-align: center;">
+                    <strong style="color: #2e7d32; font-size: 1.1em;">✓ Answer: 6:9 simplifies to 2:3</strong>
+                </div>
+            </div>
+            
+            <h3 style="margin-top: 40px;">Example 2: Simplify 12:18</h3>
+            
+            <div class="example-box">
+                <div class="step">
+                    <span class="step-number">1</span>
+                    <strong>Find the GCD of 12 and 18:</strong>
+                    <br>
+                    Factors of 12: 1, 2, 3, 4, 6, 12
+                    <br>
+                    Factors of 18: 1, 2, 3, 6, 9, 18
+                    <br>
+                    <span class="highlight">GCD = 6</span>
+                </div>
+                
+                <div class="step">
+                    <span class="step-number">2</span>
+                    <strong>Divide both by 6:</strong>
+                    <br>
+                    (12 ÷ 6) : (18 ÷ 6) = <span class="highlight">2 : 3</span>
+                </div>
+                
+                <div style="background: #e8f5e9; padding: 20px; border-radius: 8px; margin-top: 20px; text-align: center;">
+                    <strong style="color: #2e7d32; font-size: 1.1em;">✓ Answer: 12:18 simplifies to 2:3</strong>
+                </div>
+            </div>
+        </div>
+        
+        <!-- WORD PROBLEMS -->
+        <div class="section">
+            <h2>Solving Ratio Word Problems</h2>
+            
+            <h3>Example 1: Finding the Actual Quantities</h3>
+            
+            <div class="example-box">
+                <h4>🎒 School Problem</h4>
+                
+                <div class="step">
+                    <span class="step-number">1</span>
+                    <strong>Read the problem:</strong>
+                    <br>
+                    In a class, the ratio of boys to girls is 3:2. If there are 9 boys, how many girls are there?
+                </div>
+                
+                <div class="step">
+                    <span class="step-number">2</span>
+                    <strong>Identify what we know:</strong>
+                    <br>
+                    Ratio: 3:2 (boys : girls)
+                    <br>
+                    Actual boys: 9
+                    <br>
+                    Find: Actual girls?
+                </div>
+                
+                <div class="step">
+                    <span class="step-number">3</span>
+                    <strong>Find the multiplier:</strong>
+                    <br>
+                    In ratio, boys = 3
+                    <br>
+                    Actual boys = 9
+                    <br>
+                    <span class="highlight">Multiplier = 9 ÷ 3 = 3</span>
+                </div>
+                
+                <div class="step">
+                    <span class="step-number">4</span>
+                    <strong>Multiply the girls part by the same multiplier:</strong>
+                    <br>
+                    In ratio, girls = 2
+                    <br>
+                    Actual girls = 2 × 3 = <span class="highlight">6</span>
+                </div>
+                
+                <div style="background: #e8f5e9; padding: 20px; border-radius: 8px; margin-top: 20px; text-align: center;">
+                    <strong style="color: #2e7d32; font-size: 1.1em;">✓ Answer: There are 6 girls</strong>
+                    <br><br>
+                    Check: 9:6 = 3:2 ✓ (divide both by 3)
+                </div>
+            </div>
+            
+            <h3 style="margin-top: 40px;">Example 2: Dividing in a Ratio</h3>
+            
+            <div class="example-box">
+                <h4>🍕 Sharing Pizza</h4>
+                
+                <div class="step">
+                    <span class="step-number">1</span>
+                    <strong>Read the problem:</strong>
+                    <br>
+                    Two friends share $50 in the ratio 3:2. How much does each get?
+                </div>
+                
+                <div class="step">
+                    <span class="step-number">2</span>
+                    <strong>Find the total parts:</strong>
+                    <br>
+                    Ratio is 3:2
+                    <br>
+                    Total parts = 3 + 2 = <span class="highlight">5 parts</span>
+                </div>
+                
+                <div class="step">
+                    <span class="step-number">3</span>
+                    <strong>Find the value of 1 part:</strong>
+                    <br>
+                    Total money = $50
+                    <br>
+                    Value of 1 part = $50 ÷ 5 = <span class="highlight">$10</span>
+                </div>
+                
+                <div class="step">
+                    <span class="step-number">4</span>
+                    <strong>Find each person's share:</strong>
+                    <br>
+                    First friend: 3 × $10 = <span class="highlight">$30</span>
+                    <br>
+                    Second friend: 2 × $10 = <span class="highlight">$20</span>
+                </div>
+                
+                <div style="background: #e8f5e9; padding: 20px; border-radius: 8px; margin-top: 20px; text-align: center;">
+                    <strong style="color: #2e7d32; font-size: 1.1em;">✓ Answer: $30 and $20</strong>
+                    <br><br>
+                    Check: $30 + $20 = $50 ✓ and 30:20 = 3:2 ✓
+                </div>
+            </div>
+        </div>
+        
+        <!-- RATIO VS FRACTION -->
+        <div class="section">
+            <h2>Ratio vs Fraction - What's the Difference?</h2>
+            
+            <table class="table">
+                <tr>
+                    <th>Aspect</th>
+                    <th>Ratio</th>
+                    <th>Fraction</th>
+                </tr>
+                <tr>
+                    <td><strong>Definition</strong></td>
+                    <td>Compares two or more quantities</td>
+                    <td>Represents part of a whole</td>
+                </tr>
+                <tr>
+                    <td><strong>Written as</strong></td>
+                    <td>3:2 or 3 to 2 or 3/2</td>
+                    <td>3/2 (only this way)</td>
+                </tr>
+                <tr>
+                    <td><strong>Example</strong></td>
+                    <td>Apples to oranges = 3:2 (3 apples FOR every 2 oranges)</td>
+                    <td>3/2 (3 parts out of 2 parts)</td>
+                </tr>
+                <tr>
+                    <td><strong>Meaning</strong></td>
+                    <td>Comparison between two things</td>
+                    <td>One part out of the whole</td>
+                </tr>
+                <tr>
+                    <td><strong>Value</strong></td>
+                    <td>Can be any value</td>
+                    <td>Always ≤ 1 (in proper fractions)</td>
+                </tr>
+            </table>
+            
+            <div class="note-box">
+                <strong>💡 IMPORTANT:</strong> Even though they look similar, ratios and fractions mean different things! A ratio 3:2 is NOT the same as fraction 3/2 in meaning, even though they're written the same way.
+            </div>
+        </div>
+        
+        <!-- PRACTICAL EXAMPLES -->
+        <div class="section">
+            <h2>Real-World Ratio Examples</h2>
+            
+            <div class="grid-2">
+                <div class="grid-item">
+                    <strong>🎨 Mixing Paint</strong>
+                    <br><br>
+                    To make a specific color, you mix red and blue paint in the ratio 2:3
+                    <br><br>
+                    If you need 10 liters of red paint, you need 15 liters of blue paint
+                    <br><br>
+                    (Because 2:3, and 10÷2=5, so 3×5=15)
+                </div>
+                
+                <div class="grid-item">
+                    <strong>🍰 Recipe</strong>
+                    <br><br>
+                    A cake recipe uses flour and sugar in ratio 3:2
+                    <br><br>
+                    If you use 300g flour, you need 200g sugar
+                    <br><br>
+                    (Because 3:2, and 300÷3=100, so 2×100=200)
+                </div>
+                
+                <div class="grid-item">
+                    <strong>🗺️ Map Scale</strong>
+                    <br><br>
+                    A map has scale 1:1000 (1cm on map = 1000cm in real life)
+                    <br><br>
+                    If 2cm on map, then 2000cm in real life
+                    <br><br>
+                    (2 × 1000 = 2000)
+                </div>
+                
+                <div class="grid-item">
+                    <strong>💰 Investment Split</strong>
+                    <br><br>
+                    Two partners invest in ratio 4:3
+                    <br><br>
+                    If total investment is $70,000:
+                    <br>Partner 1: $40,000
+                    <br>Partner 2: $30,000
+                </div>
+            </div>
+        </div>
+        
+        <!-- KEY POINTS -->
+        <div class="section" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
+            <h2 style="color: white; background: none; padding: 0; margin: 0 0 30px 0;">📌 KEY POINTS TO REMEMBER</h2>
+            
+            <div style="font-size: 1.1em; line-height: 2;">
+                <div style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 8px; margin: 15px 0;">
+                    ✓ <strong>Ratio compares quantities:</strong> 3:2 means "for every 3 of this, there are 2 of that"
+                </div>
+                
+                <div style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 8px; margin: 15px 0;">
+                    ✓ <strong>Written 3 ways:</strong> 3:2 = 3 to 2 = 3/2
+                </div>
+                
+                <div style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 8px; margin: 15px 0;">
+                    ✓ <strong>Equivalent ratios:</strong> 2:3 = 4:6 = 6:9 (multiply both by same number)
+                </div>
+                
+                <div style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 8px; margin: 15px 0;">
+                    ✓ <strong>Simplify by GCD:</strong> 6:9 ÷ 3 = 2:3
+                </div>
+                
+                <div style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 8px; margin: 15px 0;">
+                    ✓ <strong>For word problems:</strong> Find the multiplier, then apply to all parts
+                </div>
+                
+                <div style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 8px; margin: 15px 0;">
+                    ✓ <strong>Order matters:</strong> 3:2 is different from 2:3!
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
