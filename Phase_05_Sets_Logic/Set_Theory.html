@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Set Theory - Complete Guide</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .section {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .section h2 {
+            color: white;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            border-radius: 10px;
+            margin: -40px -40px 30px -40px;
+            text-align: center;
+            font-size: 1.8em;
+        }
+
+        .section h3 {
+            color: #667eea;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-size: 1.4em;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+
+        .explanation {
+            background: #e3f2fd;
+            border-left: 5px solid #2196f3;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-size: 1.1em;
+            line-height: 1.8;
+        }
+
+        .explanation strong {
+            color: #1565c0;
+        }
+
+        .example-box {
+            background: #f0f7ff;
+            border: 3px solid #667eea;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 25px 0;
+        }
+
+        .example-box h4 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        .step {
+            background: #fff9e6;
+            border-left: 5px solid #ffc107;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            font-size: 1.05em;
+            line-height: 1.8;
+        }
+
+        .step-number {
+            display: inline-block;
+            background: #ffc107;
+            color: #333;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 35px;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .highlight {
+            background: #ffeb3b;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .visual-item {
+            background: #f5f5f5;
+            padding: 20px;
+            border-radius: 10px;
+            border: 2px solid #667eea;
+            text-align: center;
+        }
+
+        .visual-item strong {
+            color: #667eea;
+            display: block;
+            margin-bottom: 15px;
+        }
+
+        .key-concept {
+            background: #e8f5e9;
+            border-left: 5px solid #4caf50;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-size: 1.1em;
+            line-height: 1.8;
+        }
+
+        .key-concept strong {
+            color: #2e7d32;
+        }
+
+        .formula-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 12px;
+            margin: 25px 0;
+            font-size: 1.15em;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .answer-box {
+            background: #e8f5e9;
+            border-left: 5px solid #4caf50;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            text-align: center;
+            font-size: 1.1em;
+        }
+
+        .answer-box strong {
+            color: #2e7d32;
+            display: block;
+            font-size: 1.3em;
+            margin-top: 10px;
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        .table th {
+            background: #667eea;
+            color: white;
+            padding: 15px;
+            text-align: left;
+        }
+
+        .table td {
+            padding: 12px 15px;
+            border-bottom: 2px solid #ddd;
+        }
+
+        .note-box {
+            background: #fce4ec;
+            border-left: 5px solid #e91e63;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .note-box strong {
+            color: #c2185b;
+        }
+
+        @media (max-width: 768px) {
+            .grid-2 {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>📦 SET THEORY - Complete Guide</h1>
+
+        <div class="section">
+            <h2>What is a Set?</h2>
+            <div class="explanation">
+                A <strong>Set</strong> is a <strong>collection of distinct objects</strong>.<br><br>
+                <strong>Think of it as: "A group of unique items inside curly braces { }"</strong>
+            </div>
+            <h3>Examples:</h3>
+            <div class="grid-2">
+                <div class="visual-item"><strong>🎨 Colors</strong><br>A = {Red, Blue, Green}</div>
+                <div class="visual-item"><strong>🔢 Numbers</strong><br>B = {1, 2, 3, 4, 5}</div>
+                <div class="visual-item"><strong>🍎 Fruits</strong><br>C = {Apple, Banana}</div>
+                <div class="visual-item"><strong>📚 Vowels</strong><br>V = {a, e, i, o, u}</div>
+            </div>
+            <div class="key-concept">
+                <strong>✨ Key Rules:</strong><br>
+                • Elements must be unique (no duplicates)<br>
+                • Order doesn't matter: {1, 2, 3} = {3, 1, 2}<br>
+                • Sets are named with CAPITAL letters (A, B, C)
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Set Notation & Symbols</h2>
+            <table class="table">
+                <tr>
+                    <th>Symbol</th>
+                    <th>Name</th>
+                    <th>Meaning</th>
+                    <th>Example</th>
+                </tr>
+                <tr>
+                    <td><strong>∈</strong></td>
+                    <td>Element of</td>
+                    <td>"is a member of"</td>
+                    <td>3 ∈ {1,2,3} ✓</td>
+                </tr>
+                <tr>
+                    <td><strong>∉</strong></td>
+                    <td>Not element</td>
+                    <td>"is NOT a member"</td>
+                    <td>5 ∉ {1,2,3} ✓</td>
+                </tr>
+                <tr>
+                    <td><strong>⊂</strong></td>
+                    <td>Subset</td>
+                    <td>"is contained in"</td>
+                    <td>{1,2} ⊂ {1,2,3}</td>
+                </tr>
+                <tr>
+                    <td><strong>∪</strong></td>
+                    <td>Union</td>
+                    <td>"combine all"</td>
+                    <td>{1,2} ∪ {3} = {1,2,3}</td>
+                </tr>
+                <tr>
+                    <td><strong>∩</strong></td>
+                    <td>Intersection</td>
+                    <td>"common only"</td>
+                    <td>{1,2} ∩ {2,3} = {2}</td>
+                </tr>
+                <tr>
+                    <td><strong>∅</strong></td>
+                    <td>Empty Set</td>
+                    <td>"no elements"</td>
+                    <td>∅ or { }</td>
+                </tr>
+                <tr>
+                    <td><strong>|A|</strong></td>
+                    <td>Cardinality</td>
+                    <td>"count of elements"</td>
+                    <td>|{1,2,3}| = 3</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="section">
+            <h2>Types of Sets</h2>
+            <div class="grid-2">
+                <div class="example-box">
+                    <h4>∅ Empty Set</h4>
+                    <div class="step">Set with NO elements<br>∅ = { }<br>|∅| = 0</div>
+                </div>
+                <div class="example-box">
+                    <h4>Finite Set</h4>
+                    <div class="step">Countable elements<br>A = {1, 2, 3}<br>|A| = 3</div>
+                </div>
+                <div class="example-box">
+                    <h4>Infinite Set</h4>
+                    <div class="step">Unlimited elements<br>N = {1, 2, 3, ...}<br>Cannot count</div>
+                </div>
+                <div class="example-box">
+                    <h4>Universal Set (U)</h4>
+                    <div class="step">Contains ALL elements<br>U = {0,1,2,...,9}<br>All others ⊂ U</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Subsets</h2>
+            <div class="explanation">
+                Set A is a <strong>subset</strong> of B if <strong>every element</strong> of A is also in B.<br>
+                Written as: A ⊆ B
+            </div>
+            <div class="example-box">
+                <h4>📝 Is {1,2} a subset of {1,2,3,4}?</h4>
+                <div class="step"><span class="step-number">1</span>Check: Is 1 in {1,2,3,4}? ✓</div>
+                <div class="step"><span class="step-number">2</span>Check: Is 2 in {1,2,3,4}? ✓</div>
+                <div class="answer-box"><strong>✓ Yes! {1,2} ⊂ {1,2,3,4}</strong></div>
+            </div>
+            <div class="formula-box">Number of Subsets = 2ⁿ<br>(n = number of elements)</div>
+            <div class="key-concept">
+                <strong>Examples:</strong><br>
+                • 1 element → 2¹ = 2 subsets<br>
+                • 2 elements → 2² = 4 subsets<br>
+                • 3 elements → 2³ = 8 subsets
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Complement of a Set</h2>
+            <div class="explanation">
+                <strong>Complement A'</strong> = Elements in U that are NOT in A
+            </div>
+            <div class="example-box">
+                <h4>📝 U = {1,2,3,4,5,6,7,8,9,10}, A = {2,4,6,8,10}</h4>
+                <div class="step"><span class="step-number">1</span>Find elements in U but NOT in A</div>
+                <div class="step"><span class="step-number">2</span>A' = {1, 3, 5, 7, 9}</div>
+                <div class="answer-box"><strong>✓ A' = {1, 3, 5, 7, 9} (odd numbers)</strong></div>
+            </div>
+        </div>
+
+        <div class="section" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
+            <h2 style="color: white; background: none; padding: 0; margin: 0 0 30px 0;">📌 KEY POINTS</h2>
+            <div style="font-size: 1.1em; line-height: 2;">
+                <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 8px; margin: 10px 0;">✓ Set
+                    = Collection of unique elements in { }</div>
+                <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 8px; margin: 10px 0;">✓ ∈
+                    means "is an element of"</div>
+                <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 8px; margin: 10px 0;">✓ ⊂
+                    means "is a subset of"</div>
+                <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 8px; margin: 10px 0;">✓
+                    Empty set: ∅ = { }</div>
+                <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 8px; margin: 10px 0;">✓
+                    Subsets count: 2ⁿ</div>
+                <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 8px; margin: 10px 0;">✓
+                    Order doesn't matter, no duplicates</div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

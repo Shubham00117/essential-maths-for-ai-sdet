@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Set Operations - Complete Guide</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .section {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .section h2 {
+            color: white;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            border-radius: 10px;
+            margin: -40px -40px 30px -40px;
+            text-align: center;
+            font-size: 1.8em;
+        }
+
+        .section h3 {
+            color: #667eea;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-size: 1.4em;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+
+        .explanation {
+            background: #e3f2fd;
+            border-left: 5px solid #2196f3;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-size: 1.1em;
+            line-height: 1.8;
+        }
+
+        .explanation strong {
+            color: #1565c0;
+        }
+
+        .example-box {
+            background: #f0f7ff;
+            border: 3px solid #667eea;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 25px 0;
+        }
+
+        .example-box h4 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        .step {
+            background: #fff9e6;
+            border-left: 5px solid #ffc107;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            font-size: 1.05em;
+            line-height: 1.8;
+        }
+
+        .step-number {
+            display: inline-block;
+            background: #ffc107;
+            color: #333;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 35px;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .highlight {
+            background: #ffeb3b;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .visual-item {
+            background: #f5f5f5;
+            padding: 20px;
+            border-radius: 10px;
+            border: 2px solid #667eea;
+            text-align: center;
+        }
+
+        .visual-item strong {
+            color: #667eea;
+            display: block;
+            margin-bottom: 15px;
+        }
+
+        .key-concept {
+            background: #e8f5e9;
+            border-left: 5px solid #4caf50;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-size: 1.1em;
+            line-height: 1.8;
+        }
+
+        .key-concept strong {
+            color: #2e7d32;
+        }
+
+        .formula-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 12px;
+            margin: 25px 0;
+            font-size: 1.15em;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .answer-box {
+            background: #e8f5e9;
+            border-left: 5px solid #4caf50;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            text-align: center;
+            font-size: 1.1em;
+        }
+
+        .answer-box strong {
+            color: #2e7d32;
+            display: block;
+            font-size: 1.3em;
+            margin-top: 10px;
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        .table th {
+            background: #667eea;
+            color: white;
+            padding: 15px;
+            text-align: left;
+        }
+
+        .table td {
+            padding: 12px 15px;
+            border-bottom: 2px solid #ddd;
+        }
+
+        .note-box {
+            background: #fce4ec;
+            border-left: 5px solid #e91e63;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .note-box strong {
+            color: #c2185b;
+        }
+
+        .venn-diagram {
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        @media (max-width: 768px) {
+            .grid-2 {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>🔗 SET OPERATIONS - Complete Guide</h1>
+
+        <div class="section">
+            <h2>What are Set Operations?</h2>
+            <div class="explanation">
+                <strong>Set Operations</strong> are ways to combine, compare, or modify sets to create new sets.<br><br>
+                <strong>Main Operations:</strong> Union (∪), Intersection (∩), Difference (-), Complement (')
+            </div>
+            <table class="table">
+                <tr>
+                    <th>Operation</th>
+                    <th>Symbol</th>
+                    <th>Meaning</th>
+                </tr>
+                <tr>
+                    <td>Union</td>
+                    <td>∪</td>
+                    <td>Combine ALL elements from both sets</td>
+                </tr>
+                <tr>
+                    <td>Intersection</td>
+                    <td>∩</td>
+                    <td>Only COMMON elements</td>
+                </tr>
+                <tr>
+                    <td>Difference</td>
+                    <td>- or \</td>
+                    <td>Elements in first but NOT in second</td>
+                </tr>
+                <tr>
+                    <td>Complement</td>
+                    <td>' or ᶜ</td>
+                    <td>Elements NOT in the set</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="section">
+            <h2>Union (A ∪ B)</h2>
+            <div class="explanation">
+                <strong>Union</strong> combines <strong>ALL elements</strong> from both sets.<br>
+                Written as: A ∪ B (read as "A union B")
+            </div>
+            <div class="venn-diagram">
+                <svg width="300" height="180" viewBox="0 0 300 180">
+                    <circle cx="110" cy="90" r="60" fill="#667eea" fill-opacity="0.5" stroke="#667eea"
+                        stroke-width="2" />
+                    <circle cx="190" cy="90" r="60" fill="#667eea" fill-opacity="0.5" stroke="#667eea"
+                        stroke-width="2" />
+                    <text x="80" y="90" font-size="14" fill="#333">A</text>
+                    <text x="210" y="90" font-size="14" fill="#333">B</text>
+                    <text x="150" y="170" font-size="14" fill="#667eea" font-weight="bold">A ∪ B = Entire shaded
+                        area</text>
+                </svg>
+            </div>
+            <div class="example-box">
+                <h4>📝 Example: Find A ∪ B</h4>
+                <div class="step"><span class="step-number">1</span><strong>Given:</strong><br>A = {1, 2, 3}<br>B = {3,
+                    4, 5}</div>
+                <div class="step"><span class="step-number">2</span><strong>Combine ALL elements:</strong><br>List
+                    everything from A: 1, 2, 3<br>Add elements from B: 4, 5 (3 already listed)</div>
+                <div class="answer-box"><strong>A ∪ B = {1, 2, 3, 4, 5}</strong></div>
+            </div>
+            <div class="key-concept"><strong>✨ Remember:</strong> Union = "OR" = Everything from both!</div>
+        </div>
+
+        <div class="section">
+            <h2>Intersection (A ∩ B)</h2>
+            <div class="explanation">
+                <strong>Intersection</strong> keeps only elements that are in <strong>BOTH sets</strong>.<br>
+                Written as: A ∩ B (read as "A intersection B")
+            </div>
+            <div class="venn-diagram">
+                <svg width="300" height="180" viewBox="0 0 300 180">
+                    <circle cx="110" cy="90" r="60" fill="transparent" stroke="#667eea" stroke-width="2" />
+                    <circle cx="190" cy="90" r="60" fill="transparent" stroke="#764ba2" stroke-width="2" />
+                    <ellipse cx="150" cy="90" rx="20" ry="50" fill="#ffc107" fill-opacity="0.7" />
+                    <text x="70" y="90" font-size="14" fill="#333">A</text>
+                    <text x="210" y="90" font-size="14" fill="#333">B</text>
+                    <text x="150" y="170" font-size="14" fill="#667eea" font-weight="bold">A ∩ B = Yellow overlap</text>
+                </svg>
+            </div>
+            <div class="example-box">
+                <h4>📝 Example: Find A ∩ B</h4>
+                <div class="step"><span class="step-number">1</span><strong>Given:</strong><br>A = {1, 2, 3, 4}<br>B =
+                    {3, 4, 5, 6}</div>
+                <div class="step"><span class="step-number">2</span><strong>Find COMMON elements:</strong><br>Is 1 in
+                    both? No<br>Is 2 in both? No<br>Is 3 in both? <span class="highlight">Yes!</span><br>Is 4 in both?
+                    <span class="highlight">Yes!</span>
+                </div>
+                <div class="answer-box"><strong>A ∩ B = {3, 4}</strong></div>
+            </div>
+            <div class="key-concept"><strong>✨ Remember:</strong> Intersection = "AND" = Common elements only!</div>
+        </div>
+
+        <div class="section">
+            <h2>Difference (A - B)</h2>
+            <div class="explanation">
+                <strong>Difference</strong> keeps elements in A that are <strong>NOT in B</strong>.<br>
+                Written as: A - B or A \ B
+            </div>
+            <div class="venn-diagram">
+                <svg width="300" height="180" viewBox="0 0 300 180">
+                    <circle cx="110" cy="90" r="60" fill="#667eea" fill-opacity="0.5" stroke="#667eea"
+                        stroke-width="2" />
+                    <circle cx="190" cy="90" r="60" fill="white" stroke="#764ba2" stroke-width="2" />
+                    <text x="70" y="90" font-size="14" fill="#333">A-B</text>
+                    <text x="210" y="90" font-size="14" fill="#333">B</text>
+                    <text x="150" y="170" font-size="14" fill="#667eea" font-weight="bold">A - B = Left part only</text>
+                </svg>
+            </div>
+            <div class="example-box">
+                <h4>📝 Example: Find A - B</h4>
+                <div class="step"><span class="step-number">1</span><strong>Given:</strong><br>A = {1, 2, 3, 4, 5}<br>B
+                    = {4, 5, 6, 7}</div>
+                <div class="step"><span class="step-number">2</span><strong>Keep elements in A but NOT in
+                        B:</strong><br>1 in B? No → keep 1<br>2 in B? No → keep 2<br>3 in B? No → keep 3<br>4 in B? Yes
+                    → remove<br>5 in B? Yes → remove</div>
+                <div class="answer-box"><strong>A - B = {1, 2, 3}</strong></div>
+            </div>
+            <div class="note-box"><strong>💡 Note:</strong> A - B ≠ B - A (order matters!)</div>
+        </div>
+
+        <div class="section">
+            <h2>Symmetric Difference (A △ B)</h2>
+            <div class="explanation">
+                <strong>Symmetric Difference</strong> = Elements in A OR B but <strong>NOT in BOTH</strong>.<br>
+                Written as: A △ B = (A - B) ∪ (B - A)
+            </div>
+            <div class="example-box">
+                <h4>📝 Example: Find A △ B</h4>
+                <div class="step"><span class="step-number">1</span><strong>Given:</strong><br>A = {1, 2, 3}<br>B = {2,
+                    3, 4}</div>
+                <div class="step"><span class="step-number">2</span><strong>Find A - B:</strong> {1}</div>
+                <div class="step"><span class="step-number">3</span><strong>Find B - A:</strong> {4}</div>
+                <div class="step"><span class="step-number">4</span><strong>Union of results:</strong> {1} ∪ {4} = {1,
+                    4}</div>
+                <div class="answer-box"><strong>A △ B = {1, 4}</strong></div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Practice Problems</h2>
+            <div class="explanation">Let A = {1, 2, 3, 4} and B = {3, 4, 5, 6}</div>
+
+            <div class="example-box">
+                <h4>Problem 1: Find A ∪ B</h4>
+                <div class="step">Combine all: {1, 2, 3, 4} + {5, 6}</div>
+                <div class="answer-box"><strong>A ∪ B = {1, 2, 3, 4, 5, 6}</strong></div>
+            </div>
+
+            <div class="example-box">
+                <h4>Problem 2: Find A ∩ B</h4>
+                <div class="step">Common elements only</div>
+                <div class="answer-box"><strong>A ∩ B = {3, 4}</strong></div>
+            </div>
+
+            <div class="example-box">
+                <h4>Problem 3: Find A - B</h4>
+                <div class="step">In A but not in B</div>
+                <div class="answer-box"><strong>A - B = {1, 2}</strong></div>
+            </div>
+
+            <div class="example-box">
+                <h4>Problem 4: Find B - A</h4>
+                <div class="step">In B but not in A</div>
+                <div class="answer-box"><strong>B - A = {5, 6}</strong></div>
+            </div>
+        </div>
+
+        <div class="section" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
+            <h2 style="color: white; background: none; padding: 0; margin: 0 0 30px 0;">📌 KEY POINTS</h2>
+            <div style="font-size: 1.1em; line-height: 2;">
+                <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 8px; margin: 10px 0;">✓
+                    <strong>Union (∪):</strong> ALL elements from both sets
+                </div>
+                <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 8px; margin: 10px 0;">✓
+                    <strong>Intersection (∩):</strong> COMMON elements only
+                </div>
+                <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 8px; margin: 10px 0;">✓
+                    <strong>Difference (A-B):</strong> In A but NOT in B
+                </div>
+                <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 8px; margin: 10px 0;">✓
+                    <strong>A - B ≠ B - A</strong> (order matters!)
+                </div>
+                <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 8px; margin: 10px 0;">✓
+                    Union = OR | Intersection = AND</div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

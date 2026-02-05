@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boolean Logic & Truth Tables - Complete Guide</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .section {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .section h2 {
+            color: white;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            border-radius: 10px;
+            margin: -40px -40px 30px -40px;
+            text-align: center;
+            font-size: 1.8em;
+        }
+
+        .section h3 {
+            color: #667eea;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-size: 1.4em;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+
+        .explanation {
+            background: #e3f2fd;
+            border-left: 5px solid #2196f3;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-size: 1.1em;
+            line-height: 1.8;
+        }
+
+        .explanation strong {
+            color: #1565c0;
+        }
+
+        .example-box {
+            background: #f0f7ff;
+            border: 3px solid #667eea;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 25px 0;
+        }
+
+        .example-box h4 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        .step {
+            background: #fff9e6;
+            border-left: 5px solid #ffc107;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            font-size: 1.05em;
+            line-height: 1.8;
+        }
+
+        .highlight {
+            background: #ffeb3b;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .visual-item {
+            background: #f5f5f5;
+            padding: 20px;
+            border-radius: 10px;
+            border: 2px solid #667eea;
+            text-align: center;
+        }
+
+        .visual-item strong {
+            color: #667eea;
+            display: block;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        .key-concept {
+            background: #e8f5e9;
+            border-left: 5px solid #4caf50;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-size: 1.1em;
+            line-height: 1.8;
+        }
+
+        .key-concept strong {
+            color: #2e7d32;
+        }
+
+        .formula-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 12px;
+            margin: 25px 0;
+            font-size: 1.15em;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .answer-box {
+            background: #e8f5e9;
+            border-left: 5px solid #4caf50;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            text-align: center;
+            font-size: 1.1em;
+        }
+
+        .answer-box strong {
+            color: #2e7d32;
+            display: block;
+            font-size: 1.3em;
+            margin-top: 10px;
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        .table th {
+            background: #667eea;
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .table td {
+            padding: 12px 15px;
+            border-bottom: 2px solid #ddd;
+            text-align: center;
+        }
+
+        .table tr:hover {
+            background: #f5f5f5;
+        }
+
+        .true {
+            color: #4caf50;
+            font-weight: bold;
+        }
+
+        .false {
+            color: #f44336;
+            font-weight: bold;
+        }
+
+        .note-box {
+            background: #fce4ec;
+            border-left: 5px solid #e91e63;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .note-box strong {
+            color: #c2185b;
+        }
+
+        @media (max-width: 768px) {
+
+            .grid-2,
+            .grid-3 {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>🔲 BOOLEAN LOGIC & TRUTH TABLES</h1>
+
+        <div class="section">
+            <h2>What is Boolean Logic?</h2>
+            <div class="explanation">
+                <strong>Boolean Logic</strong> is a form of algebra where values are either <strong>TRUE (1)</strong> or
+                <strong>FALSE (0)</strong>.<br><br>
+                Named after mathematician <strong>George Boole</strong>. Used everywhere in programming and computers!
+            </div>
+            <div class="grid-2">
+                <div class="visual-item">
+                    <strong>✓ TRUE</strong>
+                    Represented as: 1, True, Yes, On
+                </div>
+                <div class="visual-item">
+                    <strong>✗ FALSE</strong>
+                    Represented as: 0, False, No, Off
+                </div>
+            </div>
+            <div class="key-concept">
+                <strong>✨ Where is Boolean Logic used?</strong><br>
+                • Programming conditions (if statements)<br>
+                • Database queries<br>
+                • Digital circuits<br>
+                • Search filters<br>
+                • Decision making systems
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Basic Boolean Operators</h2>
+            <div class="grid-3">
+                <div class="visual-item">
+                    <strong>AND (∧)</strong>
+                    Both must be TRUE<br><br>
+                    True AND True = True<br>
+                    Otherwise = False
+                </div>
+                <div class="visual-item">
+                    <strong>OR (∨)</strong>
+                    At least one TRUE<br><br>
+                    False OR False = False<br>
+                    Otherwise = True
+                </div>
+                <div class="visual-item">
+                    <strong>NOT (¬)</strong>
+                    Flips the value<br><br>
+                    NOT True = False<br>
+                    NOT False = True
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>AND Operator (∧)</h2>
+            <div class="explanation">
+                <strong>AND</strong> returns TRUE only if <strong>BOTH inputs are TRUE</strong>.<br>
+                Symbols: ∧, &&, ·, AND
+            </div>
+            <h3>Truth Table for AND:</h3>
+            <table class="table">
+                <tr>
+                    <th>A</th>
+                    <th>B</th>
+                    <th>A AND B</th>
+                </tr>
+                <tr>
+                    <td class="false">0 (F)</td>
+                    <td class="false">0 (F)</td>
+                    <td class="false">0 (F)</td>
+                </tr>
+                <tr>
+                    <td class="false">0 (F)</td>
+                    <td class="true">1 (T)</td>
+                    <td class="false">0 (F)</td>
+                </tr>
+                <tr>
+                    <td class="true">1 (T)</td>
+                    <td class="false">0 (F)</td>
+                    <td class="false">0 (F)</td>
+                </tr>
+                <tr>
+                    <td class="true">1 (T)</td>
+                    <td class="true">1 (T)</td>
+                    <td class="true">1 (T)</td>
+                </tr>
+            </table>
+            <div class="example-box">
+                <h4>📝 Real-World Example:</h4>
+                <div class="step">
+                    <strong>Door opens if:</strong> Key card valid AND PIN correct<br><br>
+                    • Key ✓ + PIN ✗ = Door locked<br>
+                    • Key ✗ + PIN ✓ = Door locked<br>
+                    • Key ✓ + PIN ✓ = <span class="highlight">Door opens!</span>
+                </div>
+            </div>
+            <div class="key-concept"><strong>✨ Remember:</strong> AND is like multiplication: 1×1=1, anything else = 0
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>OR Operator (∨)</h2>
+            <div class="explanation">
+                <strong>OR</strong> returns TRUE if <strong>at least one input is TRUE</strong>.<br>
+                Symbols: ∨, ||, +, OR
+            </div>
+            <h3>Truth Table for OR:</h3>
+            <table class="table">
+                <tr>
+                    <th>A</th>
+                    <th>B</th>
+                    <th>A OR B</th>
+                </tr>
+                <tr>
+                    <td class="false">0 (F)</td>
+                    <td class="false">0 (F)</td>
+                    <td class="false">0 (F)</td>
+                </tr>
+                <tr>
+                    <td class="false">0 (F)</td>
+                    <td class="true">1 (T)</td>
+                    <td class="true">1 (T)</td>
+                </tr>
+                <tr>
+                    <td class="true">1 (T)</td>
+                    <td class="false">0 (F)</td>
+                    <td class="true">1 (T)</td>
+                </tr>
+                <tr>
+                    <td class="true">1 (T)</td>
+                    <td class="true">1 (T)</td>
+                    <td class="true">1 (T)</td>
+                </tr>
+            </table>
+            <div class="example-box">
+                <h4>📝 Real-World Example:</h4>
+                <div class="step">
+                    <strong>Discount if:</strong> Student OR Senior citizen<br><br>
+                    • Student ✓ = <span class="highlight">Discount!</span><br>
+                    • Senior ✓ = <span class="highlight">Discount!</span><br>
+                    • Both ✓ = <span class="highlight">Discount!</span><br>
+                    • Neither = No discount
+                </div>
+            </div>
+            <div class="key-concept"><strong>✨ Remember:</strong> OR is like addition (capped at 1): 0+0=0, anything
+                else = 1</div>
+        </div>
+
+        <div class="section">
+            <h2>NOT Operator (¬)</h2>
+            <div class="explanation">
+                <strong>NOT</strong> flips/inverts the value.<br>
+                Symbols: ¬, !, ~, NOT
+            </div>
+            <h3>Truth Table for NOT:</h3>
+            <table class="table">
+                <tr>
+                    <th>A</th>
+                    <th>NOT A</th>
+                </tr>
+                <tr>
+                    <td class="false">0 (F)</td>
+                    <td class="true">1 (T)</td>
+                </tr>
+                <tr>
+                    <td class="true">1 (T)</td>
+                    <td class="false">0 (F)</td>
+                </tr>
+            </table>
+            <div class="example-box">
+                <h4>📝 Real-World Example:</h4>
+                <div class="step">
+                    Light switch!<br><br>
+                    • NOT on = off<br>
+                    • NOT off = on
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>XOR Operator (⊕)</h2>
+            <div class="explanation">
+                <strong>XOR (Exclusive OR)</strong> = TRUE if inputs are <strong>DIFFERENT</strong>.<br>
+                Symbols: ⊕, ^, XOR
+            </div>
+            <h3>Truth Table for XOR:</h3>
+            <table class="table">
+                <tr>
+                    <th>A</th>
+                    <th>B</th>
+                    <th>A XOR B</th>
+                </tr>
+                <tr>
+                    <td class="false">0</td>
+                    <td class="false">0</td>
+                    <td class="false">0</td>
+                </tr>
+                <tr>
+                    <td class="false">0</td>
+                    <td class="true">1</td>
+                    <td class="true">1</td>
+                </tr>
+                <tr>
+                    <td class="true">1</td>
+                    <td class="false">0</td>
+                    <td class="true">1</td>
+                </tr>
+                <tr>
+                    <td class="true">1</td>
+                    <td class="true">1</td>
+                    <td class="false">0</td>
+                </tr>
+            </table>
+            <div class="key-concept"><strong>✨ Remember:</strong> XOR = "One or the other, but not both!"</div>
+        </div>
+
+        <div class="section">
+            <h2>Compound Expressions</h2>
+            <div class="explanation">
+                Combine multiple operators to create complex expressions.<br>
+                <strong>Order of operations:</strong> NOT → AND → OR
+            </div>
+            <div class="example-box">
+                <h4>📝 Example: Evaluate (A AND B) OR C</h4>
+                <div class="step"><strong>Given:</strong> A = True, B = False, C = True</div>
+                <div class="step"><strong>Step 1:</strong> A AND B = True AND False = <span
+                        class="highlight">False</span></div>
+                <div class="step"><strong>Step 2:</strong> False OR C = False OR True = <span
+                        class="highlight">True</span></div>
+                <div class="answer-box"><strong>Result = True</strong></div>
+            </div>
+            <div class="example-box">
+                <h4>📝 Example: Evaluate NOT (A OR B)</h4>
+                <div class="step"><strong>Given:</strong> A = True, B = False</div>
+                <div class="step"><strong>Step 1:</strong> A OR B = True OR False = <span class="highlight">True</span>
+                </div>
+                <div class="step"><strong>Step 2:</strong> NOT True = <span class="highlight">False</span></div>
+                <div class="answer-box"><strong>Result = False</strong></div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>De Morgan's Laws</h2>
+            <div class="explanation">
+                Important rules for simplifying Boolean expressions.
+            </div>
+            <div class="formula-box">
+                Law 1: NOT (A AND B) = (NOT A) OR (NOT B)<br><br>
+                Law 2: NOT (A OR B) = (NOT A) AND (NOT B)
+            </div>
+            <div class="example-box">
+                <h4>📝 Apply De Morgan's Law</h4>
+                <div class="step"><strong>Given:</strong> NOT (A AND B)<br><strong>Convert:</strong> (NOT A) OR (NOT B)
+                </div>
+                <div class="step"><strong>If A=True, B=True:</strong><br>NOT (T AND T) = NOT T = False<br>(NOT T) OR
+                    (NOT T) = F OR F = False ✓</div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Programming Examples</h2>
+            <div class="explanation">How Boolean logic appears in code:</div>
+            <div class="grid-2">
+                <div class="example-box">
+                    <h4>JavaScript/Python AND</h4>
+                    <div class="step"
+                        style="font-family: monospace; background: #1a1a2e; color: #16c79a; padding: 15px;">
+                        if (age >= 18 && hasID):<br>
+                        &nbsp;&nbsp;allow_entry()
+                    </div>
+                </div>
+                <div class="example-box">
+                    <h4>JavaScript/Python OR</h4>
+                    <div class="step"
+                        style="font-family: monospace; background: #1a1a2e; color: #16c79a; padding: 15px;">
+                        if (isStudent || isSenior):<br>
+                        &nbsp;&nbsp;apply_discount()
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
+            <h2 style="color: white; background: none; padding: 0; margin: 0 0 30px 0;">📌 KEY POINTS</h2>
+            <div style="font-size: 1.1em; line-height: 2;">
+                <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 8px; margin: 10px 0;">✓
+                    <strong>AND:</strong> Both TRUE → TRUE (like multiplication)
+                </div>
+                <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 8px; margin: 10px 0;">✓
+                    <strong>OR:</strong> At least one TRUE → TRUE
+                </div>
+                <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 8px; margin: 10px 0;">✓
+                    <strong>NOT:</strong> Flips TRUE↔FALSE
+                </div>
+                <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 8px; margin: 10px 0;">✓
+                    <strong>XOR:</strong> Different values → TRUE
+                </div>
+                <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 8px; margin: 10px 0;">✓
+                    <strong>Order:</strong> NOT → AND → OR
+                </div>
+                <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 8px; margin: 10px 0;">✓
+                    <strong>De Morgan:</strong> NOT(A AND B) = NOT A OR NOT B
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
