@@ -33,9 +33,9 @@
 | **07** | Probability | 1 | Confidence scores, sampling, uncertainty |
 | **08** | Engineering Math | 1 | Scaling, complexity, growth patterns |
 | **09** | CS Math Essentials | 1 | Modular arithmetic, recursion, matrices, hashing, bits |
-| **10** | Agent & LLM Math | 5 | Graphs, embeddings, entropy, optimization |
+| **10** | Agent & LLM Math | 7 | Graphs, embeddings, entropy, optimization, RAG, DAGs, LLM training |
 
-**Total: 35+ Modules across 11 Phases**
+**Total: 37+ Modules across 11 Phases**
 
 ---
 
@@ -187,6 +187,8 @@
 | 03 | Embeddings & Cosine Similarity | Vectors as meaning, similarity thresholds, RAG |
 | 04 | Optimization Thinking | Cost vs latency vs quality, token economics |
 | 05 | Information Theory Basics | Entropy, surprisal, prompt optimization |
+| 06 | RAG and DAG Architectures | Retrieval-augmented generation, directed acyclic graphs |
+| 07 | LLM Training Fundamentals | Model training concepts, fine-tuning basics |
 
 **AI Application:** This is THE phase for understanding modern AI agent architecture — LangGraph workflows, RAG systems, cost optimization, and LLM behavior.
 
@@ -298,7 +300,9 @@ Math_for_AI_SDET/
 │   ├── Module_02_Conditional_Probability_Agents.html
 │   ├── Module_03_Embeddings_Cosine_Similarity.html
 │   ├── Module_04_Optimization_Thinking.html
-│   └── Module_05_Information_Theory_Basics.html
+│   ├── Module_05_Information_Theory_Basics.html
+│   ├── Module_06_RAG_and_DAG_Architectures.html
+│   └── Module_07_LLM_Training_Fundamentals.html
 │
 ├── Excercise/                             # Practice problems
 │   └── [6 exercise files]
@@ -360,16 +364,18 @@ Each module follows a consistent 9-section structure:
 
 ## 📬 Course Updates
 
-**Last Updated:** 3rd February 2026
+**Last Updated:** 5th February 2026
 
 **Recent Additions:**
 - ✅ Phase 09: CS Math Essentials — Conceptual foundations (modular arithmetic, recursion, matrices, hashing, bits)
-- ✅ Phase 10: Agent & LLM Math — All 5 modules complete!
+- ✅ Phase 10: Agent & LLM Math — All 7 modules complete!
   - Graph Theory Basics (LangGraph foundations)
   - Conditional Probability for Agents
   - Embeddings & Cosine Similarity (RAG systems)
   - Optimization Thinking (cost vs latency vs quality)
   - Information Theory Basics (entropy, surprisal)
+  - RAG and DAG Architectures (retrieval-augmented generation, directed acyclic graphs)
+  - LLM Training Fundamentals (model training concepts, fine-tuning basics)
 - ✅ HTML interactive versions for all major phases
 - ✅ Refined learning philosophy: concepts over code implementations
 - ✅ Enhanced AI/SDET testing perspectives throughout
