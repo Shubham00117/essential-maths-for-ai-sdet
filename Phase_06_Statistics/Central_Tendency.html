@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Central Tendency - Mean, Median, Mode</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .section {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .section h2 {
+            color: white;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            border-radius: 10px;
+            margin: -40px -40px 30px -40px;
+            text-align: center;
+            font-size: 1.8em;
+        }
+
+        .section h3 {
+            color: #667eea;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-size: 1.4em;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+
+        .explanation {
+            background: #e3f2fd;
+            border-left: 5px solid #2196f3;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-size: 1.1em;
+            line-height: 1.8;
+        }
+
+        .explanation strong {
+            color: #1565c0;
+        }
+
+        .example-box {
+            background: #f0f7ff;
+            border: 3px solid #667eea;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 25px 0;
+        }
+
+        .example-box h4 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        .step {
+            background: #fff9e6;
+            border-left: 5px solid #ffc107;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            font-size: 1.05em;
+            line-height: 1.8;
+        }
+
+        .step-number {
+            display: inline-block;
+            background: #ffc107;
+            color: #333;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 35px;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .highlight {
+            background: #ffeb3b;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .visual-item {
+            background: #f5f5f5;
+            padding: 20px;
+            border-radius: 10px;
+            border: 2px solid #667eea;
+            text-align: center;
+        }
+
+        .visual-item strong {
+            color: #667eea;
+            display: block;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+
+        .key-concept {
+            background: #e8f5e9;
+            border-left: 5px solid #4caf50;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-size: 1.1em;
+            line-height: 1.8;
+        }
+
+        .key-concept strong {
+            color: #2e7d32;
+        }
+
+        .formula-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 12px;
+            margin: 25px 0;
+            font-size: 1.15em;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .answer-box {
+            background: #e8f5e9;
+            border-left: 5px solid #4caf50;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            text-align: center;
+            font-size: 1.1em;
+        }
+
+        .answer-box strong {
+            color: #2e7d32;
+            display: block;
+            font-size: 1.3em;
+            margin-top: 10px;
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        .table th {
+            background: #667eea;
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .table td {
+            padding: 12px 15px;
+            border-bottom: 2px solid #ddd;
+            text-align: center;
+        }
+
+        .note-box {
+            background: #fce4ec;
+            border-left: 5px solid #e91e63;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .note-box strong {
+            color: #c2185b;
+        }
+
+        @media (max-width: 768px) {
+            .grid-3 {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>📊 CENTRAL TENDENCY - Mean, Median, Mode</h1>
+
+        <div class="section">
+            <h2>What is Central Tendency?</h2>
+            <div class="explanation">
+                <strong>Central Tendency</strong> describes the <strong>center or typical value</strong> of a
+                dataset.<br><br>
+                <strong>Three main measures:</strong> Mean (Average), Median (Middle), Mode (Most Frequent)
+            </div>
+            <div class="grid-3">
+                <div class="visual-item">
+                    <strong>📈 Mean</strong>
+                    The average of all values<br><br>
+                    Add all → Divide by count
+                </div>
+                <div class="visual-item">
+                    <strong>📍 Median</strong>
+                    The middle value<br><br>
+                    Sort → Pick middle
+                </div>
+                <div class="visual-item">
+                    <strong>🔄 Mode</strong>
+                    Most frequent value<br><br>
+                    Count → Find max
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Mean (Average)</h2>
+            <div class="explanation">
+                The <strong>Mean</strong> is the sum of all values divided by the count of values.<br>
+                Most commonly used measure of central tendency.
+            </div>
+            <div class="formula-box">
+                Mean = Sum of all values ÷ Number of values<br><br>
+                Mean = (x₁ + x₂ + x₃ + ... + xₙ) ÷ n
+            </div>
+            <div class="example-box">
+                <h4>📝 Example: Find the Mean</h4>
+                <div class="step"><strong>Data:</strong> 5, 10, 15, 20, 25</div>
+                <div class="step"><span class="step-number">1</span><strong>Add all values:</strong><br>5 + 10 + 15 + 20
+                    + 25 = 75</div>
+                <div class="step"><span class="step-number">2</span><strong>Count the values:</strong><br>n = 5</div>
+                <div class="step"><span class="step-number">3</span><strong>Divide:</strong><br>Mean = 75 ÷ 5 = <span
+                        class="highlight">15</span></div>
+                <div class="answer-box"><strong>Mean = 15</strong></div>
+            </div>
+            <div class="example-box">
+                <h4>📝 Example 2: Test Scores</h4>
+                <div class="step"><strong>Data:</strong> 85, 90, 78, 92, 88, 95</div>
+                <div class="step"><span class="step-number">1</span><strong>Sum:</strong> 85+90+78+92+88+95 = 528</div>
+                <div class="step"><span class="step-number">2</span><strong>Count:</strong> n = 6</div>
+                <div class="step"><span class="step-number">3</span><strong>Mean:</strong> 528 ÷ 6 = <span
+                        class="highlight">88</span></div>
+                <div class="answer-box"><strong>Mean = 88</strong></div>
+            </div>
+            <div class="note-box">
+                <strong>💡 Note:</strong> Mean is affected by extreme values (outliers)!<br>
+                Example: {10, 10, 10, 10, 1000} → Mean = 208 (misleading!)
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Median (Middle Value)</h2>
+            <div class="explanation">
+                The <strong>Median</strong> is the middle value when data is sorted.<br>
+                Not affected by extreme values - better for skewed data!
+            </div>
+            <div class="formula-box">
+                Step 1: Sort the data (ascending order)<br>
+                Step 2: Find the middle value<br><br>
+                Odd count → Middle number<br>
+                Even count → Average of two middle numbers
+            </div>
+            <h3>Example 1: Odd Number of Values</h3>
+            <div class="example-box">
+                <h4>📝 Find the Median</h4>
+                <div class="step"><strong>Data:</strong> 7, 3, 9, 1, 5</div>
+                <div class="step"><span class="step-number">1</span><strong>Sort:</strong> 1, 3, 5, 7, 9</div>
+                <div class="step"><span class="step-number">2</span><strong>Count:</strong> 5 values (odd)</div>
+                <div class="step"><span class="step-number">3</span><strong>Find middle:</strong> 1, 3, <span
+                        class="highlight">5</span>, 7, 9</div>
+                <div class="answer-box"><strong>Median = 5</strong></div>
+            </div>
+            <h3>Example 2: Even Number of Values</h3>
+            <div class="example-box">
+                <h4>📝 Find the Median</h4>
+                <div class="step"><strong>Data:</strong> 4, 8, 2, 6</div>
+                <div class="step"><span class="step-number">1</span><strong>Sort:</strong> 2, 4, 6, 8</div>
+                <div class="step"><span class="step-number">2</span><strong>Count:</strong> 4 values (even)</div>
+                <div class="step"><span class="step-number">3</span><strong>Find two middle values:</strong> 2, <span
+                        class="highlight">4, 6</span>, 8</div>
+                <div class="step"><span class="step-number">4</span><strong>Average them:</strong> (4 + 6) ÷ 2 = <span
+                        class="highlight">5</span></div>
+                <div class="answer-box"><strong>Median = 5</strong></div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Mode (Most Frequent)</h2>
+            <div class="explanation">
+                The <strong>Mode</strong> is the value that appears most frequently.<br>
+                A dataset can have no mode, one mode, or multiple modes.
+            </div>
+            <div class="formula-box">
+                Count how many times each value appears<br>
+                The value with highest count = Mode
+            </div>
+            <div class="example-box">
+                <h4>📝 Example 1: Single Mode</h4>
+                <div class="step"><strong>Data:</strong> 2, 4, 4, 4, 5, 6, 7</div>
+                <div class="step"><span class="step-number">1</span><strong>Count each:</strong><br>2→1, 4→3, 5→1, 6→1,
+                    7→1</div>
+                <div class="step"><span class="step-number">2</span><strong>Most frequent:</strong> 4 appears <span
+                        class="highlight">3 times</span></div>
+                <div class="answer-box"><strong>Mode = 4</strong></div>
+            </div>
+            <div class="example-box">
+                <h4>📝 Example 2: Two Modes (Bimodal)</h4>
+                <div class="step"><strong>Data:</strong> 1, 2, 2, 3, 3, 4</div>
+                <div class="step"><span class="step-number">1</span><strong>Count:</strong> 2→2 times, 3→2 times</div>
+                <div class="answer-box"><strong>Modes = 2 and 3 (Bimodal)</strong></div>
+            </div>
+            <div class="example-box">
+                <h4>📝 Example 3: No Mode</h4>
+                <div class="step"><strong>Data:</strong> 1, 2, 3, 4, 5</div>
+                <div class="step">All values appear exactly once</div>
+                <div class="answer-box"><strong>No Mode</strong></div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Comparison: When to Use Each?</h2>
+            <table class="table">
+                <tr>
+                    <th>Measure</th>
+                    <th>Best When</th>
+                    <th>Weakness</th>
+                </tr>
+                <tr>
+                    <td><strong>Mean</strong></td>
+                    <td>Data is symmetric, no outliers</td>
+                    <td>Affected by extreme values</td>
+                </tr>
+                <tr>
+                    <td><strong>Median</strong></td>
+                    <td>Data has outliers or is skewed</td>
+                    <td>Ignores actual values</td>
+                </tr>
+                <tr>
+                    <td><strong>Mode</strong></td>
+                    <td>Categorical data, finding most common</td>
+                    <td>May not exist or not unique</td>
+                </tr>
+            </table>
+            <div class="example-box">
+                <h4>📝 Complete Example</h4>
+                <div class="step"><strong>Data:</strong> 10, 20, 20, 30, 40, 50, 100</div>
+                <div class="step"><strong>Mean:</strong> (10+20+20+30+40+50+100) ÷ 7 = 270 ÷ 7 = <span
+                        class="highlight">38.57</span></div>
+                <div class="step"><strong>Median:</strong> 10, 20, 20, <span class="highlight">30</span>, 40, 50, 100 =
+                    <span class="highlight">30</span></div>
+                <div class="step"><strong>Mode:</strong> 20 appears twice = <span class="highlight">20</span></div>
+            </div>
+        </div>
+
+        <div class="section" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
+            <h2 style="color: white; background: none; padding: 0; margin: 0 0 30px 0;">📌 KEY POINTS</h2>
+            <div style="font-size: 1.1em; line-height: 2;">
+                <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 8px; margin: 10px 0;">✓
+                    <strong>Mean:</strong> Sum ÷ Count (affected by outliers)</div>
+                <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 8px; margin: 10px 0;">✓
+                    <strong>Median:</strong> Middle value after sorting</div>
+                <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 8px; margin: 10px 0;">✓
+                    <strong>Mode:</strong> Most frequent value</div>
+                <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 8px; margin: 10px 0;">✓
+                    Even count median: Average of two middle values</div>
+                <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 8px; margin: 10px 0;">✓ Use
+                    Median for skewed data with outliers</div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

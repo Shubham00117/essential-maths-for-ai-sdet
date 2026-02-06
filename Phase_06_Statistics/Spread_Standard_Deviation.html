@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spread & Standard Deviation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .section {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .section h2 {
+            color: white;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            border-radius: 10px;
+            margin: -40px -40px 30px -40px;
+            text-align: center;
+            font-size: 1.8em;
+        }
+
+        .section h3 {
+            color: #667eea;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-size: 1.4em;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+
+        .explanation {
+            background: #e3f2fd;
+            border-left: 5px solid #2196f3;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-size: 1.1em;
+            line-height: 1.8;
+        }
+
+        .explanation strong {
+            color: #1565c0;
+        }
+
+        .example-box {
+            background: #f0f7ff;
+            border: 3px solid #667eea;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 25px 0;
+        }
+
+        .example-box h4 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        .step {
+            background: #fff9e6;
+            border-left: 5px solid #ffc107;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            font-size: 1.05em;
+            line-height: 1.8;
+        }
+
+        .step-number {
+            display: inline-block;
+            background: #ffc107;
+            color: #333;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 35px;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .highlight {
+            background: #ffeb3b;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .visual-item {
+            background: #f5f5f5;
+            padding: 20px;
+            border-radius: 10px;
+            border: 2px solid #667eea;
+            text-align: center;
+        }
+
+        .visual-item strong {
+            color: #667eea;
+            display: block;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        .key-concept {
+            background: #e8f5e9;
+            border-left: 5px solid #4caf50;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-size: 1.1em;
+            line-height: 1.8;
+        }
+
+        .key-concept strong {
+            color: #2e7d32;
+        }
+
+        .formula-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 12px;
+            margin: 25px 0;
+            font-size: 1.15em;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .answer-box {
+            background: #e8f5e9;
+            border-left: 5px solid #4caf50;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            text-align: center;
+            font-size: 1.1em;
+        }
+
+        .answer-box strong {
+            color: #2e7d32;
+            display: block;
+            font-size: 1.3em;
+            margin-top: 10px;
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        .table th {
+            background: #667eea;
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .table td {
+            padding: 12px 15px;
+            border-bottom: 2px solid #ddd;
+            text-align: center;
+        }
+
+        .note-box {
+            background: #fce4ec;
+            border-left: 5px solid #e91e63;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .note-box strong {
+            color: #c2185b;
+        }
+
+        @media (max-width: 768px) {
+            .grid-2 {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>📏 SPREAD & STANDARD DEVIATION</h1>
+
+        <div class="section">
+            <h2>What is Spread?</h2>
+            <div class="explanation">
+                <strong>Spread</strong> (or Dispersion) measures how <strong>spread out</strong> the data values
+                are.<br><br>
+                Central tendency tells us the center; Spread tells us how far values are from that center.
+            </div>
+            <div class="grid-2">
+                <div class="visual-item">
+                    <strong>Low Spread</strong>
+                    Data points are close together<br><br>
+                    Example: 48, 49, 50, 51, 52<br>
+                    (clustered around 50)
+                </div>
+                <div class="visual-item">
+                    <strong>High Spread</strong>
+                    Data points are far apart<br><br>
+                    Example: 10, 30, 50, 70, 90<br>
+                    (widely scattered)
+                </div>
+            </div>
+            <div class="key-concept">
+                <strong>✨ Measures of Spread:</strong><br>
+                • Range (simplest)<br>
+                • Variance (average squared deviation)<br>
+                • Standard Deviation (most common)
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Range</h2>
+            <div class="explanation">
+                <strong>Range</strong> = Highest value − Lowest value<br>
+                The simplest measure of spread.
+            </div>
+            <div class="formula-box">
+                Range = Maximum - Minimum
+            </div>
+            <div class="example-box">
+                <h4>📝 Example: Find the Range</h4>
+                <div class="step"><strong>Data:</strong> 12, 25, 8, 45, 30, 15</div>
+                <div class="step"><span class="step-number">1</span><strong>Find Maximum:</strong> 45</div>
+                <div class="step"><span class="step-number">2</span><strong>Find Minimum:</strong> 8</div>
+                <div class="step"><span class="step-number">3</span><strong>Calculate:</strong> 45 - 8 = <span
+                        class="highlight">37</span></div>
+                <div class="answer-box"><strong>Range = 37</strong></div>
+            </div>
+            <div class="note-box">
+                <strong>💡 Limitation:</strong> Range only uses two values, so one outlier can distort it heavily.
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Variance</h2>
+            <div class="explanation">
+                <strong>Variance</strong> measures the average of the <strong>squared differences</strong> from the
+                mean.<br>
+                Shows how far each value is from the mean, on average.
+            </div>
+            <div class="formula-box">
+                Variance = Σ(xᵢ - mean)² ÷ n<br><br>
+                Step 1: Find the mean<br>
+                Step 2: Subtract mean from each value<br>
+                Step 3: Square each difference<br>
+                Step 4: Average the squared differences
+            </div>
+            <div class="example-box">
+                <h4>📝 Example: Calculate Variance</h4>
+                <div class="step"><strong>Data:</strong> 2, 4, 6, 8, 10</div>
+                <div class="step"><span class="step-number">1</span><strong>Find Mean:</strong><br>(2+4+6+8+10) ÷ 5 = 30
+                    ÷ 5 = <span class="highlight">6</span></div>
+                <div class="step"><span class="step-number">2</span><strong>Find differences from mean:</strong><br>
+                    2 - 6 = -4<br>
+                    4 - 6 = -2<br>
+                    6 - 6 = 0<br>
+                    8 - 6 = 2<br>
+                    10 - 6 = 4
+                </div>
+                <div class="step"><span class="step-number">3</span><strong>Square each difference:</strong><br>
+                    (-4)² = 16<br>
+                    (-2)² = 4<br>
+                    (0)² = 0<br>
+                    (2)² = 4<br>
+                    (4)² = 16
+                </div>
+                <div class="step"><span class="step-number">4</span><strong>Average the squares:</strong><br>
+                    (16 + 4 + 0 + 4 + 16) ÷ 5 = 40 ÷ 5 = <span class="highlight">8</span>
+                </div>
+                <div class="answer-box"><strong>Variance = 8</strong></div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Standard Deviation</h2>
+            <div class="explanation">
+                <strong>Standard Deviation (σ or SD)</strong> = Square root of Variance<br><br>
+                The most commonly used measure of spread. Tells us the "typical" distance from the mean.
+            </div>
+            <div class="formula-box">
+                Standard Deviation = √Variance<br><br>
+                SD = √[Σ(xᵢ - mean)² ÷ n]
+            </div>
+            <div class="example-box">
+                <h4>📝 Example: Calculate Standard Deviation</h4>
+                <div class="step"><strong>Data:</strong> 2, 4, 6, 8, 10 (same as before)</div>
+                <div class="step"><span class="step-number">1</span><strong>We calculated Variance = 8</strong></div>
+                <div class="step"><span class="step-number">2</span><strong>Standard Deviation:</strong><br>SD = √8 =
+                    <span class="highlight">2.83</span></div>
+                <div class="answer-box"><strong>Standard Deviation ≈ 2.83</strong></div>
+            </div>
+            <div class="key-concept">
+                <strong>✨ What does SD mean?</strong><br>
+                • Low SD → Data points are close to the mean<br>
+                • High SD → Data points are spread far from the mean<br>
+                • SD has the same units as the original data
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Complete Step-by-Step Example</h2>
+            <div class="example-box">
+                <h4>📝 Find Range, Variance, and Standard Deviation</h4>
+                <div class="step"><strong>Data:</strong> 5, 10, 15, 20, 25</div>
+
+                <h3>Step 1: Range</h3>
+                <div class="step">Range = 25 - 5 = <span class="highlight">20</span></div>
+
+                <h3>Step 2: Mean</h3>
+                <div class="step">Mean = (5+10+15+20+25) ÷ 5 = 75 ÷ 5 = <span class="highlight">15</span></div>
+
+                <h3>Step 3: Variance</h3>
+                <table class="table">
+                    <tr>
+                        <th>Value (x)</th>
+                        <th>x - Mean</th>
+                        <th>(x - Mean)²</th>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>5-15 = -10</td>
+                        <td>100</td>
+                    </tr>
+                    <tr>
+                        <td>10</td>
+                        <td>10-15 = -5</td>
+                        <td>25</td>
+                    </tr>
+                    <tr>
+                        <td>15</td>
+                        <td>15-15 = 0</td>
+                        <td>0</td>
+                    </tr>
+                    <tr>
+                        <td>20</td>
+                        <td>20-15 = 5</td>
+                        <td>25</td>
+                    </tr>
+                    <tr>
+                        <td>25</td>
+                        <td>25-15 = 10</td>
+                        <td>100</td>
+                    </tr>
+                    <tr>
+                        <th colspan="2">Sum of Squares</th>
+                        <th>250</th>
+                    </tr>
+                </table>
+                <div class="step">Variance = 250 ÷ 5 = <span class="highlight">50</span></div>
+
+                <h3>Step 4: Standard Deviation</h3>
+                <div class="step">SD = √50 = <span class="highlight">7.07</span></div>
+
+                <div class="answer-box">
+                    <strong>Range = 20 | Variance = 50 | SD ≈ 7.07</strong>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Population vs Sample</h2>
+            <div class="grid-2">
+                <div class="example-box">
+                    <h4>Population (σ)</h4>
+                    <div class="step">Use when you have ALL data<br><br>Divide by <strong>n</strong></div>
+                </div>
+                <div class="example-box">
+                    <h4>Sample (s)</h4>
+                    <div class="step">Use when you have a sample<br><br>Divide by <strong>n - 1</strong></div>
+                </div>
+            </div>
+            <div class="note-box">
+                <strong>💡 Note:</strong> For sample standard deviation, we divide by (n-1) instead of n. This
+                correction is called "Bessel's correction" and gives a better estimate.
+            </div>
+        </div>
+
+        <div class="section" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
+            <h2 style="color: white; background: none; padding: 0; margin: 0 0 30px 0;">📌 KEY POINTS</h2>
+            <div style="font-size: 1.1em; line-height: 2;">
+                <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 8px; margin: 10px 0;">✓
+                    <strong>Range:</strong> Maximum - Minimum (simplest)</div>
+                <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 8px; margin: 10px 0;">✓
+                    <strong>Variance:</strong> Average of squared differences from mean</div>
+                <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 8px; margin: 10px 0;">✓
+                    <strong>Standard Deviation:</strong> √Variance</div>
+                <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 8px; margin: 10px 0;">✓ Low
+                    SD = Data clustered near mean</div>
+                <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 8px; margin: 10px 0;">✓
+                    Sample SD uses (n-1), Population SD uses (n)</div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

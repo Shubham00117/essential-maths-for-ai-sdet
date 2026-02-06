@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Analysis & Distribution</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .section {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .section h2 {
+            color: white;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            border-radius: 10px;
+            margin: -40px -40px 30px -40px;
+            text-align: center;
+            font-size: 1.8em;
+        }
+
+        .section h3 {
+            color: #667eea;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-size: 1.4em;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+
+        .explanation {
+            background: #e3f2fd;
+            border-left: 5px solid #2196f3;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-size: 1.1em;
+            line-height: 1.8;
+        }
+
+        .explanation strong {
+            color: #1565c0;
+        }
+
+        .example-box {
+            background: #f0f7ff;
+            border: 3px solid #667eea;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 25px 0;
+        }
+
+        .example-box h4 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        .step {
+            background: #fff9e6;
+            border-left: 5px solid #ffc107;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            font-size: 1.05em;
+            line-height: 1.8;
+        }
+
+        .step-number {
+            display: inline-block;
+            background: #ffc107;
+            color: #333;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 35px;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .highlight {
+            background: #ffeb3b;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .visual-item {
+            background: #f5f5f5;
+            padding: 20px;
+            border-radius: 10px;
+            border: 2px solid #667eea;
+            text-align: center;
+        }
+
+        .visual-item strong {
+            color: #667eea;
+            display: block;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        .key-concept {
+            background: #e8f5e9;
+            border-left: 5px solid #4caf50;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-size: 1.1em;
+            line-height: 1.8;
+        }
+
+        .key-concept strong {
+            color: #2e7d32;
+        }
+
+        .formula-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 12px;
+            margin: 25px 0;
+            font-size: 1.15em;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .answer-box {
+            background: #e8f5e9;
+            border-left: 5px solid #4caf50;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            text-align: center;
+            font-size: 1.1em;
+        }
+
+        .answer-box strong {
+            color: #2e7d32;
+            display: block;
+            font-size: 1.2em;
+            margin-top: 10px;
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        .table th {
+            background: #667eea;
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .table td {
+            padding: 12px 15px;
+            border-bottom: 2px solid #ddd;
+            text-align: center;
+        }
+
+        .note-box {
+            background: #fce4ec;
+            border-left: 5px solid #e91e63;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .note-box strong {
+            color: #c2185b;
+        }
+
+        .diagram {
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        @media (max-width: 768px) {
+
+            .grid-2,
+            .grid-3 {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>📈 DATA ANALYSIS & DISTRIBUTION</h1>
+
+        <div class="section">
+            <h2>What is Data Distribution?</h2>
+            <div class="explanation">
+                <strong>Distribution</strong> describes how data values are spread or arranged.<br><br>
+                It shows the frequency of each value and the overall pattern of the data.
+            </div>
+            <div class="grid-3">
+                <div class="visual-item">
+                    <strong>📊 Shape</strong>
+                    How the data looks when graphed<br>
+                    (symmetric, skewed, etc.)
+                </div>
+                <div class="visual-item">
+                    <strong>📍 Center</strong>
+                    Where most values cluster<br>
+                    (mean, median, mode)
+                </div>
+                <div class="visual-item">
+                    <strong>📏 Spread</strong>
+                    How spread out values are<br>
+                    (range, std deviation)
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Types of Distributions</h2>
+
+            <h3>1. Normal Distribution (Bell Curve)</h3>
+            <div class="explanation">
+                The most common distribution. Data clusters around the mean, with fewer values at extremes.<br>
+                <strong>Symmetric</strong> - Mean = Median = Mode
+            </div>
+            <div class="diagram">
+                <svg width="400" height="200" viewBox="0 0 400 200">
+                    <path d="M 50 180 Q 100 180, 150 100 Q 200 20, 250 100 Q 300 180, 350 180" fill="none"
+                        stroke="#667eea" stroke-width="3" />
+                    <line x1="200" y1="20" x2="200" y2="180" stroke="#ffc107" stroke-width="2" stroke-dasharray="5,5" />
+                    <text x="200" y="195" text-anchor="middle" font-size="12" fill="#333">Mean/Median/Mode</text>
+                    <text x="200" y="12" text-anchor="middle" font-size="14" font-weight="bold" fill="#667eea">Bell
+                        Curve</text>
+                </svg>
+            </div>
+            <div class="key-concept">
+                <strong>✨ 68-95-99.7 Rule (Empirical Rule):</strong><br>
+                • 68% of data falls within 1 standard deviation of mean<br>
+                • 95% of data falls within 2 standard deviations<br>
+                • 99.7% of data falls within 3 standard deviations
+            </div>
+
+            <h3>2. Skewed Distributions</h3>
+            <div class="grid-2">
+                <div class="example-box">
+                    <h4>Left Skewed (Negative)</h4>
+                    <div class="step">
+                        Tail extends to the LEFT<br>
+                        Mean < Median < Mode<br><br>
+                            Example: Easy test scores<br>
+                            (most score high)
+                    </div>
+                </div>
+                <div class="example-box">
+                    <h4>Right Skewed (Positive)</h4>
+                    <div class="step">
+                        Tail extends to the RIGHT<br>
+                        Mode < Median < Mean<br><br>
+                            Example: Income distribution<br>
+                            (few earn very high)
+                    </div>
+                </div>
+            </div>
+
+            <h3>3. Uniform Distribution</h3>
+            <div class="explanation">
+                All values have <strong>equal probability</strong>.<br>
+                Example: Rolling a fair die (each outcome 1-6 has equal chance)
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Quartiles & Percentiles</h2>
+            <div class="explanation">
+                <strong>Quartiles</strong> divide data into 4 equal parts.<br>
+                <strong>Percentiles</strong> show the percentage of values below a given point.
+            </div>
+
+            <h3>The Five-Number Summary:</h3>
+            <table class="table">
+                <tr>
+                    <th>Measure</th>
+                    <th>Symbol</th>
+                    <th>Meaning</th>
+                </tr>
+                <tr>
+                    <td>Minimum</td>
+                    <td>Min</td>
+                    <td>Smallest value</td>
+                </tr>
+                <tr>
+                    <td>First Quartile</td>
+                    <td>Q1</td>
+                    <td>25th percentile (25% below)</td>
+                </tr>
+                <tr>
+                    <td>Median</td>
+                    <td>Q2</td>
+                    <td>50th percentile (middle)</td>
+                </tr>
+                <tr>
+                    <td>Third Quartile</td>
+                    <td>Q3</td>
+                    <td>75th percentile (75% below)</td>
+                </tr>
+                <tr>
+                    <td>Maximum</td>
+                    <td>Max</td>
+                    <td>Largest value</td>
+                </tr>
+            </table>
+
+            <div class="example-box">
+                <h4>📝 Example: Find Quartiles</h4>
+                <div class="step"><strong>Data (sorted):</strong> 2, 4, 6, 8, 10, 12, 14, 16</div>
+                <div class="step"><span class="step-number">1</span><strong>Find Median (Q2):</strong><br>
+                    Middle of 8 values = (8 + 10) ÷ 2 = <span class="highlight">9</span>
+                </div>
+                <div class="step"><span class="step-number">2</span><strong>Find Q1:</strong><br>
+                    Median of lower half (2,4,6,8) = (4+6) ÷ 2 = <span class="highlight">5</span>
+                </div>
+                <div class="step"><span class="step-number">3</span><strong>Find Q3:</strong><br>
+                    Median of upper half (10,12,14,16) = (12+14) ÷ 2 = <span class="highlight">13</span>
+                </div>
+                <div class="answer-box">
+                    <strong>Min=2 | Q1=5 | Q2=9 | Q3=13 | Max=16</strong>
+                </div>
+            </div>
+
+            <h3>Interquartile Range (IQR)</h3>
+            <div class="formula-box">
+                IQR = Q3 - Q1<br><br>
+                Measures the spread of the middle 50% of data
+            </div>
+            <div class="step">From example above: IQR = 13 - 5 = <span class="highlight">8</span></div>
+        </div>
+
+        <div class="section">
+            <h2>Outliers</h2>
+            <div class="explanation">
+                <strong>Outliers</strong> are values that are unusually far from other values.<br>
+                They can significantly affect mean and other calculations.
+            </div>
+            <div class="formula-box">
+                Lower Fence = Q1 - 1.5 × IQR<br>
+                Upper Fence = Q3 + 1.5 × IQR<br><br>
+                Values outside these fences are outliers!
+            </div>
+            <div class="example-box">
+                <h4>📝 Example: Find Outliers</h4>
+                <div class="step"><strong>Given:</strong> Q1 = 5, Q3 = 13, IQR = 8</div>
+                <div class="step"><span class="step-number">1</span><strong>Lower Fence:</strong><br>5 - 1.5 × 8 = 5 -
+                    12 = <span class="highlight">-7</span></div>
+                <div class="step"><span class="step-number">2</span><strong>Upper Fence:</strong><br>13 + 1.5 × 8 = 13 +
+                    12 = <span class="highlight">25</span></div>
+                <div class="answer-box">
+                    <strong>Any value < -7 or> 25 is an outlier</strong>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Z-Score (Standard Score)</h2>
+            <div class="explanation">
+                <strong>Z-Score</strong> tells us how many standard deviations a value is from the mean.<br>
+                Allows comparison between different datasets.
+            </div>
+            <div class="formula-box">
+                Z = (X - Mean) ÷ Standard Deviation<br><br>
+                Z = (x - μ) ÷ σ
+            </div>
+            <div class="grid-2">
+                <div class="visual-item">
+                    <strong>Positive Z</strong>
+                    Value is ABOVE mean<br>
+                    Z = +2 → 2 SD above mean
+                </div>
+                <div class="visual-item">
+                    <strong>Negative Z</strong>
+                    Value is BELOW mean<br>
+                    Z = -1 → 1 SD below mean
+                </div>
+            </div>
+            <div class="example-box">
+                <h4>📝 Example: Calculate Z-Score</h4>
+                <div class="step"><strong>Given:</strong> Test score = 85, Mean = 75, SD = 5</div>
+                <div class="step"><span class="step-number">1</span><strong>Apply formula:</strong><br>Z = (85 - 75) ÷ 5
+                </div>
+                <div class="step"><span class="step-number">2</span><strong>Calculate:</strong><br>Z = 10 ÷ 5 = <span
+                        class="highlight">+2</span></div>
+                <div class="answer-box">
+                    <strong>Z = +2</strong><br>
+                    Score is 2 standard deviations above average!
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Correlation</h2>
+            <div class="explanation">
+                <strong>Correlation</strong> measures the relationship between two variables.<br>
+                Ranges from -1 to +1
+            </div>
+            <div class="grid-3">
+                <div class="visual-item">
+                    <strong>Positive (+1)</strong>
+                    Both increase together<br><br>
+                    Example: Height & Weight
+                </div>
+                <div class="visual-item">
+                    <strong>Zero (0)</strong>
+                    No relationship<br><br>
+                    Example: Shoe size & IQ
+                </div>
+                <div class="visual-item">
+                    <strong>Negative (-1)</strong>
+                    One increases, other decreases<br><br>
+                    Example: Speed & Travel time
+                </div>
+            </div>
+            <div class="note-box">
+                <strong>💡 Remember:</strong> Correlation ≠ Causation!<br>
+                Just because two things are related doesn't mean one causes the other.
+            </div>
+        </div>
+
+        <div class="section" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
+            <h2 style="color: white; background: none; padding: 0; margin: 0 0 30px 0;">📌 KEY POINTS</h2>
+            <div style="font-size: 1.1em; line-height: 2;">
+                <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 8px; margin: 10px 0;">✓
+                    <strong>Normal Distribution:</strong> Bell curve, symmetric, 68-95-99.7 rule</div>
+                <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 8px; margin: 10px 0;">✓
+                    <strong>Quartiles:</strong> Q1 (25%), Q2/Median (50%), Q3 (75%)</div>
+                <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 8px; margin: 10px 0;">✓
+                    <strong>IQR:</strong> Q3 - Q1 (middle 50% spread)</div>
+                <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 8px; margin: 10px 0;">✓
+                    <strong>Outliers:</strong> Outside Q1-1.5×IQR or Q3+1.5×IQR</div>
+                <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 8px; margin: 10px 0;">✓
+                    <strong>Z-Score:</strong> (Value - Mean) ÷ SD</div>
+                <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 8px; margin: 10px 0;">✓
+                    <strong>Correlation:</strong> -1 to +1 (relationship strength)</div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
