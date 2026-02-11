@@ -12,17 +12,34 @@
 - ✅ Math from a **programming & engineering perspective**
 - ✅ **Python-style thinking** everywhere
 - ✅ Real-world **AI/Agent applications**
+- ✅ **Mathematical foundations only** — practical application covered in Prompt Engineering course
 - ❌ No exam-style theory
 - ❌ No heavy proofs or derivations
 
-**Final Goal:** Confidently build, test, and reason about AI systems — from LangGraph agents to RAG pipelines.
+**Final Goal:** Confidently understand the mathematical principles behind AI systems — from LangGraph agents to RAG pipelines.
+
+---
+
+## 🔄 Course Relationship: Math vs Prompt Engineering
+
+This course focuses on **WHY** (mathematical foundations), while the **Prompt Engineering Course** focuses on **HOW** (practical techniques).
+
+| This Course (Math for AI-SDET) | Prompt Engineering Course |
+|-------------------------------|---------------------------|
+| Why embeddings work mathematically | How to use embeddings in RAG prompts |
+| Entropy theory behind temperature | How to tune temperature for tasks |
+| Graph theory for workflows | How to build LangGraph agents |
+| Information theory concepts | Prompt optimization techniques |
+| Mathematical optimization | Cost management strategies |
+
+**Recommendation:** Complete this course first for solid foundations, then take Prompt Engineering for hands-on application.
 
 ---
 
 ## 📊 Course Structure at a Glance
 
 | Phase | Focus Area | Modules | Key AI/SDET Applications |
-|-------|------------|---------|--------------------------|
+|-------|------------|---------|--------------------------| 
 | **00** | Thinking Like a Programmer | 4 | Problem decomposition, algorithmic thinking |
 | **01** | Arithmetic Mastery | 5 | Precision, floating point, test assertions |
 | **02** | Ratios & Percentages | 4 | Accuracy metrics, performance benchmarks |
@@ -33,9 +50,9 @@
 | **07** | Probability | 1 | Confidence scores, sampling, uncertainty |
 | **08** | Engineering Math | 1 | Scaling, complexity, growth patterns |
 | **09** | CS Math Essentials | 1 | Modular arithmetic, recursion, matrices, hashing, bits |
-| **10** | Agent & LLM Math | 7 | Graphs, embeddings, entropy, optimization, RAG, DAGs, LLM training |
+| **10** | Agent & LLM Math | 5 | Graphs, probability, embeddings, entropy, training theory |
 
-**Total: 37+ Modules across 11 Phases**
+**Total: 35+ Modules across 11 Phases**
 
 ---
 
@@ -82,7 +99,7 @@
 | 12 | Proportional Reasoning | Cross-multiplication, scaling |
 | 13 | Time, Distance, Speed | Rate problems, performance metrics |
 
-**AI Application:** Accuracy, precision, recall calculations; token cost estimation; latency benchmarking.
+**AI Application:** Accuracy, precision, recall calculations; latency benchmarking; throughput analysis.
 
 ---
 
@@ -107,10 +124,10 @@
 | Module | Topic | Key Concepts |
 |--------|-------|--------------|
 | 19 | Coordinate Systems | 2D/3D positioning, axes |
-| 20 | Distance Calculations | Euclidean distance, Manhattan distance |
+| 20 | Distance Calculations | Euclidean distance, Manhattan distance, Minkowski |
 | 21 | Basic Geometry | Shapes, areas, spatial relationships |
 
-**AI Application:** Embedding spaces, vector similarity, spatial representations in ML.
+**AI Application:** Embedding spaces, vector similarity foundations, spatial representations in ML.
 
 ---
 
@@ -177,21 +194,39 @@
 
 ---
 
-### 🤖 Phase 10: Agent & LLM Math (NEW!)
-*Mathematics specifically for modern AI systems*
+### 🤖 Phase 10: Agent & LLM Math (REFINED)
+*Pure mathematical foundations for modern AI systems*
 
-| Module | Topic | Key Concepts |
-|--------|-------|--------------|
-| 01 | Graph Theory Basics | Nodes, edges, DAGs, state machines, LangGraph |
-| 02 | Conditional Probability for Agents | Confidence-based decisions, retry logic, fallbacks |
-| 03 | Embeddings & Cosine Similarity | Vectors as meaning, similarity thresholds, RAG |
-| 04 | Optimization Thinking | Cost vs latency vs quality, token economics |
-| 05 | Information Theory Basics | Entropy, surprisal, prompt optimization |
-| 06 | RAG and DAG Architectures | Retrieval-augmented generation, directed acyclic graphs |
-| 07 | LLM Training Fundamentals | Model training concepts, fine-tuning basics |
+> **Note:** This phase covers the **mathematical theory** only. Practical application techniques (RAG pipelines, caching strategies, agentic workflows, prompt optimization) are covered in the **Prompt Engineering Course**.
 
-**AI Application:** This is THE phase for understanding modern AI agent architecture — LangGraph workflows, RAG systems, cost optimization, and LLM behavior.
+| Module | Topic | Key Mathematical Concepts | ⚠️ NOT Covered Here |
+|--------|-------|--------------------------|---------------------|
+| 01 | Graph Theory Basics | Nodes, edges, directed graphs, DAGs, adjacency matrices, topological sort, state machine theory | LangGraph implementation, workflow building |
+| 02 | Conditional Probability for Agents | Bayes' theorem, prior/posterior probability, confidence intervals, decision theory | Retry logic implementation, fallback strategies |
+| 03 | Embeddings & Vector Space Theory | Vector spaces, dimensionality, cosine similarity formula, dot products, high-dimensional geometry | RAG pipeline building, similarity threshold tuning |
+| 04 | Information Theory | Entropy, cross-entropy, surprisal, KL-divergence, mutual information, perplexity derivation | Temperature tuning, prompt optimization |
+| 05 | LLM Training Theory | Cross-entropy loss, gradient descent intuition, RLHF math, DPO formulation, perplexity as evaluation | Fine-tuning workflows, training data curation |
 
+**What Changed:**
+- ❌ **Removed:** Module 04 (Optimization Thinking) → Moved to Prompt Engineering (cost/caching is practical, not math)
+- ❌ **Removed:** Module 06 (RAG and DAG Architectures) → Merged with Module 01 (graph theory) and Module 03 (embeddings)
+- ✅ **Retained:** Pure mathematical concepts that underpin AI systems
+- ✅ **Renamed:** Module 05 from "Information Theory Basics" to "Information Theory" (keeping full coverage)
+- ✅ **Renamed:** Module 07 to Module 05 and renamed to "LLM Training Theory"
+
+**AI Application:** This phase provides the **mathematical intuition** for understanding why AI systems work — essential for debugging, optimization, and advanced system design.
+
+---
+
+## 🔗 Phase 10 → Prompt Engineering Course Mapping
+
+| Math for AI-SDET (This Course) | Prompt Engineering Course |
+|-------------------------------|---------------------------|
+| Module 01: Graph Theory | Module 7.2: Agentic Workflows (practical) |
+| Module 02: Conditional Probability | Module 7.5: Error Handling (decision logic) |
+| Module 03: Embeddings Theory | Module 7.4: RAG Integration (practical) |
+| Module 04: Information Theory | Module 8.2: Caching + Module 8.3: Context (practical) |
+| Module 05: LLM Training Theory | Module 5.5: Self-Refinement (application) |
 
 ---
 
@@ -200,10 +235,10 @@
 After completing this course, you will be able to:
 
 ### For AI Development
-- ✅ **Build LangGraph workflows** understanding the graph theory behind them
-- ✅ **Design RAG systems** with proper similarity thresholds
-- ✅ **Optimize token usage** for cost-effective AI applications
-- ✅ **Implement confidence-based routing** in multi-agent systems
+- ✅ **Understand LangGraph workflows** through graph theory foundations
+- ✅ **Reason about RAG systems** with vector space mathematics
+- ✅ **Analyze entropy and perplexity** for model evaluation
+- ✅ **Apply probability theory** to confidence-based reasoning
 
 ### For AI Testing (SDET)
 - ✅ **Test numerical precision** in AI outputs
@@ -213,8 +248,8 @@ After completing this course, you will be able to:
 
 ### For Interviews
 - ✅ **Explain mathematical concepts** in practical terms
-- ✅ **Discuss trade-offs** in AI system design
-- ✅ **Demonstrate understanding** of LLM internals
+- ✅ **Discuss the "why"** behind AI system design
+- ✅ **Demonstrate deep understanding** of LLM internals
 
 ---
 
@@ -295,14 +330,16 @@ Math_for_AI_SDET/
 ├── Phase_09_CS_Math_Essentials/
 │   └── Module_06_CS_Math_Essentials.html  # Conceptual CS math foundations
 │
-├── Phase_10_Agent_LLM_Math/               # NEW: Complete AI/Agent focus
-│   ├── Module_01_Graph_Theory_Basics.html
-│   ├── Module_02_Conditional_Probability_Agents.html
-│   ├── Module_03_Embeddings_Cosine_Similarity.html
-│   ├── Module_04_Optimization_Thinking.html
-│   ├── Module_05_Information_Theory_Basics.html
-│   ├── Module_06_RAG_and_DAG_Architectures.html
-│   └── Module_07_LLM_Training_Fundamentals.html
+├── Phase_10_Agent_LLM_Math/               # REFINED: Pure mathematical focus
+│   ├── Module_01_Graph_Theory.html        # Renamed from Graph_Theory_Basics
+│   ├── Module_02_Conditional_Probability.html  # Renamed for brevity
+│   ├── Module_03_Embeddings_Vector_Space.html  # Renamed to emphasize math
+│   ├── Module_04_Information_Theory.html  # Renamed from Information_Theory_Basics
+│   └── Module_05_LLM_Training_Theory.html # Renamed from LLM_Training_Fundamentals
+│   │
+│   └── [ARCHIVED]/                        # Content moved to Prompt Engineering course
+│       ├── Module_04_Optimization_Thinking.html  # → Prompt Eng: Cost Optimization
+│       └── Module_06_RAG_and_DAG.html     # → Prompt Eng: RAG Integration
 │
 ├── Excercise/                             # Practice problems
 │   └── [6 exercise files]
@@ -319,22 +356,19 @@ Math_for_AI_SDET/
 1. Phase 05: Sets & Logic → Test coverage, conditions
 2. Phase 06: Statistics → Metrics, benchmarking
 3. Phase 07: Probability → Confidence, uncertainty
-4. Phase 10: Agent & LLM Math → Full AI stack
+4. Phase 10: Agent & LLM Math → Core AI mathematics
 
-### Path 2: Complete Journey (10-12 weeks)
+### Path 2: Complete Journey (8-10 weeks)
 - **Weeks 1-2:** Phase 00-01 (Foundations)
 - **Weeks 3-4:** Phase 02-03 (Calculations & Algebra)
 - **Weeks 5-6:** Phase 04-05 (Spatial & Logic)
-- **Weeks 7-8:** Phase 06-07 (Statistics & Probability)
-- **Weeks 9-10:** Phase 08-09 (Engineering & AI Math)
-- **Weeks 11-12:** Projects & Review
+- **Weeks 7-8:** Phase 06-08 (Statistics, Probability & Engineering)
+- **Weeks 9-10:** Phase 09-10 (CS Math & AI Math)
 
-### Path 3: LangGraph/Agent Focus
-1. Phase 09: Module 06 (CS Math Essentials) → Hashing, recursion, matrices
-2. Phase 10: Module 01 (Graphs) → Essential
-3. Phase 10: Module 02 (Conditional Probability) → Decision logic
-4. Phase 10: Module 03 (Embeddings) → RAG systems
-5. Phase 10: Module 04-05 (Optimization & Info Theory) → Production systems
+### Path 3: Combined with Prompt Engineering (Recommended)
+1. **Math Course:** Phase 10 Modules 01-05 (Mathematical foundations)
+2. **Prompt Eng:** Modules 5-8 (Practical application)
+3. **Integration:** Build projects that require both
 
 ---
 
@@ -345,9 +379,9 @@ Each module follows a consistent 9-section structure:
 1. **Topic Name** — Clear title
 2. **Why This Matters** — AI/Agent context
 3. **Core Concept** — Simple explanations with analogies
-4. **Math → Programming Mapping** — Code equivalents
-5. **Python Example** — Practical, commented snippets
-6. **AI/GenAI Example** — Real LLM/agent applications
+4. **Mathematical Foundations** — Formulas with intuition
+5. **Math → Programming Mapping** — Code equivalents
+6. **AI/GenAI Application** — Conceptual connection to AI systems
 7. **Testing/SDET Angle** — Test scenarios, assertions
 8. **Common Mistakes** — Beginner pitfalls
 9. **One-Line Summary** — Quick takeaway
@@ -364,26 +398,48 @@ Each module follows a consistent 9-section structure:
 
 ## 📬 Course Updates
 
-**Last Updated:** 5th February 2026
+**Last Updated:** 7th February 2026
 
-**Recent Additions:**
-- ✅ Phase 09: CS Math Essentials — Conceptual foundations (modular arithmetic, recursion, matrices, hashing, bits)
-- ✅ Phase 10: Agent & LLM Math — All 7 modules complete!
-  - Graph Theory Basics (LangGraph foundations)
-  - Conditional Probability for Agents
-  - Embeddings & Cosine Similarity (RAG systems)
-  - Optimization Thinking (cost vs latency vs quality)
-  - Information Theory Basics (entropy, surprisal)
-  - RAG and DAG Architectures (retrieval-augmented generation, directed acyclic graphs)
-  - LLM Training Fundamentals (model training concepts, fine-tuning basics)
+**Recent Changes:**
+- ✅ **Redesigned Phase 10** to focus on pure mathematical foundations
+- ✅ **Removed duplication** with Prompt Engineering course:
+  - Optimization Thinking → Now in Prompt Eng (Module 8)
+  - RAG/DAG Architectures → Now in Prompt Eng (Module 7)
+- ✅ **Renamed modules** for clarity:
+  - Graph Theory Basics → Graph Theory
+  - Information Theory Basics → Information Theory
+  - LLM Training Fundamentals → LLM Training Theory
+- ✅ **Added course relationship section** clarifying Math vs Prompt Eng scope
+- ✅ **Updated learning paths** for combined curriculum
+- ✅ **Archived practical modules** that overlap with Prompt Engineering
+
+**Previous Updates:**
+- ✅ Phase 09: CS Math Essentials — Conceptual foundations
+- ✅ Phase 10: Agent & LLM Math — Originally 7 modules, now refined to 5
 - ✅ HTML interactive versions for all major phases
-- ✅ Refined learning philosophy: concepts over code implementations
 - ✅ Enhanced AI/SDET testing perspectives throughout
+
+---
+
+## ❓ FAQ
+
+### Q: Why were some Phase 10 modules removed?
+**A:** Modules covering practical implementation (optimization strategies, RAG pipelines, caching) were moved to the Prompt Engineering Course. This course now focuses purely on mathematical theory, while Prompt Engineering covers application.
+
+### Q: Should I take this course or Prompt Engineering first?
+**A:** Take **Math for AI-SDET first** for solid foundations, then **Prompt Engineering** for hands-on skills. The math course explains "why," the prompt course teaches "how."
+
+### Q: What happened to the Optimization and RAG modules?
+**A:** Their content is now in:
+- **Optimization Thinking** → Prompt Eng: Module 8 (Cost Optimization)
+- **RAG Architectures** → Prompt Eng: Module 7.4 (RAG Integration)
+- The mathematical concepts (graph theory, embeddings) remain in this course.
 
 ---
 
 ## 🔗 Related Resources
 
+- **Prompt Engineering Course:** Practical application of these concepts
 - **LangChain Documentation:** Understanding LLM chains
 - **LangGraph Guide:** Building stateful agents
 - **MLOps Best Practices:** Production AI systems
