@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Engineering Math - Complete Guide</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .section {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .section h2 {
+            color: white;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            border-radius: 10px;
+            margin: -40px -40px 30px -40px;
+            text-align: center;
+            font-size: 1.8em;
+        }
+
+        .section h3 {
+            color: #667eea;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-size: 1.4em;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+
+        .explanation {
+            background: #e3f2fd;
+            border-left: 5px solid #2196f3;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-size: 1.1em;
+            line-height: 1.8;
+        }
+
+        .explanation strong {
+            color: #1565c0;
+        }
+
+        .example-box {
+            background: #f0f7ff;
+            border: 3px solid #667eea;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 25px 0;
+        }
+
+        .example-box h4 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        .step {
+            background: #fff9e6;
+            border-left: 5px solid #ffc107;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            font-size: 1.05em;
+            line-height: 1.8;
+        }
+
+        .step-number {
+            display: inline-block;
+            background: #ffc107;
+            color: #333;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 35px;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .highlight {
+            background: #ffeb3b;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .visual-item {
+            background: #f5f5f5;
+            padding: 20px;
+            border-radius: 10px;
+            border: 2px solid #667eea;
+            text-align: center;
+        }
+
+        .visual-item strong {
+            color: #667eea;
+            display: block;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        .key-concept {
+            background: #e8f5e9;
+            border-left: 5px solid #4caf50;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-size: 1.1em;
+            line-height: 1.8;
+        }
+
+        .key-concept strong {
+            color: #2e7d32;
+        }
+
+        .formula-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 12px;
+            margin: 25px 0;
+            font-size: 1.15em;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .answer-box {
+            background: #e8f5e9;
+            border-left: 5px solid #4caf50;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            text-align: center;
+            font-size: 1.1em;
+        }
+
+        .answer-box strong {
+            color: #2e7d32;
+            display: block;
+            font-size: 1.2em;
+            margin-top: 10px;
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        .table th {
+            background: #667eea;
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .table td {
+            padding: 12px 15px;
+            border-bottom: 2px solid #ddd;
+            text-align: center;
+            font-family: monospace;
+        }
+
+        .note-box {
+            background: #fce4ec;
+            border-left: 5px solid #e91e63;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .note-box strong {
+            color: #c2185b;
+        }
+
+        .code-box {
+            background: #1a1a2e;
+            color: #16c79a;
+            padding: 20px;
+            border-radius: 8px;
+            font-family: monospace;
+            margin: 15px 0;
+        }
+
+        @media (max-width: 768px) {
+
+            .grid-2,
+            .grid-3 {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>⚙️ ENGINEERING MATH - Complete Guide</h1>
+
+        <!-- LOGARITHMS -->
+        <div class="section">
+            <h2>Logarithms</h2>
+            <div class="explanation">
+                <strong>Logarithm</strong> is the inverse of exponentiation.<br><br>
+                If <strong>bˣ = y</strong>, then <strong>log_b(y) = x</strong><br>
+                "What power do I raise b to, to get y?"
+            </div>
+            <div class="formula-box">
+                log_b(y) = x means b^x = y<br><br>
+                Example: log₂(8) = 3 because 2³ = 8
+            </div>
+
+            <h3>Common Logarithm Types:</h3>
+            <div class="grid-3">
+                <div class="visual-item">
+                    <strong>log (Base 10)</strong>
+                    Common logarithm<br><br>
+                    log(100) = 2<br>
+                    (10² = 100)
+                </div>
+                <div class="visual-item">
+                    <strong>ln (Base e)</strong>
+                    Natural logarithm<br><br>
+                    e ≈ 2.718<br>
+                    Used in calculus
+                </div>
+                <div class="visual-item">
+                    <strong>log₂ (Base 2)</strong>
+                    Binary logarithm<br><br>
+                    log₂(8) = 3<br>
+                    Used in CS!
+                </div>
+            </div>
+
+            <h3>Logarithm Rules:</h3>
+            <table class="table">
+                <tr>
+                    <th>Rule</th>
+                    <th>Formula</th>
+                    <th>Example</th>
+                </tr>
+                <tr>
+                    <td>Product</td>
+                    <td>log(a×b) = log(a) + log(b)</td>
+                    <td>log(2×4) = log(2)+log(4)</td>
+                </tr>
+                <tr>
+                    <td>Quotient</td>
+                    <td>log(a/b) = log(a) - log(b)</td>
+                    <td>log(8/2) = log(8)-log(2)</td>
+                </tr>
+                <tr>
+                    <td>Power</td>
+                    <td>log(aⁿ) = n × log(a)</td>
+                    <td>log(2³) = 3×log(2)</td>
+                </tr>
+                <tr>
+                    <td>Base Change</td>
+                    <td>log_b(x) = log(x)/log(b)</td>
+                    <td>log₂(8) = log(8)/log(2)</td>
+                </tr>
+            </table>
+
+            <div class="example-box">
+                <h4>📝 Example: Solve log₂(32)</h4>
+                <div class="step"><span class="step-number">1</span>Ask: 2 to what power = 32?</div>
+                <div class="step"><span class="step-number">2</span>2¹=2, 2²=4, 2³=8, 2⁴=16, 2⁵=32</div>
+                <div class="answer-box"><strong>log₂(32) = 5</strong></div>
+            </div>
+        </div>
+
+        <!-- BINARY NUMBER SYSTEM -->
+        <div class="section">
+            <h2>Binary Number System</h2>
+            <div class="explanation">
+                <strong>Binary</strong> uses only 2 digits: <strong>0 and 1</strong><br><br>
+                Computers use binary because circuits have two states: ON (1) and OFF (0)
+            </div>
+
+            <h3>Place Values in Binary:</h3>
+            <table class="table">
+                <tr>
+                    <th>Position</th>
+                    <th>7</th>
+                    <th>6</th>
+                    <th>5</th>
+                    <th>4</th>
+                    <th>3</th>
+                    <th>2</th>
+                    <th>1</th>
+                    <th>0</th>
+                </tr>
+                <tr>
+                    <td>Value</td>
+                    <td>128</td>
+                    <td>64</td>
+                    <td>32</td>
+                    <td>16</td>
+                    <td>8</td>
+                    <td>4</td>
+                    <td>2</td>
+                    <td>1</td>
+                </tr>
+                <tr>
+                    <td>Power</td>
+                    <td>2⁷</td>
+                    <td>2⁶</td>
+                    <td>2⁵</td>
+                    <td>2⁴</td>
+                    <td>2³</td>
+                    <td>2²</td>
+                    <td>2¹</td>
+                    <td>2⁰</td>
+                </tr>
+            </table>
+
+            <h3>Binary to Decimal:</h3>
+            <div class="example-box">
+                <h4>📝 Convert 1011 (binary) to decimal</h4>
+                <div class="step"><span class="step-number">1</span>Write place values: 8, 4, 2, 1</div>
+                <div class="step"><span class="step-number">2</span>Match with binary: 1×8 + 0×4 + 1×2 + 1×1</div>
+                <div class="step"><span class="step-number">3</span>Calculate: 8 + 0 + 2 + 1 = <span
+                        class="highlight">11</span></div>
+                <div class="answer-box"><strong>1011₂ = 11₁₀</strong></div>
+            </div>
+
+            <h3>Decimal to Binary:</h3>
+            <div class="example-box">
+                <h4>📝 Convert 13 (decimal) to binary</h4>
+                <div class="step"><span class="step-number">1</span>Divide by 2, track remainders:</div>
+                <div class="step">
+                    13 ÷ 2 = 6 remainder <strong>1</strong><br>
+                    6 ÷ 2 = 3 remainder <strong>0</strong><br>
+                    3 ÷ 2 = 1 remainder <strong>1</strong><br>
+                    1 ÷ 2 = 0 remainder <strong>1</strong>
+                </div>
+                <div class="step"><span class="step-number">2</span>Read remainders bottom-up: <span
+                        class="highlight">1101</span></div>
+                <div class="answer-box"><strong>13₁₀ = 1101₂</strong></div>
+            </div>
+
+            <h3>Common Conversions:</h3>
+            <table class="table">
+                <tr>
+                    <th>Decimal</th>
+                    <th>Binary</th>
+                    <th>Hex</th>
+                </tr>
+                <tr>
+                    <td>0</td>
+                    <td>0000</td>
+                    <td>0</td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>0001</td>
+                    <td>1</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>0100</td>
+                    <td>4</td>
+                </tr>
+                <tr>
+                    <td>8</td>
+                    <td>1000</td>
+                    <td>8</td>
+                </tr>
+                <tr>
+                    <td>10</td>
+                    <td>1010</td>
+                    <td>A</td>
+                </tr>
+                <tr>
+                    <td>15</td>
+                    <td>1111</td>
+                    <td>F</td>
+                </tr>
+                <tr>
+                    <td>16</td>
+                    <td>10000</td>
+                    <td>10</td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- BIG O NOTATION -->
+        <div class="section">
+            <h2>Big O Notation</h2>
+            <div class="explanation">
+                <strong>Big O</strong> describes how an algorithm's time/space grows as input size increases.<br><br>
+                It measures <strong>worst-case</strong> efficiency. Essential for software testing & performance!
+            </div>
+
+            <h3>Common Time Complexities:</h3>
+            <table class="table">
+                <tr>
+                    <th>Big O</th>
+                    <th>Name</th>
+                    <th>Example</th>
+                    <th>n=1000</th>
+                </tr>
+                <tr>
+                    <td>O(1)</td>
+                    <td>Constant</td>
+                    <td>Array access</td>
+                    <td>1</td>
+                </tr>
+                <tr>
+                    <td>O(log n)</td>
+                    <td>Logarithmic</td>
+                    <td>Binary search</td>
+                    <td>~10</td>
+                </tr>
+                <tr>
+                    <td>O(n)</td>
+                    <td>Linear</td>
+                    <td>Simple loop</td>
+                    <td>1,000</td>
+                </tr>
+                <tr>
+                    <td>O(n log n)</td>
+                    <td>Linearithmic</td>
+                    <td>Merge sort</td>
+                    <td>~10,000</td>
+                </tr>
+                <tr>
+                    <td>O(n²)</td>
+                    <td>Quadratic</td>
+                    <td>Nested loops</td>
+                    <td>1,000,000</td>
+                </tr>
+                <tr>
+                    <td>O(2ⁿ)</td>
+                    <td>Exponential</td>
+                    <td>Recursive fibonacci</td>
+                    <td>HUGE!</td>
+                </tr>
+            </table>
+
+            <div class="grid-2">
+                <div class="example-box">
+                    <h4>O(1) - Constant</h4>
+                    <div class="code-box">
+                        function getFirst(arr) {<br>
+                        &nbsp;&nbsp;return arr[0];<br>
+                        }
+                    </div>
+                    <div class="step">Always takes same time regardless of array size</div>
+                </div>
+                <div class="example-box">
+                    <h4>O(n) - Linear</h4>
+                    <div class="code-box">
+                        function findMax(arr) {<br>
+                        &nbsp;&nbsp;for each item in arr:<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;check if max<br>
+                        }
+                    </div>
+                    <div class="step">Time grows linearly with input size</div>
+                </div>
+            </div>
+
+            <div class="example-box">
+                <h4>O(n²) - Quadratic (Nested Loops)</h4>
+                <div class="code-box">
+                    for i in range(n):<br>
+                    &nbsp;&nbsp;for j in range(n):<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;print(i, j)
+                </div>
+                <div class="step">If n=10, runs 100 times. If n=100, runs 10,000 times!</div>
+            </div>
+
+            <div class="key-concept">
+                <strong>✨ Rule of Thumb:</strong><br>
+                • O(1), O(log n) → Excellent<br>
+                • O(n), O(n log n) → Good<br>
+                • O(n²) → Acceptable for small data<br>
+                • O(2ⁿ), O(n!) → Usually too slow
+            </div>
+        </div>
+
+        <!-- EXPONENTS -->
+        <div class="section">
+            <h2>Exponents & Powers</h2>
+            <div class="explanation">
+                <strong>Exponent</strong> tells how many times to multiply a number by itself.<br>
+                aⁿ = a × a × a × ... (n times)
+            </div>
+
+            <h3>Exponent Rules:</h3>
+            <table class="table">
+                <tr>
+                    <th>Rule</th>
+                    <th>Formula</th>
+                    <th>Example</th>
+                </tr>
+                <tr>
+                    <td>Product</td>
+                    <td>aᵐ × aⁿ = aᵐ⁺ⁿ</td>
+                    <td>2³ × 2² = 2⁵ = 32</td>
+                </tr>
+                <tr>
+                    <td>Quotient</td>
+                    <td>aᵐ ÷ aⁿ = aᵐ⁻ⁿ</td>
+                    <td>2⁵ ÷ 2² = 2³ = 8</td>
+                </tr>
+                <tr>
+                    <td>Power of Power</td>
+                    <td>(aᵐ)ⁿ = aᵐˣⁿ</td>
+                    <td>(2²)³ = 2⁶ = 64</td>
+                </tr>
+                <tr>
+                    <td>Zero Power</td>
+                    <td>a⁰ = 1</td>
+                    <td>5⁰ = 1</td>
+                </tr>
+                <tr>
+                    <td>Negative Power</td>
+                    <td>a⁻ⁿ = 1/aⁿ</td>
+                    <td>2⁻³ = 1/8</td>
+                </tr>
+            </table>
+
+            <div class="example-box">
+                <h4>📝 Simplify: 2⁴ × 2³ ÷ 2²</h4>
+                <div class="step"><span class="step-number">1</span>Add exponents for multiplication: 2⁴⁺³ = 2⁷</div>
+                <div class="step"><span class="step-number">2</span>Subtract for division: 2⁷⁻² = 2⁵</div>
+                <div class="step"><span class="step-number">3</span>Calculate: 2⁵ = <span class="highlight">32</span>
+                </div>
+                <div class="answer-box"><strong>Answer = 32</strong></div>
+            </div>
+        </div>
+
+        <!-- SEQUENCES -->
+        <div class="section">
+            <h2>Sequences & Series</h2>
+
+            <h3>Arithmetic Sequence</h3>
+            <div class="explanation">
+                Each term differs by a <strong>constant value (d)</strong>.<br>
+                Example: 2, 5, 8, 11, 14 (d = 3)
+            </div>
+            <div class="formula-box">
+                nth term: aₙ = a₁ + (n-1) × d<br><br>
+                Sum: S = n/2 × (first + last)
+            </div>
+            <div class="example-box">
+                <h4>📝 Find 10th term of: 3, 7, 11, 15...</h4>
+                <div class="step"><span class="step-number">1</span>First term (a₁) = 3, Common difference (d) = 4</div>
+                <div class="step"><span class="step-number">2</span>a₁₀ = 3 + (10-1) × 4 = 3 + 36 = <span
+                        class="highlight">39</span></div>
+                <div class="answer-box"><strong>10th term = 39</strong></div>
+            </div>
+
+            <h3>Geometric Sequence</h3>
+            <div class="explanation">
+                Each term is multiplied by a <strong>constant ratio (r)</strong>.<br>
+                Example: 2, 6, 18, 54 (r = 3)
+            </div>
+            <div class="formula-box">
+                nth term: aₙ = a₁ × r^(n-1)
+            </div>
+            <div class="example-box">
+                <h4>📝 Find 5th term of: 2, 6, 18...</h4>
+                <div class="step"><span class="step-number">1</span>First term = 2, Ratio = 3</div>
+                <div class="step"><span class="step-number">2</span>a₅ = 2 × 3⁴ = 2 × 81 = <span
+                        class="highlight">162</span></div>
+                <div class="answer-box"><strong>5th term = 162</strong></div>
+            </div>
+        </div>
+
+        <!-- MATRICES BASICS -->
+        <div class="section">
+            <h2>Matrices Basics</h2>
+            <div class="explanation">
+                A <strong>Matrix</strong> is a rectangular array of numbers arranged in rows and columns.
+                It allows us to store complex datasets in a structured way.
+            </div>
+
+            <h3>Matrix Notation & Structure:</h3>
+            <div class="grid-2">
+                <div class="visual-item">
+                    <strong>Matrix A (2×3)</strong><br>
+                    <span style="font-family: monospace; font-size: 1.3em;">
+                        [ 1&nbsp;&nbsp;2&nbsp;&nbsp;3 ]<br>
+                        [ 4&nbsp;&nbsp;5&nbsp;&nbsp;6 ]
+                    </span>
+                    <br><br>
+                    2 rows × 3 columns
+                </div>
+                <div class="visual-item">
+                    <strong>Element Notation</strong><br><br>
+                    a<sub>ij</sub> = element at row i, column j<br><br>
+                    a<sub>12</sub> = 2 (row 1, col 2)<br>
+                    a<sub>23</sub> = 6 (row 2, col 3)
+                </div>
+            </div>
+
+            <h3>Types of Matrices:</h3>
+            <div class="grid-3">
+                <div class="visual-item">
+                    <strong>Row Vector (1×n)</strong><br>
+                    <span style="font-family: monospace;">[ 1 2 3 ]</span><br><br>
+                    Horizontal array
+                </div>
+                <div class="visual-item">
+                    <strong>Column Vector (m×1)</strong><br>
+                    <span style="font-family: monospace;">[ 1 ]<br>[ 2 ]</span><br>
+                    Vertical array
+                </div>
+                <div class="visual-item">
+                    <strong>Square Matrix (n×n)</strong><br>
+                    <span style="font-family: monospace;">[ 1 2 ]<br>[ 3 4 ]</span><br>
+                    Equal rows & cols
+                </div>
+            </div>
+
+            <h3>Special Matrices:</h3>
+            <div class="grid-2">
+                <div class="example-box">
+                    <h4>Identity Matrix (I)</h4>
+                    <div class="visual-item">
+                        <span style="font-family: monospace;">
+                            [ 1&nbsp;&nbsp;0 ]<br>[ 0&nbsp;&nbsp;1 ]
+                        </span>
+                    </div>
+                    <div class="step">1s on diagonal, 0s elsewhere</div>
+                </div>
+                <div class="example-box">
+                    <h4>Zero Matrix (0)</h4>
+                    <div class="visual-item">
+                        <span style="font-family: monospace;">
+                            [ 0&nbsp;&nbsp;0 ]<br>[ 0&nbsp;&nbsp;0 ]
+                        </span>
+                    </div>
+                    <div class="step">All elements are zero</div>
+                </div>
+            </div>
+
+            <h3>Basic Operations:</h3>
+            <div class="grid-2">
+                <div class="example-box">
+                    <h4>1. Matrix Addition</h4>
+                    <div class="step">Add elements at same positions</div>
+                    <div class="visual-item">
+                        <span style="font-family: monospace;">[1 2] + [3 4] = [4 6]</span>
+                    </div>
+                </div>
+                <div class="example-box">
+                    <h4>2. Scalar Multiplication</h4>
+                    <div class="step">Multiply every element by a number</div>
+                    <div class="visual-item">
+                        <span style="font-family: monospace;">2 × [1 2] = [2 4]</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="example-box">
+                <h4>3. Transpose (Aᵀ)</h4>
+                <div class="explanation">Swap rows and columns.</div>
+                <div class="grid-2">
+                    <div class="visual-item">
+                        <strong>Original</strong><br>
+                        [ 1 2 3 ]<br>[ 4 5 6 ]
+                    </div>
+                    <div class="visual-item">
+                        <strong>Transpose</strong><br>
+                        [ 1 4 ]<br>[ 2 5 ]<br>[ 3 6 ]
+                    </div>
+                </div>
+            </div>
+
+            <div class="note-box">
+                <strong>🚀 Looking Ahead:</strong> Advanced operations like <em>Matrix Multiplication</em>,
+                <em>Dot Product</em>, and <em>Cosine Similarity</em> are the backbone of AI and will be
+                covered in <strong>Phase 10: Layer & Embedding Math</strong>.
+            </div>
+        </div>
+
+        <!-- KEY POINTS -->
+        <div class="section" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
+            <h2 style="color: white; background: none; padding: 0; margin: 0 0 30px 0;">📌 KEY POINTS</h2>
+            <div style="font-size: 1.1em; line-height: 2;">
+                <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 8px; margin: 10px 0;">✓
+                    <strong>Logarithm:</strong> log_b(y) = x means b^x = y
+                </div>
+                <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 8px; margin: 10px 0;">✓
+                    <strong>Binary:</strong> Uses 0 and 1, place values are powers of 2
+                </div>
+                <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 8px; margin: 10px 0;">✓
+                    <strong>Big O:</strong> O(1) best → O(n²) slow → O(2ⁿ) worst
+                </div>
+                <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 8px; margin: 10px 0;">✓
+                    <strong>Exponents:</strong> aᵐ × aⁿ = aᵐ⁺ⁿ | a⁰ = 1
+                </div>
+                <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 8px; margin: 10px 0;">✓
+                    <strong>Arithmetic:</strong> aₙ = a₁ + (n-1)d
+                </div>
+                <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 8px; margin: 10px 0;">✓
+                    <strong>Geometric:</strong> aₙ = a₁ × r^(n-1)
+                </div>
+                <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 8px; margin: 10px 0;">✓
+                    <strong>Matrices:</strong> Row × Column | Addition is element-wise | Aᵀ swaps rows/cols
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
