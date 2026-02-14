@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Computer Science Math Essentials</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: #00ff88;
+            margin-bottom: 40px;
+            font-size: 2.5em;
+            text-shadow: 0 0 20px rgba(0, 255, 136, 0.5);
+        }
+
+        .section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .section h2 {
+            color: white;
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            padding: 20px;
+            border-radius: 10px;
+            margin: -40px -40px 30px -40px;
+            text-align: center;
+            font-size: 1.8em;
+        }
+
+        .section h3 {
+            color: #11998e;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-size: 1.4em;
+            border-bottom: 3px solid #11998e;
+            padding-bottom: 10px;
+        }
+
+        .why-matters {
+            background: linear-gradient(135deg, #11998e15, #38ef7d15);
+            border-left: 5px solid #11998e;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-size: 1.1em;
+            line-height: 1.8;
+        }
+
+        .explanation {
+            background: #e0f7fa;
+            border-left: 5px solid #00bcd4;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-size: 1.1em;
+            line-height: 1.8;
+        }
+
+        .logic-block {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 20px 0;
+            font-family: 'Consolas', monospace;
+            font-size: 1em;
+            line-height: 1.8;
+            white-space: pre-wrap;
+        }
+
+        .example-box {
+            background: #e8f5e9;
+            border: 3px solid #4caf50;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 25px 0;
+        }
+
+        .example-box h4 {
+            color: #2e7d32;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        .testing-box {
+            background: linear-gradient(135deg, #00b89415, #00cec915);
+            border: 3px solid #00b894;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 25px 0;
+        }
+
+        .testing-box h4 {
+            color: #00b894;
+            margin-bottom: 15px;
+        }
+
+        .mistake-box {
+            background: linear-gradient(135deg, #e1726315, #fd797915);
+            border-left: 5px solid #e17263;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .visual-item {
+            background: #f5f5f5;
+            padding: 20px;
+            border-radius: 10px;
+            border: 2px solid #11998e;
+            text-align: center;
+        }
+
+        .visual-item strong {
+            color: #11998e;
+            display: block;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        .key-concept {
+            background: #e8f5e9;
+            border-left: 5px solid #4caf50;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-size: 1.1em;
+            line-height: 1.8;
+        }
+
+        .mental-model {
+            background: linear-gradient(135deg, #fff3e0, #ffe0b2);
+            border: 3px solid #ff9800;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 25px 0;
+        }
+
+        .mental-model h4 {
+            color: #e65100;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        .summary-box {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 12px;
+            margin: 25px 0;
+            font-size: 1.2em;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .formula-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 12px;
+            margin: 25px 0;
+            font-size: 1.15em;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        .table th {
+            background: #11998e;
+            color: white;
+            padding: 15px;
+            text-align: left;
+        }
+
+        .table td {
+            padding: 12px 15px;
+            border-bottom: 2px solid #ddd;
+        }
+
+        .diagram {
+            background: white;
+            border: 2px solid #11998e;
+            border-radius: 12px;
+            padding: 30px;
+            margin: 20px 0;
+            text-align: center;
+            font-family: monospace;
+        }
+
+        @media (max-width: 768px) {
+
+            .grid-2,
+            .grid-3 {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>🖥️ Module 06: Computer Science Math Essentials</h1>
+
+        <div class="section">
+            <h2>1️⃣ Topic: CS Math Essentials</h2>
+            <div class="explanation">
+                This module covers <strong>5 essential CS math topics</strong> commonly taught in Computer Science
+                Engineering that are crucial for understanding algorithms, data structures, and systems-level
+                programming.
+            </div>
+            <div class="grid-2">
+                <div class="visual-item"><strong>🔢 Modular Arithmetic</strong>Hashing, cycling, cryptography<br><br>7
+                    mod 3 = 1</div>
+                <div class="visual-item"><strong>🔄 Recursion</strong>Algorithm analysis<br><br>f(n) = f(n-1) + f(n-2)
+                </div>
+            </div>
+            <div class="grid-3">
+                <div class="visual-item"><strong>🧮 Matrices</strong>Neural networks<br><br>[[1,2],[3,4]]</div>
+                <div class="visual-item"><strong>#️⃣ Hashing</strong>Fingerprinting<br><br>hash("key")</div>
+                <div class="visual-item"><strong>🔧 Bitwise</strong>Flags & Masks<br><br>5 & 3 = 1</div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>2️⃣ Why This Matters (AI / Agent Context)</h2>
+            <div class="why-matters">
+                <strong>🎯 Where these CS math concepts appear in AI/SDET work:</strong><br><br>
+                • <strong>Modular Arithmetic:</strong> Hash functions for caching, consistent hashing for load
+                balancing, round-robin scheduling<br><br>
+                • <strong>Recursion:</strong> Agent tool chains, recursive document processing, tree traversal in
+                RAG<br><br>
+                • <strong>Matrices:</strong> Neural network weights, attention mechanisms, embedding
+                transformations<br><br>
+                • <strong>Hashing:</strong> Duplicate detection, cache keys, content fingerprinting, bloom
+                filters<br><br>
+                • <strong>Bit Manipulation:</strong> Feature flags, permissions, efficient state encoding
+            </div>
+        </div>
+
+        <!-- PART A: MODULAR ARITHMETIC -->
+        <div class="section">
+            <h2>3️⃣ Part A: Modular Arithmetic</h2>
+            <h3>What is Modular Arithmetic?</h3>
+            <div class="explanation">
+                <strong>Modular arithmetic</strong> = "Clock math" — numbers wrap around after reaching a limit.<br><br>
+                <strong>a mod n</strong> = remainder when a is divided by n
+            </div>
+            <div class="formula-box">
+                a mod n = a - n × floor(a / n)<br><br>
+                Example: 17 mod 5 = 17 - 5×3 = 17 - 15 = 2
+            </div>
+
+            <div class="example-box">
+                <h4>🕐 Clock Analogy</h4>
+                If it's 10:00 and you add 5 hours: (10 + 5) mod 12 = 15 mod 12 = 3:00<br><br>
+                Numbers "wrap around" at 12 — this is modular arithmetic!
+            </div>
+
+            <h3>Common Modular Operations</h3>
+            <table class="table">
+                <tr>
+                    <th>Operation</th>
+                    <th>Pattern</th>
+                    <th>Use Case</th>
+                </tr>
+                <tr>
+                    <td>Wrap index</td>
+                    <td>i % array_length</td>
+                    <td>Circular buffer, round-robin</td>
+                </tr>
+                <tr>
+                    <td>Is even?</td>
+                    <td>n % 2 == 0</td>
+                    <td>Parity check</td>
+                </tr>
+                <tr>
+                    <td>Hash bucket</td>
+                    <td>hash(key) % num_buckets</td>
+                    <td>Hash table distribution</td>
+                </tr>
+                <tr>
+                    <td>Cycle detection</td>
+                    <td>step % cycle_length == 0</td>
+                    <td>Periodic operations</td>
+                </tr>
+            </table>
+
+            <h3>Logical Flow: Circular Buffer Thinking</h3>
+            <div class="logic-block">CONCEPT: Circular Buffer (Ring Buffer)
+
+                GOAL: Overwrite oldest data when buffer is full
+
+                STRUCTURE:
+                - Fixed size array (e.g., size = 3)
+                - head pointer (where to write next)
+
+                LOGIC:
+                When writing item:
+                1. Write at position: head
+                2. Move head: head = (head + 1) % size
+
+                This causes WRAP-AROUND:
+                head = 0 → write → head = 1
+                head = 1 → write → head = 2
+                head = 2 → write → head = 0 ← wraps back!
+
+                EXAMPLE (size=3, write 5 items: A,B,C,D,E):
+                Write A: buffer[0]=A, head=1
+                Write B: buffer[1]=B, head=2
+                Write C: buffer[2]=C, head=0 (wrap!)
+                Write D: buffer[0]=D, head=1 (overwrites A)
+                Write E: buffer[1]=E, head=2 (overwrites B)
+                Final: [D, E, C] ← oldest (C) survived</div>
+
+            <h3>Round-Robin Load Balancing</h3>
+            <div class="logic-block">CONCEPT: Distribute requests evenly across servers
+
+                SERVERS: [A, B, C] (3 servers)
+                COUNTER: current = 0
+
+                REQUEST ROUTING:
+                Request 1: servers[0 % 3] = A, current = 1
+                Request 2: servers[1 % 3] = B, current = 2
+                Request 3: servers[2 % 3] = C, current = 3
+                Request 4: servers[3 % 3] = A, current = 4 (wrap!)
+                Request 5: servers[4 % 3] = B, current = 5
+                ...
+
+                RESULT: A → B → C → A → B → C (cycles forever)
+
+                KEY INSIGHT: Modulo creates PERFECT cycling!</div>
+
+            <div class="mental-model">
+                <h4>🧠 CS Math: Modular Exponentiation</h4>
+                Calculating <code>(a^b) % n</code> directly is slow for large numbers.<br><br>
+                CS uses the <strong>Square-and-Multiply</strong> method to do this in <strong>O(log b)</strong>
+                time.<br><br>
+                <strong>Used in:</strong> Cryptography (RSA), hashing, random number generation
+            </div>
+        </div>
+
+        <!-- PART B: RECURSION -->
+        <div class="section">
+            <h2>4️⃣ Part B: Recursion & Recurrence Relations</h2>
+            <h3>What is Recursion?</h3>
+            <div class="explanation">
+                <strong>Recursion</strong> = A function that calls itself with a smaller/simpler input.<br><br>
+                <strong>Three requirements:</strong><br>
+                1. <strong>Base case:</strong> When to stop (prevents infinite recursion)<br>
+                2. <strong>Progress:</strong> Each call must move toward base case<br>
+                3. <strong>Self-call:</strong> Function calls itself with modified input
+            </div>
+
+            <div class="diagram">
+                <pre>factorial(4)
+    └── 4 × factorial(3)
+              └── 3 × factorial(2)
+                        └── 2 × factorial(1)
+                                  └── 1  (base case!)
+    
+Result: 4 × 3 × 2 × 1 = 24
+
+Each call WAITS for the inner call to return!</pre>
+            </div>
+
+            <h3>Recurrence Relations</h3>
+            <div class="explanation">
+                A <strong>recurrence relation</strong> defines a sequence where each term depends on previous
+                terms.<br><br>
+                <strong>Used for:</strong> Analyzing algorithm complexity
+            </div>
+
+            <table class="table">
+                <tr>
+                    <th>Recurrence</th>
+                    <th>Algorithm Example</th>
+                    <th>Complexity</th>
+                </tr>
+                <tr>
+                    <td>T(n) = T(n-1) + c</td>
+                    <td>Linear search, factorial</td>
+                    <td>O(n)</td>
+                </tr>
+                <tr>
+                    <td>T(n) = T(n/2) + c</td>
+                    <td>Binary search</td>
+                    <td>O(log n)</td>
+                </tr>
+                <tr>
+                    <td>T(n) = 2T(n/2) + cn</td>
+                    <td>Merge sort</td>
+                    <td>O(n log n)</td>
+                </tr>
+                <tr>
+                    <td>T(n) = T(n-1) + T(n-2)</td>
+                    <td>Naive Fibonacci</td>
+                    <td>O(2ⁿ) 😰</td>
+                </tr>
+            </table>
+
+            <div class="mental-model">
+                <h4>🎓 The Master Theorem (Simplified)</h4>
+                Used to solve recurrences of form <code>T(n) = aT(n/b) + f(n)</code><br><br>
+                It tells us the Big O complexity by comparing:<br>
+                • Work done in recursive calls (a subproblems of size n/b)<br>
+                • Work done in current step (f(n))<br><br>
+                <strong>Quick reference:</strong> If a = b and f(n) = O(n), then T(n) = O(n log n)
+            </div>
+
+            <h3>Recursive Thinking Pattern</h3>
+            <div class="logic-block">PATTERN: Recursive Document Processing (Common in RAG)
+
+                GOAL: Process nested documents with depth limit
+
+                THINKING:
+                1. WHAT'S THE BASE CASE?
+                → If depth >= max_depth: stop, return truncated result
+
+                2. WHAT'S THE RECURSIVE CASE?
+                → Process current document
+                → For each child: recursively process (depth + 1)
+
+                3. HOW DO WE MAKE PROGRESS?
+                → Each call increases depth by 1
+                → Eventually hits max_depth (guaranteed termination)
+
+                LOGICAL FLOW:
+                process(doc, depth=0):
+                IF depth >= 5:
+                RETURN {content: doc.text, truncated: true}
+
+                result = {content: doc.text}
+                result.children = []
+
+                FOR each child in doc.children:
+                result.children.add(process(child, depth + 1))
+
+                RETURN result</div>
+
+            <h3>Memoization: Fixing Exponential Recursion</h3>
+            <div class="logic-block">PROBLEM: Naive Fibonacci is O(2ⁿ)
+
+                fib(5) calls:
+                fib(5) → fib(4) + fib(3)
+                fib(4) → fib(3) + fib(2) ← fib(3) calculated TWICE!
+                fib(3) → fib(2) + fib(1) ← fib(2) calculated MANY times!
+
+                Total calls for fib(5): 15
+                Total calls for fib(50): 40+ billion! 😱
+
+                SOLUTION: Memoization (cache previous results)
+
+                LOGIC:
+                cache = {}
+
+                fib(n):
+                IF n in cache:
+                RETURN cache[n] ← O(1) lookup!
+
+                IF n <= 1: result=n ELSE: result=fib(n-1) + fib(n-2) cache[n]=result RETURN result RESULT: O(2ⁿ) → O(n)
+                    🎉</div>
+            </div>
+
+            <!-- PART C: MATRICES -->
+            <div class="section">
+                <h2>5️⃣ Part C: Matrix Basics</h2>
+                <h3>What is a Matrix?</h3>
+                <div class="explanation">
+                    A <strong>matrix</strong> is a 2D array of numbers arranged in rows and columns.<br><br>
+                    <strong>Notation:</strong> A matrix with m rows and n columns is an "m × n matrix"<br><br>
+                    <strong>Key insight for AI:</strong> Neural network layers ARE matrix multiplications!
+                </div>
+
+                <div class="diagram">
+                    <pre>Matrix A (2×3):           Matrix B (3×2):
+┌           ┐             ┌       ┐
+│ 1   2   3 │             │ 7   8 │
+│ 4   5   6 │             │ 9  10 │
+└           ┘             │11  12 │
+                          └       ┘
+
+Result of A × B (2×2):
+┌                           ┐
+│ 1×7+2×9+3×11 = 58    64  │
+│ 4×7+5×9+6×11 = 139  154  │
+└                           ┘
+
+RULE: (m×n) × (n×p) = (m×p)
+      Columns of A MUST equal Rows of B!</pre>
+                </div>
+
+                <h3>Key Matrix Operations</h3>
+                <table class="table">
+                    <tr>
+                        <th>Operation</th>
+                        <th>What It Does</th>
+                        <th>AI Use Case</th>
+                    </tr>
+                    <tr>
+                        <td>Matrix Multiply (A @ B)</td>
+                        <td>Rows of A dot with columns of B</td>
+                        <td>Neural network forward pass</td>
+                    </tr>
+                    <tr>
+                        <td>Element-wise (A * B)</td>
+                        <td>Multiply corresponding elements</td>
+                        <td>Attention masking</td>
+                    </tr>
+                    <tr>
+                        <td>Transpose (A.T)</td>
+                        <td>Swap rows and columns</td>
+                        <td>Attention: Q × K.T</td>
+                    </tr>
+                    <tr>
+                        <td>Dot Product</td>
+                        <td>Sum of element-wise products</td>
+                        <td>Similarity scores</td>
+                    </tr>
+                    <tr>
+                        <td>Reshape</td>
+                        <td>Change dimensions (same data)</td>
+                        <td>Batch processing</td>
+                    </tr>
+                </table>
+
+                <h3>How Neural Network Layers Work</h3>
+                <div class="logic-block">CONCEPT: Dense Layer = Matrix Multiplication + Bias
+
+                    INPUT: Batch of samples, each with features
+                    Shape: (batch_size, num_features)
+                    Example: (32, 768) = 32 samples, 768 features each
+
+                    WEIGHTS: Learned parameters
+                    Shape: (num_features, output_size)
+                    Example: (768, 256) = transform 768 features → 256
+
+                    LOGIC:
+                    output = input @ weights + bias
+
+                    input: (32, 768)
+                    weights: (768, 256)
+                    output: (32, 256) ← each sample now has 256 features
+
+                    THIS IS WHY DIMENSIONS MATTER:
+                    (32, 768) @ (768, 256) works ✅ (inner dims match: 768)
+                    (32, 768) @ (256, 768) fails ❌ (768 ≠ 256)</div>
+
+                <h3>Attention Mechanism (Simplified)</h3>
+                <div class="logic-block">CONCEPT: Attention = Which parts of input to focus on
+
+                    THE FORMULA: Attention(Q, K, V) = softmax(Q × K.T) × V
+
+                    STEP BY STEP:
+                    1. Q × K.T (Query times Key-transpose)
+                    → Produces "attention scores"
+                    → Higher score = more relevant
+
+                    2. softmax(scores)
+                    → Converts to probabilities (sum to 1)
+                    → Tells us "how much to attend to each position"
+
+                    3. × V (multiply by Values)
+                    → Weighted sum of values based on attention
+                    → Output is context-aware representation
+
+                    WHY TRANSPOSE K?
+                    Q shape: (seq_len, d_model) = (10, 512)
+                    K shape: (seq_len, d_model) = (10, 512)
+                    K.T shape: (d_model, seq_len) = (512, 10)
+
+                    Q × K.T: (10, 512) × (512, 10) = (10, 10)
+                    → Each position attends to all other positions!</div>
+
+                <div class="key-concept">
+                    <strong>🧠 Why Matrices Matter for AI:</strong><br>
+                    • Every neural network layer is a matrix multiplication<br>
+                    • Attention (Q×K.T×V) is matrix operations<br>
+                    • Embeddings are stored as matrices (vocab × dimensions)<br>
+                    • Batch processing = processing multiple samples via matrices
+                </div>
+            </div>
+
+            <!-- PART D: HASHING -->
+            <div class="section">
+                <h2>6️⃣ Part D: Hashing</h2>
+                <h3>What is Hashing?</h3>
+                <div class="explanation">
+                    <strong>Hashing</strong> = Converting any data into a fixed-size "fingerprint" (hash value).<br><br>
+                    <strong>Key properties:</strong><br>
+                    1. <strong>Deterministic:</strong> Same input → same hash (always!)<br>
+                    2. <strong>Fixed size:</strong> Any input → same size output<br>
+                    3. <strong>Fast:</strong> O(1) to compute<br>
+                    4. <strong>One-way:</strong> Can't reverse hash to get original (for crypto hashes)
+                </div>
+
+                <div class="mental-model">
+                    <h4>🐦 The Pigeonhole Principle</h4>
+                    <strong>Theorem:</strong> If you have 10 holes and 11 pigeons, at least one hole MUST have two
+                    pigeons.<br><br>
+                    <strong>Applied to hashing:</strong> Input space is infinite, hash output space is finite →
+                    <strong>Collisions are inevitable!</strong><br><br>
+                    <strong>Implication:</strong> Hash tables must handle collisions (chaining, open addressing)
+                </div>
+
+                <div class="grid-2">
+                    <div class="example-box">
+                        <h4>🔑 Hash for Lookup</h4>
+                        <code>hash("user_123") → 847291</code><br>
+                        <code>847291 % 10 → bucket 1</code><br><br>
+                        Used in: dictionaries, caches, databases
+                    </div>
+                    <div class="example-box">
+                        <h4>🔒 Hash for Verification</h4>
+                        <code>SHA256("password") → a1b2c3...</code><br><br>
+                        Used in: authentication, file integrity, blockchain
+                    </div>
+                </div>
+
+                <h3>Hashing in AI Systems</h3>
+                <table class="table">
+                    <tr>
+                        <th>Use Case</th>
+                        <th>Hash Type</th>
+                        <th>Purpose</th>
+                    </tr>
+                    <tr>
+                        <td>Cache key</td>
+                        <td>hash(query)</td>
+                        <td>Store/retrieve LLM responses</td>
+                    </tr>
+                    <tr>
+                        <td>Deduplication</td>
+                        <td>Content hash</td>
+                        <td>Detect duplicate documents in RAG</td>
+                    </tr>
+                    <tr>
+                        <td>Embedding cache</td>
+                        <td>Text hash</td>
+                        <td>Avoid recomputing embeddings</td>
+                    </tr>
+                    <tr>
+                        <td>Request fingerprint</td>
+                        <td>MD5/SHA256</td>
+                        <td>Track unique API requests</td>
+                    </tr>
+                    <tr>
+                        <td>Consistent hashing</td>
+                        <td>Hash ring</td>
+                        <td>Distribute load across servers</td>
+                    </tr>
+                </table>
+
+                <h3>Cache Key Logic</h3>
+                <div class="logic-block">CONCEPT: Content-Based Caching
+
+                    GOAL: Same content = same cache key (even with different formatting)
+
+                    LOGIC:
+                    1. NORMALIZE: Remove case differences, extra spaces
+                    "Hello World" → "hello world"
+                    "HELLO world " → "hello world"
+
+                    2. HASH: Generate fingerprint
+                    "hello world" → hash → "5eb63bbbe01eeed..."
+
+                    3. LOOKUP:
+                    IF hash in cache:
+                    RETURN cached_value ← O(1) lookup!
+                    ELSE:
+                    compute fresh result
+                    cache[hash] = result
+                    RETURN result
+
+                    WHY NORMALIZE?
+                    Without: "Hello" and "hello" = different cache entries 😢
+                    With: "Hello" and "hello" = SAME cache entry 🎉
+                    → Better cache hit rate!</div>
+
+                <h3>Duplicate Detection Pattern</h3>
+                <div class="logic-block">CONCEPT: Find duplicates without comparing every pair
+
+                    NAIVE APPROACH: Compare every document to every other
+                    Complexity: O(n²) ← too slow for large datasets!
+
+                    SMART APPROACH: Hash-based bucketing
+                    1. Hash first 100 chars of each document
+                    2. Group by hash → documents in same bucket are LIKELY duplicates
+                    3. Only compare within same bucket
+
+                    Complexity: O(n) for hashing + O(small) for comparisons
+
+                    EXAMPLE:
+                    doc1: "Python is great..." → hash[:8] = "abc12345"
+                    doc2: "JavaScript is..." → hash[:8] = "def67890"
+                    doc3: "Python is great..." → hash[:8] = "abc12345" ← same as doc1!
+
+                    Buckets:
+                    "abc12345": [doc1, doc3] ← check these for duplicates
+                    "def67890": [doc2] ← alone, no duplicates</div>
+            </div>
+
+            <!-- PART E: BIT MANIPULATION -->
+            <div class="section">
+                <h2>7️⃣ Part E: Bit Manipulation</h2>
+                <h3>What is Bit Manipulation?</h3>
+                <div class="explanation">
+                    <strong>Bit manipulation</strong> = Working directly with individual bits (0s and 1s).<br><br>
+                    <strong>Why?</strong> Extremely fast, memory-efficient, and powerful for flags/permissions.
+                </div>
+
+                <h3>Bitwise Operators</h3>
+                <table class="table">
+                    <tr>
+                        <th>Operator</th>
+                        <th>Symbol</th>
+                        <th>Example</th>
+                        <th>Result</th>
+                    </tr>
+                    <tr>
+                        <td>AND</td>
+                        <td>&</td>
+                        <td>5 & 3 (0101 & 0011)</td>
+                        <td>1 (0001)</td>
+                    </tr>
+                    <tr>
+                        <td>OR</td>
+                        <td>|</td>
+                        <td>5 | 3 (0101 | 0011)</td>
+                        <td>7 (0111)</td>
+                    </tr>
+                    <tr>
+                        <td>XOR</td>
+                        <td>^</td>
+                        <td>5 ^ 3 (0101 ^ 0011)</td>
+                        <td>6 (0110)</td>
+                    </tr>
+                    <tr>
+                        <td>NOT</td>
+                        <td>~</td>
+                        <td>~5</td>
+                        <td>-6</td>
+                    </tr>
+                    <tr>
+                        <td>Left Shift</td>
+                        <td>&lt;&lt;</td>
+                        <td>5 << 1</td>
+                        <td>10 (×2)</td>
+                    </tr>
+                    <tr>
+                        <td>Right Shift</td>
+                        <td>&gt;&gt;</td>
+                        <td>5 >> 1</td>
+                        <td>2 (÷2)</td>
+                    </tr>
+                </table>
+
+                <div class="diagram">
+                    <pre>Binary representation:
+    5 = 0101
+    3 = 0011
+
+5 & 3 (AND):     5 | 3 (OR):      5 ^ 3 (XOR):
+  0101             0101             0101
+& 0011           | 0011           ^ 0011
+------           ------           ------
+  0001 = 1         0111 = 7         0110 = 6
+
+AND: Both bits must be 1
+OR:  Either bit can be 1
+XOR: Exactly one bit is 1</pre>
+                </div>
+
+                <h3>Bitmasking Concept</h3>
+                <div class="mental-model">
+                    <h4>🎭 What is a Mask?</h4>
+                    A <strong>mask</strong> is a binary pattern used to pick out specific bits.<br><br>
+                    <strong>To check if 3rd bit is on:</strong> AND with 0100 (the mask)<br>
+                    <strong>To set 3rd bit:</strong> OR with 0100<br>
+                    <strong>To clear 3rd bit:</strong> AND with NOT 0100 = 1011
+                </div>
+
+                <h3>Feature Flags Pattern</h3>
+                <div class="logic-block">CONCEPT: Store multiple boolean flags in a single integer
+
+                    DEFINE FLAGS (each is a power of 2):
+                    STREAMING = 1 << 0=0001=1 CACHING=1 << 1=0010=2 LOGGING=1 << 2=0100=4 RETRY=1 << 3=1000=8
+                        OPERATIONS: flags=0 (nothing enabled) ENABLE a flag: flags=flags | flag flags |=STREAMING →
+                        flags=0001 flags |=CACHING → flags=0011 DISABLE a flag: flags=flags & ~flag flags &=~STREAMING →
+                        flags=0010 CHECK a flag: (flags & flag) !=0 flags & STREAMING → 0010 & 0001=0000 → False flags &
+                        CACHING → 0010 & 0010=0010 → True WHY USE THIS? Before: 4 boolean variables=4 bytes minimum
+                        After: 1 integer=4 bytes stores 32 flags! Also: Can pass/store all flags as single value</div>
+
+                        <h3>Permission System Logic</h3>
+                        <div class="logic-block">CONCEPT: Role-based permissions using bits
+
+                            DEFINE PERMISSIONS:
+                            READ = 1 << 0=001=1 WRITE=1 << 1=010=2 EXECUTE=1 << 2=100=4 DEFINE ROLES (combinations):
+                                VIEWER=READ=001=1 EDITOR=READ | WRITE=011=3 ADMIN=READ | WRITE | EXECUTE=111=7 CHECK
+                                PERMISSION: has_permission(user_perms, required)=(user_perms & required)==required
+                                EDITOR checking READ: (011 & 001)==001 → True ✅ EDITOR checking EXECUTE: (011 &
+                                100)==100 → False ❌ ADMIN checking EXECUTE: (111 & 100)==100 → True ✅ REAL WORLD: Unix
+                                file permissions (rwx) use exactly this!</div>
+
+                                <h3>Common Bit Tricks</h3>
+                                <table class="table">
+                                    <tr>
+                                        <th>Trick</th>
+                                        <th>Pattern</th>
+                                        <th>Why It Works</th>
+                                    </tr>
+                                    <tr>
+                                        <td>Is power of 2?</td>
+                                        <td>n & (n-1) == 0</td>
+                                        <td>Powers of 2 have single bit set</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Multiply by 2</td>
+                                        <td>n << 1</td>
+                                        <td>Shift bits left = ×2</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Divide by 2</td>
+                                        <td>n >> 1</td>
+                                        <td>Shift bits right = ÷2</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Get lowest bit</td>
+                                        <td>n & 1</td>
+                                        <td>Masks everything except last bit</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Toggle bit</td>
+                                        <td>n ^ bit</td>
+                                        <td>XOR flips the bit</td>
+                                    </tr>
+                                </table>
+                        </div>
+
+                        <!-- TESTING SECTION -->
+                        <div class="section">
+                            <h2>8️⃣ Testing / SDET Angle</h2>
+                            <div class="testing-box">
+                                <h4>🧪 Test Scenarios for CS Math Operations</h4>
+                            </div>
+                            <table class="table">
+                                <tr>
+                                    <th>Topic</th>
+                                    <th>What to Test</th>
+                                    <th>Why It Matters</th>
+                                </tr>
+                                <tr>
+                                    <td>Modular</td>
+                                    <td>Wrap-around at boundaries</td>
+                                    <td>Off-by-one errors are common</td>
+                                </tr>
+                                <tr>
+                                    <td>Modular</td>
+                                    <td>Negative numbers</td>
+                                    <td>-7 % 3 = 2 in Python, -1 in others!</td>
+                                </tr>
+                                <tr>
+                                    <td>Recursion</td>
+                                    <td>Base case triggers correctly</td>
+                                    <td>Missing base case = infinite loop</td>
+                                </tr>
+                                <tr>
+                                    <td>Recursion</td>
+                                    <td>Depth limits respected</td>
+                                    <td>Deep recursion = stack overflow</td>
+                                </tr>
+                                <tr>
+                                    <td>Matrix</td>
+                                    <td>Dimension compatibility</td>
+                                    <td>Wrong dimensions = runtime error</td>
+                                </tr>
+                                <tr>
+                                    <td>Hashing</td>
+                                    <td>Same input = same hash</td>
+                                    <td>Determinism is required</td>
+                                </tr>
+                                <tr>
+                                    <td>Hashing</td>
+                                    <td>Normalization works</td>
+                                    <td>"Hello" and "hello" should match</td>
+                                </tr>
+                                <tr>
+                                    <td>Bitwise</td>
+                                    <td>Enable/disable/check cycle</td>
+                                    <td>Flag state must be consistent</td>
+                                </tr>
+                                <tr>
+                                    <td>Bitwise</td>
+                                    <td>Permission combinations</td>
+                                    <td>ADMIN must have all permissions</td>
+                                </tr>
+                            </table>
+
+                            <div class="logic-block">TEST SCENARIOS (Think Like This):
+
+                                CIRCULAR BUFFER:
+                                ✅ Buffer full → oldest overwritten
+                                ✅ After 1000 writes → still works (no memory leak)
+                                ✅ Size 1 buffer → each write overwrites previous
+
+                                ROUND ROBIN:
+                                ✅ N requests → each server gets N/3 requests (±1)
+                                ✅ 1 server → always returns same server
+                                ✅ 0 servers → handles gracefully (error or default)
+
+                                RECURSION:
+                                ✅ depth=0 → should work (immediate base case)
+                                ✅ depth=MAX → stops at limit, doesn't crash
+                                ✅ Very deep tree → doesn't stack overflow
+
+                                HASH CACHE:
+                                ✅ Cache hit: same query → same cached response
+                                ✅ Cache miss: new query → fresh computation
+                                ✅ Normalized: "HELLO" and "hello" share cache entry
+
+                                FEATURE FLAGS:
+                                ✅ Enable then check → True
+                                ✅ Disable then check → False
+                                ✅ Multiple flags → independent of each other</div>
+                        </div>
+
+                        <!-- COMMON MISTAKES -->
+                        <div class="section">
+                            <h2>9️⃣ Common Mistakes</h2>
+                            <div class="mistake-box"><strong>❌ Negative modulo confusion:</strong> <code>-7 % 3</code> =
+                                2 in Python, but -1 in some languages!</div>
+                            <div class="mistake-box"><strong>❌ Missing base case:</strong> Recursion without termination
+                                = infinite loop → stack overflow</div>
+                            <div class="mistake-box"><strong>❌ Matrix dimension mismatch:</strong> A(m×n) @ B(p×q)
+                                requires n == p</div>
+                            <div class="mistake-box"><strong>❌ Using Python hash() for persistence:</strong> It changes
+                                between runs! Use hashlib for deterministic hashing</div>
+                            <div class="mistake-box"><strong>❌ Not memoizing recursive calls:</strong> Naive Fibonacci
+                                is O(2ⁿ) — always cache!</div>
+                            <div class="mistake-box"><strong>❌ XOR swap in production:</strong> Clever but unreadable —
+                                just use <code>a, b = b, a</code></div>
+                        </div>
+
+                        <!-- SUMMARY -->
+                        <div class="section">
+                            <h2>🔟 One-Line Summary</h2>
+                            <div class="summary-box">
+                                💡 Modular arithmetic cycles values, recursion breaks problems into sub-problems,
+                                matrices power neural networks, hashing enables O(1) lookup, and bit manipulation packs
+                                flags efficiently.
+                            </div>
+                        </div>
+                </div>
+</body>
+
+</html>
