@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Graph Theory Basics - Agent & LLM Math</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: #00d9ff;
+            margin-bottom: 40px;
+            font-size: 2.5em;
+            text-shadow: 0 0 20px rgba(0, 217, 255, 0.5);
+        }
+
+        .section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .section h2 {
+            color: white;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            border-radius: 10px;
+            margin: -40px -40px 30px -40px;
+            text-align: center;
+            font-size: 1.8em;
+        }
+
+        .section h3 {
+            color: #667eea;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-size: 1.4em;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+
+        .why-matters {
+            background: linear-gradient(135deg, #ff6b6b15, #feca5715);
+            border-left: 5px solid #ff6b6b;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-size: 1.1em;
+            line-height: 1.8;
+        }
+
+        .explanation {
+            background: #e3f2fd;
+            border-left: 5px solid #2196f3;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-size: 1.1em;
+            line-height: 1.8;
+        }
+
+        .logic-block {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 20px 0;
+            font-family: 'Consolas', monospace;
+            font-size: 1em;
+            line-height: 1.8;
+        }
+
+        .logic-block .comment {
+            color: #6a9955;
+        }
+
+        .logic-block .highlight {
+            color: #569cd6;
+            font-weight: bold;
+        }
+
+        .logic-block .action {
+            color: #dcdcaa;
+        }
+
+        .example-box {
+            background: #f0f7ff;
+            border: 3px solid #667eea;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 25px 0;
+        }
+
+        .example-box h4 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        .ai-example {
+            background: linear-gradient(135deg, #667eea15, #764ba215);
+            border: 3px solid #764ba2;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 25px 0;
+        }
+
+        .ai-example h4 {
+            color: #764ba2;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        .testing-box {
+            background: linear-gradient(135deg, #00b89415, #00cec915);
+            border: 3px solid #00b894;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 25px 0;
+        }
+
+        .testing-box h4 {
+            color: #00b894;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        .mistake-box {
+            background: linear-gradient(135deg, #e1726315, #fd797915);
+            border-left: 5px solid #e17263;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .visual-item {
+            background: #f5f5f5;
+            padding: 20px;
+            border-radius: 10px;
+            border: 2px solid #667eea;
+            text-align: center;
+        }
+
+        .visual-item strong {
+            color: #667eea;
+            display: block;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        .key-concept {
+            background: #e8f5e9;
+            border-left: 5px solid #4caf50;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-size: 1.1em;
+            line-height: 1.8;
+        }
+
+        .mental-model {
+            background: linear-gradient(135deg, #fff3e0, #ffe0b2);
+            border: 3px solid #ff9800;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 25px 0;
+        }
+
+        .mental-model h4 {
+            color: #e65100;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        .summary-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 12px;
+            margin: 25px 0;
+            font-size: 1.2em;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .diagram {
+            background: white;
+            border: 2px solid #667eea;
+            border-radius: 12px;
+            padding: 30px;
+            margin: 20px 0;
+            text-align: center;
+            font-family: monospace;
+            font-size: 1.1em;
+            line-height: 1.4;
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        .table th {
+            background: #667eea;
+            color: white;
+            padding: 15px;
+            text-align: left;
+        }
+
+        .table td {
+            padding: 12px 15px;
+            border-bottom: 2px solid #ddd;
+        }
+
+        .analogy-box {
+            background: linear-gradient(135deg, #e1bee7, #f3e5f5);
+            border: 3px solid #9c27b0;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 25px 0;
+        }
+
+        .analogy-box h4 {
+            color: #7b1fa2;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        @media (max-width: 768px) {
+
+            .grid-2,
+            .grid-3 {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>🔗 Module 01: Graph Theory Basics</h1>
+
+        <!-- 1. Topic Name -->
+        <div class="section">
+            <h2>1️⃣ Topic: Graph Theory Basics</h2>
+            <div class="explanation">
+                <strong>Graph Theory</strong> is the mathematical study of relationships between objects.<br><br>
+                In simple terms: It's about <strong>connections</strong> — who/what is connected to whom/what, and how
+                things flow between them.
+            </div>
+            <div class="grid-3">
+                <div class="visual-item">
+                    <strong>🔵 Nodes</strong>
+                    Objects / Entities<br><br>
+                    Like: Users, Pages, Steps
+                </div>
+                <div class="visual-item">
+                    <strong>➡️ Edges</strong>
+                    Connections / Links<br><br>
+                    Like: Follows, Links, Paths
+                </div>
+                <div class="visual-item">
+                    <strong>📊 Graph</strong>
+                    Nodes + Edges<br><br>
+                    The complete structure
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. Why This Matters -->
+        <div class="section">
+            <h2>2️⃣ Why This Matters (AI / Agent Context)</h2>
+            <div class="why-matters">
+                <strong>🎯 Where you'll see Graph Theory in AI/Agent systems:</strong><br><br>
+                • <strong>LangGraph:</strong> Entire framework built on directed graphs — nodes = actions, edges =
+                transitions<br><br>
+                • <strong>Agent Workflows:</strong> Multi-step agents flow through states like a state machine
+                graph<br><br>
+                • <strong>RAG Pipelines:</strong> Data flows: Query → Retriever → Ranker → LLM → Response (a
+                DAG!)<br><br>
+                • <strong>MLOps:</strong> Training pipelines are DAGs (Airflow, Kubeflow all use DAG concepts)<br><br>
+                • <strong>MCP Servers:</strong> Tool discovery and routing follows graph-based lookup patterns
+            </div>
+            <div class="key-concept">
+                <strong>💡 Bottom Line:</strong> If you want to build or test LangGraph agents, you MUST understand how
+                graphs work. Every agent workflow is a graph execution!
+            </div>
+        </div>
+
+        <!-- 3. Core Concept -->
+        <div class="section">
+            <h2>3️⃣ Core Concept (Simple Language)</h2>
+
+            <h3>What is a Graph?</h3>
+            <div class="analogy-box">
+                <h4>🗺️ Real World Analogy: A City Map</h4>
+                Think of a graph like a <strong>map of connections</strong>:<br><br>
+                • <strong>Nodes:</strong> Cities, buildings, locations (the "things")<br>
+                • <strong>Edges:</strong> Roads connecting them (the "relationships")<br>
+                • <strong>Graph:</strong> The entire map showing all cities and roads<br><br>
+                <em>Just like you navigate from city to city on roads, programs navigate from node to node via
+                    edges.</em>
+            </div>
+
+            <div class="diagram">
+                <pre>
+    Simple Graph (Undirected)          Directed Graph
+    
+        A ——— B                           A ——→ B
+        |     |                           ↓     ↓
+        |     |                           C ——→ D
+        C ——— D                           
+                                        
+    "A is connected to B"            "A leads to B" (one-way)
+    (both ways)                      (flow has direction)
+</pre>
+            </div>
+
+            <h3>Types of Graphs You'll Use</h3>
+            <div class="grid-2">
+                <div class="example-box">
+                    <h4>🔄 Undirected Graph</h4>
+                    <strong>Edges have no direction — relationship goes both ways</strong><br><br>
+                    <strong>Real Example:</strong> Facebook friends<br>
+                    If A is friend with B, then B is friend with A<br><br>
+                    <strong>Mental Model:</strong> A two-way street
+                </div>
+                <div class="example-box">
+                    <h4>➡️ Directed Graph (Digraph)</h4>
+                    <strong>Edges have direction — one-way relationship</strong><br><br>
+                    <strong>Real Example:</strong> Twitter follows<br>
+                    A follows B doesn't mean B follows A<br><br>
+                    <strong>Mental Model:</strong> A one-way street
+                </div>
+            </div>
+
+            <h3>DAG: Directed Acyclic Graph</h3>
+            <div class="explanation">
+                <strong>DAG = Directed + No Cycles</strong><br><br>
+                • <strong>Directed:</strong> Edges point one way (like arrows)<br>
+                • <strong>Acyclic:</strong> You can't start at a node and follow edges back to the same node (no
+                loops!)<br><br>
+                <em>Think: A one-way street system where you can never drive in circles</em>
+            </div>
+
+            <div class="diagram">
+                <pre>
+    This is a DAG ✅               This is NOT a DAG ❌ (has cycle)
+    
+        A → B → D                        A → B → D
+        ↓   ↓                            ↓   ↓   ↓
+        C → E                            C → E → A  (loops back!)
+        
+    Flow goes one direction          Can go A→B→D→A forever
+    (has a clear END)                (infinite loop possible!)
+</pre>
+            </div>
+
+            <div class="mental-model">
+                <h4>🧠 Mental Model: Why DAGs Matter for AI</h4>
+                <strong>Question:</strong> Why do MLOps and LangGraph use DAGs specifically?<br><br>
+                <strong>Answer:</strong> Because DAGs guarantee:<br>
+                • ✅ <strong>Tasks complete in order</strong> — B waits for A to finish<br>
+                • ✅ <strong>No infinite loops</strong> — workflow always ends<br>
+                • ✅ <strong>Clear dependencies</strong> — easy to parallelize what's independent<br><br>
+                <strong>If your workflow has a cycle → infinite loop risk → system hangs!</strong>
+            </div>
+
+            <h3>State Machines: Graphs for System States</h3>
+            <div class="explanation">
+                A <strong>State Machine</strong> is a special graph where:<br><br>
+                • Nodes = <strong>States</strong> (conditions your system can be in)<br>
+                • Edges = <strong>Transitions</strong> (events that move between states)<br>
+                • Has <strong>Start</strong> and <strong>End</strong> states<br><br>
+                <strong>Key Rule:</strong> From any state, only certain next states are valid!
+            </div>
+
+            <div class="diagram">
+                <pre>
+    Agent State Machine Example:
+    
+    [START] → [THINKING] → [TOOL_CALLING] → [WAITING_RESPONSE]
+                  ↓              ↓                   ↓
+              [ERROR] ←←←←←← [RETRY] ←←←←←←←←←← [TIMEOUT]
+                  ↓
+              [END/FAIL]
+              
+    Each box = State, Each arrow = Transition (triggered by events)
+    
+    THINKING can go to: TOOL_CALLING, RESPONDING, or ERROR
+    THINKING cannot go to: END (must first respond!)
+</pre>
+            </div>
+
+            <div class="key-concept">
+                <strong>🔥 State Machine Thinking for SDETs:</strong><br><br>
+                When testing an agent, you're essentially testing:<br>
+                • Can it reach all valid states?<br>
+                • Does it reject invalid transitions?<br>
+                • Does it handle error states correctly?<br>
+                • Does it always reach an end state?
+            </div>
+        </div>
+
+        <!-- 4. Math Idea → Programming Mapping -->
+        <div class="section">
+            <h2>4️⃣ Graph Concept → Programming Logic</h2>
+
+            <div class="example-box">
+                <h4>📐 How Graph Concepts Map to Code Thinking</h4>
+                <table class="table">
+                    <tr>
+                        <th>Graph Concept</th>
+                        <th>Programming Equivalent</th>
+                        <th>Logical Meaning</th>
+                    </tr>
+                    <tr>
+                        <td><strong>Node</strong></td>
+                        <td>Dictionary key, Object</td>
+                        <td>"A thing that exists"</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Edge</strong></td>
+                        <td>Reference, Link, Pointer</td>
+                        <td>"This leads to that"</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Graph</strong></td>
+                        <td>Dictionary of lists</td>
+                        <td>"Map of all connections"</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Traversal</strong></td>
+                        <td>Loop through neighbors</td>
+                        <td>"Visit nodes in order"</td>
+                    </tr>
+                    <tr>
+                        <td><strong>State</strong></td>
+                        <td>Enum, String variable</td>
+                        <td>"Current condition"</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Transition</strong></td>
+                        <td>If/else, Switch case</td>
+                        <td>"What happens next"</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="mental-model">
+                <h4>🧠 The Key Insight</h4>
+                <strong>A graph is just:</strong><br><br>
+                "For each node, store the list of nodes it connects to"<br><br>
+                <strong>Logical Structure:</strong><br>
+                • start → [process, validate]<br>
+                • process → [review]<br>
+                • validate → [review]<br>
+                • review → [end]<br>
+                • end → [] (nowhere to go — terminal)<br><br>
+                That's literally all a graph is in programming!
+            </div>
+        </div>
+
+        <!-- 5. Logical Flow Examples -->
+        <div class="section">
+            <h2>5️⃣ Logical Flow (How to Think)</h2>
+
+            <h3>Thinking About Graph Representation</h3>
+            <div class="logic-block">
+                <span class="comment"># How to think about representing a graph</span>
+
+                <span class="highlight">CONCEPT:</span> Each node knows who it can reach
+
+                <span class="action">STRUCTURE:</span>
+                start → can go to → [process, validate]
+                process → can go to → [review]
+                validate → can go to → [review]
+                review → can go to → [end]
+                end → can go to → [] <span class="comment">(terminal - nowhere to go)</span>
+
+                <span class="highlight">LOGIC:</span>
+                To find next steps from any node:
+                → Look up that node
+                → Return its list of connections
+
+                Example: get_next_steps("start") → returns ["process", "validate"]
+            </div>
+
+            <h3>Thinking About State Transitions</h3>
+            <div class="logic-block">
+                <span class="comment"># How state machines work logically</span>
+
+                <span class="highlight">DEFINE VALID TRANSITIONS:</span>
+                idle → can become → [thinking]
+                thinking → can become → [tool_calling, responding, error]
+                tool_call → can become → [waiting, error]
+                waiting → can become → [thinking, timeout]
+                timeout → can become → [retry, error]
+                error → can become → [idle]
+                done → can become → [] <span class="comment">(terminal)</span>
+
+                <span class="action">TRANSITION LOGIC:</span>
+                When asked to change state:
+                1. Look up current state's valid next states
+                2. Check if requested state is in that list
+                3. If yes → allow transition
+                4. If no → reject (invalid transition!)
+
+                <span class="highlight">EXAMPLE:</span>
+                Current: "idle"
+                Request: go to "thinking"
+                Check: Is "thinking" in idle's valid list? → YES → Allow
+
+                Current: "idle"
+                Request: go to "done"
+                Check: Is "done" in idle's valid list? → NO → Reject!
+            </div>
+
+            <h3>Thinking About DAG Validation</h3>
+            <div class="logic-block">
+                <span class="comment"># How to check if a graph is a DAG (no cycles)</span>
+
+                <span class="highlight">THE PROBLEM:</span>
+                We need to detect if following edges can bring us back to start
+
+                <span class="action">LOGICAL APPROACH (Coloring):</span>
+                Give each node a "color":
+                WHITE = not visited yet
+                GRAY = currently visiting (in progress)
+                BLACK = completely done
+
+                <span class="highlight">THE LOGIC:</span>
+                1. Start at a node, mark it GRAY (visiting)
+                2. Look at all its neighbors
+                3. If any neighbor is GRAY → CYCLE FOUND! (back edge)
+                4. If neighbor is WHITE → visit it recursively
+                5. When done with all neighbors → mark BLACK
+                6. If we finish without finding GRAY neighbor → NO CYCLE → It's a DAG!
+
+                <span class="comment"># Why GRAY means cycle?</span>
+                <span class="comment"># GRAY = "I'm still exploring from here"</span>
+                <span class="comment"># If I reach a GRAY node, it means I looped back!</span>
+            </div>
+        </div>
+
+        <!-- 6. AI / GenAI Application -->
+        <div class="section">
+            <h2>6️⃣ AI / GenAI Application</h2>
+
+            <div class="ai-example">
+                <h4>🤖 How LangGraph Uses Graphs</h4>
+                <p>LangGraph is literally built on graph concepts. Here's how to think about it:</p>
+            </div>
+
+            <div class="diagram">
+                <pre>
+    LangGraph Workflow = A Directed Graph
+    
+    ┌─────────────────────────────────────────────────────────┐
+    │                                                         │
+    │   [parse_query] ──→ [check_cache] ──→ [route_decision]  │
+    │                                           ↓      ↓      │
+    │                                    [call_llm] [use_cache]│
+    │                                           ↓      ↓      │
+    │                                       [format_response]  │
+    │                                              ↓          │
+    │                                           [END]         │
+    │                                                         │
+    └─────────────────────────────────────────────────────────┘
+    
+    Each box = A function (node)
+    Each arrow = Who calls whom next (edge)
+    Some have conditions = Conditional edges
+</pre>
+            </div>
+
+            <div class="mental-model">
+                <h4>🧠 LangGraph Thinking Pattern</h4>
+                <table class="table">
+                    <tr>
+                        <th>LangGraph Concept</th>
+                        <th>Graph Equivalent</th>
+                        <th>What It Does</th>
+                    </tr>
+                    <tr>
+                        <td>StateGraph()</td>
+                        <td>Create empty graph</td>
+                        <td>Initialize the workflow container</td>
+                    </tr>
+                    <tr>
+                        <td>.add_node("name", func)</td>
+                        <td>Add node to graph</td>
+                        <td>Register a processing step</td>
+                    </tr>
+                    <tr>
+                        <td>.add_edge("from", "to")</td>
+                        <td>Add directed edge</td>
+                        <td>Define fixed transition</td>
+                    </tr>
+                    <tr>
+                        <td>.add_conditional_edges()</td>
+                        <td>Add multiple edges with logic</td>
+                        <td>Define branching routes</td>
+                    </tr>
+                    <tr>
+                        <td>.compile().invoke()</td>
+                        <td>Traverse the graph</td>
+                        <td>Execute workflow from start</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="key-concept">
+                <strong>🎯 The Core Insight:</strong><br><br>
+                When you write a LangGraph workflow, you're essentially:<br>
+                1. Defining nodes (what functions/actions exist)<br>
+                2. Defining edges (who calls whom next)<br>
+                3. Adding conditions (when to go which way)<br>
+                4. Starting at "START" and following edges until "END"<br><br>
+                <strong>That's graph traversal!</strong>
+            </div>
+        </div>
+
+        <!-- 7. Testing / SDET Angle -->
+        <div class="section">
+            <h2>7️⃣ Testing / SDET Angle</h2>
+
+            <div class="testing-box">
+                <h4>🧪 What to Test in Graph-Based Systems</h4>
+                <p>When testing LangGraph or any workflow system, think about graph properties:</p>
+            </div>
+
+            <table class="table">
+                <tr>
+                    <th>Test Type</th>
+                    <th>What to Check</th>
+                    <th>Why It Matters</th>
+                </tr>
+                <tr>
+                    <td><strong>Happy Path</strong></td>
+                    <td>Expected flow executes correctly</td>
+                    <td>Basic functionality works</td>
+                </tr>
+                <tr>
+                    <td><strong>All Paths Coverage</strong></td>
+                    <td>Every edge is executed at least once</td>
+                    <td>No dead code in workflow</td>
+                </tr>
+                <tr>
+                    <td><strong>Reachability</strong></td>
+                    <td>All nodes are reachable from start</td>
+                    <td>No orphan steps in pipeline</td>
+                </tr>
+                <tr>
+                    <td><strong>Terminal State</strong></td>
+                    <td>Workflow always reaches end state</td>
+                    <td>No infinite loops</td>
+                </tr>
+                <tr>
+                    <td><strong>Invalid Transitions</strong></td>
+                    <td>Invalid state changes are rejected</td>
+                    <td>State machine integrity</td>
+                </tr>
+                <tr>
+                    <td><strong>Conditional Routing</strong></td>
+                    <td>Correct path taken based on conditions</td>
+                    <td>Branching logic is correct</td>
+                </tr>
+                <tr>
+                    <td><strong>Cycle Detection</strong></td>
+                    <td>Retry loops have exit conditions</td>
+                    <td>Prevents infinite hangs</td>
+                </tr>
+            </table>
+
+            <div class="logic-block">
+                <span class="comment"># Testing Mindset for Graph-Based Workflows</span>
+
+                <span class="highlight">REACHABILITY TEST:</span>
+                Start from "START" node
+                Traverse all possible paths
+                Check: Did we visit every node defined?
+                If any node was never visited → BUG! (orphan node)
+
+                <span class="highlight">TERMINAL TEST:</span>
+                For any input, does workflow eventually reach END?
+                If not → infinite loop or missing transition
+
+                <span class="highlight">INVALID TRANSITION TEST:</span>
+                Try to go from "idle" directly to "done"
+                Expected: System should reject this
+                If it allows → state machine is broken
+
+                <span class="highlight">CONDITIONAL ROUTING TEST:</span>
+                Give input that should go Path A
+                Verify it actually went Path A
+                Give input that should go Path B
+                Verify it actually went Path B
+            </div>
+
+            <div class="key-concept">
+                <strong>🔍 Edge Cases to Watch:</strong><br><br>
+                • Empty graph (no nodes)<br>
+                • Single node graph<br>
+                • Disconnected components (some nodes unreachable)<br>
+                • Self-loops (node points to itself)<br>
+                • Maximum depth workflows (does recursion limit hit?)
+            </div>
+        </div>
+
+        <!-- 8. Common Mistakes -->
+        <div class="section">
+            <h2>8️⃣ Common Mistakes</h2>
+            <div class="mistake-box">
+                <strong>❌ Creating cycles in DAG workflows:</strong> If your MLOps pipeline has A→B→C→A, it will run
+                forever!
+            </div>
+            <div class="mistake-box">
+                <strong>❌ Forgetting terminal states:</strong> Every path must eventually reach an END node
+            </div>
+            <div class="mistake-box">
+                <strong>❌ Orphan nodes:</strong> Nodes that can never be reached from START are dead code
+            </div>
+            <div class="mistake-box">
+                <strong>❌ Missing error transitions:</strong> What happens if a node fails? Must have error handling
+                path!
+            </div>
+            <div class="mistake-box">
+                <strong>❌ Confusing directed vs undirected:</strong> In workflows, A→B doesn't mean B→A
+            </div>
+        </div>
+
+        <!-- 9. Summary -->
+        <div class="section">
+            <h2>9️⃣ One-Line Summary</h2>
+            <div class="summary-box">
+                💡 Graphs are maps of connections — nodes are things, edges are paths between them. LangGraph workflows
+                ARE graphs, so understanding traversal, DAGs, and state machines is essential for building and testing
+                AI agents.
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

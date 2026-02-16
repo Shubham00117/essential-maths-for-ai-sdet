@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conditional Probability for Agents</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: #00d9ff;
+            margin-bottom: 40px;
+            font-size: 2.5em;
+            text-shadow: 0 0 20px rgba(0, 217, 255, 0.5);
+        }
+
+        .section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .section h2 {
+            color: white;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            padding: 20px;
+            border-radius: 10px;
+            margin: -40px -40px 30px -40px;
+            text-align: center;
+            font-size: 1.8em;
+        }
+
+        .section h3 {
+            color: #f5576c;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-size: 1.4em;
+            border-bottom: 3px solid #f5576c;
+            padding-bottom: 10px;
+        }
+
+        .explanation {
+            background: #fce4ec;
+            border-left: 5px solid #e91e63;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-size: 1.1em;
+            line-height: 1.8;
+        }
+
+        .why-matters {
+            background: linear-gradient(135deg, #ff6b6b15, #feca5715);
+            border-left: 5px solid #ff6b6b;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-size: 1.1em;
+            line-height: 1.8;
+        }
+
+        .key-concept {
+            background: #e8f5e9;
+            border-left: 5px solid #4caf50;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-size: 1.1em;
+            line-height: 1.8;
+        }
+
+        .formula-box {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 12px;
+            margin: 25px 0;
+            font-size: 1.3em;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .example-box {
+            background: #fff0f3;
+            border: 3px solid #f5576c;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 25px 0;
+        }
+
+        .example-box h4 {
+            color: #f5576c;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        .mental-model {
+            background: linear-gradient(135deg, #fff3e0, #ffe0b2);
+            border: 3px solid #ff9800;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 25px 0;
+        }
+
+        .mental-model h4 {
+            color: #e65100;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        .logic-block {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 20px 0;
+            font-family: 'Consolas', monospace;
+            font-size: 1em;
+            line-height: 1.8;
+            white-space: pre-wrap;
+        }
+
+        .testing-box {
+            background: linear-gradient(135deg, #00b89415, #00cec915);
+            border: 3px solid #00b894;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 25px 0;
+        }
+
+        .testing-box h4 {
+            color: #00b894;
+            margin-bottom: 15px;
+        }
+
+        .mistake-box {
+            background: linear-gradient(135deg, #e1726315, #fd797915);
+            border-left: 5px solid #e17263;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .summary-box {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 12px;
+            margin: 25px 0;
+            font-size: 1.2em;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        .table th {
+            background: #f5576c;
+            color: white;
+            padding: 15px;
+            text-align: left;
+        }
+
+        .table td {
+            padding: 12px 15px;
+            border-bottom: 2px solid #ddd;
+        }
+
+        .diagram {
+            background: white;
+            border: 2px solid #f5576c;
+            border-radius: 12px;
+            padding: 30px;
+            margin: 20px 0;
+            text-align: center;
+            font-family: monospace;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>🎯 Module 02: Conditional Probability for Agents</h1>
+
+        <div class="section">
+            <h2>1️⃣ Topic: Conditional Probability</h2>
+            <div class="explanation">
+                <strong>Conditional Probability</strong> = The probability of event A happening <em>given that</em>
+                event B has already happened.<br><br>
+                In simple terms: "How confident should I be about X, <strong>knowing what I know now</strong>?"
+            </div>
+            <div class="formula-box">
+                P(A | B) = P(A AND B) / P(B)<br><br>
+                Read as: "Probability of A, given B"
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>2️⃣ Why This Matters (AI / Agent Context)</h2>
+            <div class="why-matters">
+                <strong>🎯 Where you'll see this in AI systems:</strong><br><br>
+                • <strong>LLM Token Generation:</strong> P(next_token | context) — entire LLM output is
+                conditional<br><br>
+                • <strong>Agent Tool Selection:</strong> P(tool_success | user_intent, previous_results)<br><br>
+                • <strong>Retry Logic:</strong> P(success | already_failed_N_times) — should we retry?<br><br>
+                • <strong>Fallback Routing:</strong> If primary fails, what's P(secondary_works | primary_failed)?
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>3️⃣ Core Concept (Simple Language)</h2>
+
+            <h3>Updating Beliefs with Evidence</h3>
+            <div class="example-box">
+                <h4>🏥 Classic Example: Medical Test</h4>
+                <p><strong>Disease rate:</strong> 1 in 1000 (0.1%)</p>
+                <p><strong>Test accuracy:</strong> 99%</p>
+                <p><strong>You test positive. Do you have it?</strong></p><br>
+                In 1000 people: 1 true positive + 10 false positives (1% of 999)<br>
+                <strong>P(disease | positive) = 1/11 ≈ 9%!</strong><br>
+                <em>Context (base rate) matters more than raw accuracy!</em>
+            </div>
+
+            <h3>Bayes' Theorem</h3>
+            <div class="formula-box">
+                P(A | B) = P(B | A) × P(A) / P(B)<br><br>
+                Posterior = Likelihood × Prior / Evidence
+            </div>
+
+            <div class="mental-model">
+                <h4>🧠 Understanding Each Term</h4>
+                <table class="table">
+                    <tr>
+                        <th>Term</th>
+                        <th>What It Means</th>
+                        <th>AI Example</th>
+                    </tr>
+                    <tr>
+                        <td><strong>P(A)</strong> - Prior</td>
+                        <td>Belief before evidence</td>
+                        <td>P(user wants code) = 30%</td>
+                    </tr>
+                    <tr>
+                        <td><strong>P(B|A)</strong> - Likelihood</td>
+                        <td>Evidence probability if hypothesis true</td>
+                        <td>P("function" | wants code) = 80%</td>
+                    </tr>
+                    <tr>
+                        <td><strong>P(B)</strong> - Evidence</td>
+                        <td>Overall evidence probability</td>
+                        <td>P("function" appears) = 15%</td>
+                    </tr>
+                    <tr>
+                        <td><strong>P(A|B)</strong> - Posterior</td>
+                        <td>Updated belief after evidence</td>
+                        <td>P(wants code | "function") = higher!</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>4️⃣ Probability → Agent Logic</h2>
+            <table class="table">
+                <tr>
+                    <th>Concept</th>
+                    <th>Agent Decision Pattern</th>
+                </tr>
+                <tr>
+                    <td>P(A | B)</td>
+                    <td>IF B observed, calculate new confidence in A</td>
+                </tr>
+                <tr>
+                    <td>Prior P(A)</td>
+                    <td>Default confidence = 50%</td>
+                </tr>
+                <tr>
+                    <td>Threshold Decision</td>
+                    <td>IF confidence > 70% THEN proceed</td>
+                </tr>
+                <tr>
+                    <td>Confidence Decay</td>
+                    <td>After each failure, confidence *= 0.5</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="section">
+            <h2>5️⃣ Logical Flow (How Agents Decide)</h2>
+
+            <h3>Confidence-Based Decision Making</h3>
+            <div class="logic-block">DECISION ZONES:
+                confidence >= 70% → PROCEED (confident enough)
+                30% <= confidence < 70% → ASK CLARIFICATION confidence < 30% → FALLBACK (too uncertain) CONTEXT
+                    MODIFIERS: IF user intent is clear: confidence *=1.2 (boost) IF recent error occurred: confidence
+                    *=0.7 (penalty) IF query is outside domain: confidence *=0.5 (big penalty)</div>
+
+                    <h3>Retry Logic with Decaying Probability</h3>
+                    <div class="logic-block">P(success | attempt N) = base_rate × (decay_factor ^ N)
+
+                        EXAMPLE WITH base=0.8, decay=0.5:
+                        Attempt 0: 0.8 × 1 = 80%
+                        Attempt 1: 0.8 × 0.5 = 40%
+                        Attempt 2: 0.8 × 0.25 = 20%
+                        Attempt 3: 0.8 × 0.125 = 10%
+
+                        DECISION: IF P(success) > 10% → RETRY, ELSE → GIVE UP</div>
+            </div>
+
+            <div class="section">
+                <h2>6️⃣ AI / GenAI Application</h2>
+                <div class="diagram">
+                    <pre>LLM Token Generation:
+
+Input: "The cat sat on the ___"
+
+P("mat" | context)  = 0.45  ← most likely
+P("floor" | context) = 0.25
+P("dog" | context)   = 0.05
+P("moon" | context)  = 0.001  ← unlikely
+
+The LLM picks based on these conditional probabilities!</pre>
+                </div>
+
+                <div class="key-concept">
+                    <strong>🎯 Agent Decision Framework:</strong><br>
+                    1. Start with prior belief<br>
+                    2. Observe evidence<br>
+                    3. Update belief using Bayes<br>
+                    4. Compare to threshold → decide action
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>7️⃣ Testing / SDET Angle</h2>
+                <div class="testing-box">
+                    <h4>🧪 Key Test Scenarios</h4>
+                </div>
+                <table class="table">
+                    <tr>
+                        <th>Test Type</th>
+                        <th>What to Verify</th>
+                    </tr>
+                    <tr>
+                        <td>Threshold Boundary</td>
+                        <td>At 69% → different action than at 71%</td>
+                    </tr>
+                    <tr>
+                        <td>Context Modifiers</td>
+                        <td>With error → lower confidence than without</td>
+                    </tr>
+                    <tr>
+                        <td>Probability Bounds</td>
+                        <td>All probabilities stay within 0-1</td>
+                    </tr>
+                    <tr>
+                        <td>Decay Tests</td>
+                        <td>Confidence decreases with each failure</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="section">
+                <h2>8️⃣ Common Mistakes</h2>
+                <div class="mistake-box"><strong>❌ Ignoring base rates:</strong> 99% accurate test on 0.1% disease =
+                    only 9% after positive!</div>
+                <div class="mistake-box"><strong>❌ Treating 80% as certainty:</strong> 20% failure still happens 1 in 5
+                    times!</div>
+                <div class="mistake-box"><strong>❌ Confusing P(A|B) with P(B|A):</strong> They're completely different!
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>9️⃣ One-Line Summary</h2>
+                <div class="summary-box">
+                    💡 Conditional probability lets agents think "Given what I know now, what should I do?" — powering
+                    smart retry, fallback, and confidence routing.
+                </div>
+            </div>
+        </div>
+</body>
+
+</html>

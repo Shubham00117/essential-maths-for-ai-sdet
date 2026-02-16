@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Embeddings & Cosine Similarity</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: #00d9ff;
+            margin-bottom: 40px;
+            font-size: 2.5em;
+            text-shadow: 0 0 20px rgba(0, 217, 255, 0.5);
+        }
+
+        .section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .section h2 {
+            color: white;
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            padding: 20px;
+            border-radius: 10px;
+            margin: -40px -40px 30px -40px;
+            text-align: center;
+            font-size: 1.8em;
+        }
+
+        .section h3 {
+            color: #11998e;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-size: 1.4em;
+            border-bottom: 3px solid #11998e;
+            padding-bottom: 10px;
+        }
+
+        .explanation {
+            background: #e0f7fa;
+            border-left: 5px solid #00bcd4;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-size: 1.1em;
+            line-height: 1.8;
+        }
+
+        .why-matters {
+            background: linear-gradient(135deg, #11998e15, #38ef7d15);
+            border-left: 5px solid #11998e;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-size: 1.1em;
+            line-height: 1.8;
+        }
+
+        .key-concept {
+            background: #e8f5e9;
+            border-left: 5px solid #4caf50;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-size: 1.1em;
+            line-height: 1.8;
+        }
+
+        .formula-box {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 12px;
+            margin: 25px 0;
+            font-size: 1.3em;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .example-box {
+            background: #e8f5e9;
+            border: 3px solid #4caf50;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 25px 0;
+        }
+
+        .example-box h4 {
+            color: #2e7d32;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        .mental-model {
+            background: linear-gradient(135deg, #fff3e0, #ffe0b2);
+            border: 3px solid #ff9800;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 25px 0;
+        }
+
+        .mental-model h4 {
+            color: #e65100;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        .logic-block {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 20px 0;
+            font-family: 'Consolas', monospace;
+            font-size: 1em;
+            line-height: 1.8;
+            white-space: pre-wrap;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .visual-item {
+            background: #f5f5f5;
+            padding: 20px;
+            border-radius: 10px;
+            border: 2px solid #11998e;
+            text-align: center;
+        }
+
+        .visual-item strong {
+            color: #11998e;
+            display: block;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        .testing-box {
+            background: linear-gradient(135deg, #00b89415, #00cec915);
+            border: 3px solid #00b894;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 25px 0;
+        }
+
+        .testing-box h4 {
+            color: #00b894;
+            margin-bottom: 15px;
+        }
+
+        .mistake-box {
+            background: linear-gradient(135deg, #e1726315, #fd797915);
+            border-left: 5px solid #e17263;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .summary-box {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 12px;
+            margin: 25px 0;
+            font-size: 1.2em;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        .table th {
+            background: #11998e;
+            color: white;
+            padding: 15px;
+            text-align: left;
+        }
+
+        .table td {
+            padding: 12px 15px;
+            border-bottom: 2px solid #ddd;
+        }
+
+        .diagram {
+            background: white;
+            border: 2px solid #11998e;
+            border-radius: 12px;
+            padding: 30px;
+            margin: 20px 0;
+            text-align: center;
+            font-family: monospace;
+        }
+
+        @media (max-width: 768px) {
+
+            .grid-2,
+            .grid-3 {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>📐 Module 03: Embeddings & Cosine Similarity</h1>
+
+        <div class="section">
+            <h2>1️⃣ Topic: Embeddings & Cosine Similarity</h2>
+            <div class="explanation">
+                <strong>Embeddings</strong> = Converting text/data into numerical vectors that capture meaning.<br><br>
+                <strong>Cosine Similarity</strong> = Measuring how similar two vectors are by comparing their angles
+                (not distances!)
+            </div>
+            <div class="grid-3">
+                <div class="visual-item"><strong>📝 Text</strong>"king", "queen"<br><br>Human words</div>
+                <div class="visual-item"><strong>➡️ Embedding</strong>[0.2, 0.8, -0.1, ...]<br><br>Numbers with meaning
+                </div>
+                <div class="visual-item"><strong>📊 Similarity</strong>0.95 (very similar)<br><br>Angle-based measure
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>2️⃣ Why This Matters (AI / Agent Context)</h2>
+            <div class="why-matters">
+                <strong>🎯 This is THE core math behind modern AI:</strong><br><br>
+                • <strong>RAG Systems:</strong> Find relevant documents by embedding similarity<br><br>
+                • <strong>Semantic Search:</strong> "find similar" = find vectors with high cosine similarity<br><br>
+                • <strong>LLM Tool Selection:</strong> Match user query to most relevant tool/agent<br><br>
+                • <strong>Deduplication:</strong> Detect near-duplicate content via similarity threshold<br><br>
+                • <strong>MCP Servers:</strong> Route requests to right tool based on semantic matching
+            </div>
+            <div class="key-concept">
+                <strong>💡 Key Insight:</strong> Without embeddings, AI can't understand meaning. Without cosine
+                similarity, AI can't compare meanings!
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>3️⃣ Core Concept (Simple Language)</h2>
+
+            <h3>Embeddings: Meaning as Numbers</h3>
+            <div class="explanation">
+                Imagine plotting words in space:<br><br>
+                • <strong>"king"</strong> and <strong>"queen"</strong> → close together (royalty)<br>
+                • <strong>"apple"</strong> and <strong>"orange"</strong> → close together (fruits)<br>
+                • <strong>"king"</strong> and <strong>"apple"</strong> → far apart (unrelated)<br><br>
+                Embeddings capture this! Each word becomes a point in high-dimensional space.
+            </div>
+
+            <div class="diagram">
+                <pre>2D Visualization (real embeddings have 384-1536 dimensions!)
+
+        ↑
+queen  •  • king      (royalty cluster)
+        
+        
+orange •  • apple     (fruit cluster)
+        
+─────────────────→
+
+Similar things are CLOSE together in embedding space!</pre>
+            </div>
+
+            <h3>Cosine Similarity: Angle > Distance</h3>
+            <div class="mental-model">
+                <h4>🧠 Why angle, not Euclidean distance?</h4>
+                <strong>Problem with distance:</strong> Longer vectors have bigger distances even if pointing same
+                direction<br><br>
+                <strong>Solution - Use angle:</strong> Angle only cares about <em>direction</em> = pure meaning
+                comparison<br><br>
+                <strong>Result:</strong> Value between -1 and 1<br>
+                • <strong>1</strong> = identical direction (same meaning)<br>
+                • <strong>0</strong> = perpendicular (unrelated)<br>
+                • <strong>-1</strong> = opposite (antonyms)
+            </div>
+
+            <div class="formula-box">
+                cos(θ) = (A · B) / (||A|| × ||B||)<br><br>
+                = (dot product) / (magnitude A × magnitude B)
+            </div>
+
+            <div class="grid-3">
+                <div class="visual-item"><strong>cos = 1.0</strong>Same direction<br>Identical meaning</div>
+                <div class="visual-item"><strong>cos = 0.0</strong>Perpendicular<br>Unrelated</div>
+                <div class="visual-item"><strong>cos = -1.0</strong>Opposite<br>Contradictory</div>
+            </div>
+
+            <h3>Threshold Guidelines</h3>
+            <div class="example-box">
+                <h4>📊 What Do Similarity Scores Mean?</h4>
+                <table class="table">
+                    <tr>
+                        <th>Similarity</th>
+                        <th>Meaning</th>
+                        <th>RAG Decision</th>
+                    </tr>
+                    <tr>
+                        <td>0.9+</td>
+                        <td>Near duplicate / very similar</td>
+                        <td>Definitely use</td>
+                    </tr>
+                    <tr>
+                        <td>0.8-0.9</td>
+                        <td>Highly relevant</td>
+                        <td>Confidently use</td>
+                    </tr>
+                    <tr>
+                        <td>0.7-0.8</td>
+                        <td>Somewhat relevant</td>
+                        <td>Use with caution</td>
+                    </tr>
+                    <tr>
+                        <td>0.6-0.7</td>
+                        <td>Loosely related</td>
+                        <td>Maybe skip</td>
+                    </tr>
+                    <tr>
+                        <td>Below 0.6</td>
+                        <td>Probably not useful</td>
+                        <td>Don't use</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>4️⃣ Embeddings → Programming Logic</h2>
+            <table class="table">
+                <tr>
+                    <th>Math Concept</th>
+                    <th>Logical Meaning</th>
+                    <th>How to Think</th>
+                </tr>
+                <tr>
+                    <td>Vector</td>
+                    <td>List of numbers</td>
+                    <td>Each number = one dimension of meaning</td>
+                </tr>
+                <tr>
+                    <td>Dot Product</td>
+                    <td>Element-wise multiply, then sum</td>
+                    <td>Measures "alignment"</td>
+                </tr>
+                <tr>
+                    <td>Magnitude</td>
+                    <td>Length of vector</td>
+                    <td>sqrt(sum of squares)</td>
+                </tr>
+                <tr>
+                    <td>Normalize</td>
+                    <td>Divide by length</td>
+                    <td>Makes all vectors length 1</td>
+                </tr>
+                <tr>
+                    <td>Cosine Similarity</td>
+                    <td>Dot product of normalized vectors</td>
+                    <td>Pure direction comparison</td>
+                </tr>
+                <tr>
+                    <td>Threshold Check</td>
+                    <td>IF similarity > 0.8</td>
+                    <td>Find "similar enough" items</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="section">
+            <h2>5️⃣ Logical Flow (How RAG Thinks)</h2>
+
+            <h3>How Vector Search Works</h3>
+            <div class="logic-block">STEP 1: EMBEDDING GENERATION
+                User query: "How do I train a neural network?"
+                → Convert to vector: [0.2, 0.8, -0.1, ..., 0.5] (384-1536 numbers)
+
+                STEP 2: STORE DOCUMENTS (done beforehand)
+                Each document → also converted to vector
+                Store: (doc_id, doc_text, doc_vector)
+
+                STEP 3: SIMILARITY SEARCH
+                For each stored document:
+                Calculate: cosine_sim(query_vector, doc_vector)
+
+                Sort by similarity (highest first)
+
+                STEP 4: THRESHOLD FILTER
+                Keep only docs where similarity >= 0.75 (or your threshold)
+
+                STEP 5: RETURN TOP-K
+                Return top 3-5 most similar documents</div>
+
+            <h3>Cosine Similarity Calculation Logic</h3>
+            <div class="logic-block">GIVEN: Two vectors A and B (same length)
+
+                STEP 1: DOT PRODUCT
+                Multiply corresponding elements, sum all
+                dot = A[0]*B[0] + A[1]*B[1] + ... + A[n]*B[n]
+
+                STEP 2: MAGNITUDES
+                mag_A = sqrt(A[0]² + A[1]² + ... + A[n]²)
+                mag_B = sqrt(B[0]² + B[1]² + ... + B[n]²)
+
+                STEP 3: DIVIDE
+                cosine_similarity = dot / (mag_A × mag_B)
+
+                RESULT: Number between -1 and 1
+
+                OPTIMIZATION: If vectors are pre-normalized (length=1):
+                cosine_similarity = just the dot product!
+                (This is why RAG systems normalize vectors on insert)</div>
+
+            <h3>RAG Relevance Decision</h3>
+            <div class="logic-block">INPUTS:
+                - query_embedding (from user question)
+                - retrieved_docs (from vector search)
+                - threshold = 0.75
+                - min_docs = 1
+
+                LOGIC:
+                relevant_docs = []
+
+                FOR each doc in retrieved_docs:
+                sim = cosine_similarity(query_embedding, doc.embedding)
+                IF sim >= threshold:
+                relevant_docs.append(doc)
+
+                IF len(relevant_docs) < min_docs: DECISION: "Not enough relevant context" ACTION: Use LLM knowledge only
+                    (no RAG augmentation) ELSE: DECISION: "Good context found" ACTION: Include relevant_docs in LLM
+                    prompt</div>
+            </div>
+
+            <div class="section">
+                <h2>6️⃣ AI / GenAI Application</h2>
+
+                <div class="diagram">
+                    <pre>RAG Pipeline with Embeddings:
+
+User Query: "What is machine learning?"
+        ↓
+    [EMBED QUERY] → Vector: [0.3, 0.7, -0.2, ...]
+        ↓
+    [VECTOR SEARCH] → Find similar doc vectors
+        ↓
+    [RANK BY SIMILARITY]
+        Doc A: 0.92 similarity ✅
+        Doc B: 0.85 similarity ✅
+        Doc C: 0.65 similarity ❌ (below threshold)
+        ↓
+    [FILTER BY THRESHOLD] → Keep A, B
+        ↓
+    [AUGMENT PROMPT] → "Context: Doc A, Doc B" + Query
+        ↓
+    [LLM GENERATES] → Answer with context</pre>
+                </div>
+
+                <div class="key-concept">
+                    <strong>🎯 The Core Insight for RAG:</strong><br><br>
+                    1. Similar meaning → Similar vectors → High cosine similarity<br>
+                    2. Find documents where cosine(query, doc) > threshold<br>
+                    3. Use those documents as context for LLM<br>
+                    4. LLM generates answer using retrieved context<br><br>
+                    <strong>That's semantic search! Pure math + pure meaning.</strong>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>7️⃣ Testing / SDET Angle</h2>
+                <div class="testing-box">
+                    <h4>🧪 Testing Embedding-Based Systems</h4>
+                </div>
+                <table class="table">
+                    <tr>
+                        <th>Test Type</th>
+                        <th>What to Verify</th>
+                    </tr>
+                    <tr>
+                        <td>Self-Similarity</td>
+                        <td>cosine(A, A) must equal 1.0</td>
+                    </tr>
+                    <tr>
+                        <td>Symmetry</td>
+                        <td>cosine(A, B) must equal cosine(B, A)</td>
+                    </tr>
+                    <tr>
+                        <td>Bounds</td>
+                        <td>Result must be between -1 and 1</td>
+                    </tr>
+                    <tr>
+                        <td>Known Pairs</td>
+                        <td>cosine("dog", "puppy") should be > 0.8</td>
+                    </tr>
+                    <tr>
+                        <td>Threshold Edge</td>
+                        <td>Test at 0.799 vs 0.801 with 0.8 threshold</td>
+                    </tr>
+                    <tr>
+                        <td>Zero Vector</td>
+                        <td>Handle gracefully, don't divide by zero</td>
+                    </tr>
+                    <tr>
+                        <td>Normalization</td>
+                        <td>After normalizing, vector length should ≈ 1.0</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="section">
+                <h2>8️⃣ Common Mistakes</h2>
+                <div class="mistake-box"><strong>❌ Using Euclidean distance instead of cosine:</strong> Distance doesn't
+                    normalize for vector length!</div>
+                <div class="mistake-box"><strong>❌ Wrong threshold intuition:</strong> 0.5 is NOT "50% similar" — in
+                    embedding space, it's actually quite low!</div>
+                <div class="mistake-box"><strong>❌ Not normalizing vectors:</strong> Pre-normalize for faster repeated
+                    comparisons</div>
+                <div class="mistake-box"><strong>❌ Comparing different embedding models:</strong> OpenAI ≠
+                    sentence-transformers — dimensions and spaces differ!</div>
+                <div class="mistake-box"><strong>❌ Ignoring zero vectors:</strong> Always check for zero magnitude
+                    before dividing</div>
+            </div>
+
+            <div class="section">
+                <h2>9️⃣ One-Line Summary</h2>
+                <div class="summary-box">
+                    💡 Embeddings turn meaning into numbers, cosine similarity measures how aligned those meanings are —
+                    this is the heart of RAG and semantic search.
+                </div>
+            </div>
+        </div>
+</body>
+
+</html>

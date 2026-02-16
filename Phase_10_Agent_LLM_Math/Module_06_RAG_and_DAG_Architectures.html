@@ -1,0 +1,1262 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RAG & DAG Architectures for AI Systems</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: #00d9ff;
+            margin-bottom: 40px;
+            font-size: 2.5em;
+            text-shadow: 0 0 20px rgba(0, 217, 255, 0.5);
+        }
+
+        .section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .section h2 {
+            color: white;
+            background: linear-gradient(135deg, #4776E6 0%, #8E54E9 100%);
+            padding: 20px;
+            border-radius: 10px;
+            margin: -40px -40px 30px -40px;
+            text-align: center;
+            font-size: 1.8em;
+        }
+
+        .section h3 {
+            color: #4776E6;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-size: 1.4em;
+            border-bottom: 3px solid #4776E6;
+            padding-bottom: 10px;
+        }
+
+        .explanation {
+            background: #e8eaf6;
+            border-left: 5px solid #3f51b5;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-size: 1.1em;
+            line-height: 1.8;
+        }
+
+        .why-matters {
+            background: linear-gradient(135deg, #4776E615, #8E54E915);
+            border-left: 5px solid #4776E6;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-size: 1.1em;
+            line-height: 1.8;
+        }
+
+        .key-concept {
+            background: #e8f5e9;
+            border-left: 5px solid #4caf50;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-size: 1.1em;
+            line-height: 1.8;
+        }
+
+        .formula-box {
+            background: linear-gradient(135deg, #4776E6 0%, #8E54E9 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 12px;
+            margin: 25px 0;
+            font-size: 1.2em;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .example-box {
+            background: #ede7f6;
+            border: 3px solid #673ab7;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 25px 0;
+        }
+
+        .example-box h4 {
+            color: #512da8;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        .rag-box {
+            background: linear-gradient(135deg, #00b4db15, #0083b015);
+            border: 3px solid #0083b0;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 25px 0;
+        }
+
+        .rag-box h4 {
+            color: #0083b0;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        .dag-box {
+            background: linear-gradient(135deg, #f2994a15, #f2c94c15);
+            border: 3px solid #f2994a;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 25px 0;
+        }
+
+        .dag-box h4 {
+            color: #f2994a;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        .mental-model {
+            background: linear-gradient(135deg, #fff3e0, #ffe0b2);
+            border: 3px solid #ff9800;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 25px 0;
+        }
+
+        .mental-model h4 {
+            color: #e65100;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        .logic-block {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 20px 0;
+            font-family: 'Consolas', monospace;
+            font-size: 1em;
+            line-height: 1.8;
+            white-space: pre-wrap;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .visual-item {
+            background: #f5f5f5;
+            padding: 20px;
+            border-radius: 10px;
+            border: 2px solid #4776E6;
+            text-align: center;
+        }
+
+        .visual-item strong {
+            color: #4776E6;
+            display: block;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        .flow-step {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 25px;
+            margin: 10px 0;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .flow-arrow {
+            text-align: center;
+            font-size: 2em;
+            color: #667eea;
+            margin: 5px 0;
+        }
+
+        .testing-box {
+            background: linear-gradient(135deg, #00b89415, #00cec915);
+            border: 3px solid #00b894;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 25px 0;
+        }
+
+        .testing-box h4 {
+            color: #00b894;
+            margin-bottom: 15px;
+        }
+
+        .mistake-box {
+            background: linear-gradient(135deg, #e1726315, #fd797915);
+            border-left: 5px solid #e17263;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .summary-box {
+            background: linear-gradient(135deg, #4776E6 0%, #8E54E9 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 12px;
+            margin: 25px 0;
+            font-size: 1.2em;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        .table th {
+            background: #4776E6;
+            color: white;
+            padding: 15px;
+            text-align: left;
+        }
+
+        .table td {
+            padding: 12px 15px;
+            border-bottom: 2px solid #ddd;
+        }
+
+        .diagram {
+            background: white;
+            border: 2px solid #4776E6;
+            border-radius: 12px;
+            padding: 30px;
+            margin: 20px 0;
+            text-align: center;
+            font-family: monospace;
+            font-size: 1.1em;
+            line-height: 1.4;
+        }
+
+        .diagram-dark {
+            background: #1a1a2e;
+            border: 2px solid #00d9ff;
+            border-radius: 12px;
+            padding: 30px;
+            margin: 20px 0;
+            text-align: center;
+            font-family: monospace;
+            font-size: 1.1em;
+            line-height: 1.5;
+            color: #00d9ff;
+        }
+
+        .comparison-card {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 12px;
+            padding: 25px;
+            margin: 20px 0;
+        }
+
+        .highlight-green {
+            color: #4caf50;
+            font-weight: bold;
+        }
+
+        .highlight-orange {
+            color: #ff9800;
+            font-weight: bold;
+        }
+
+        .highlight-red {
+            color: #f44336;
+            font-weight: bold;
+        }
+
+        .highlight-blue {
+            color: #2196f3;
+            font-weight: bold;
+        }
+
+        .analogy-box {
+            background: linear-gradient(135deg, #e1bee7, #f3e5f5);
+            border: 3px solid #9c27b0;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 25px 0;
+        }
+
+        .analogy-box h4 {
+            color: #7b1fa2;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        @media (max-width: 768px) {
+
+            .grid-2,
+            .grid-3 {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>🔄 Module 06: RAG & DAG Architectures</h1>
+
+        <!-- 1. Topic Name -->
+        <div class="section">
+            <h2>1️⃣ Topic: RAG & DAG for AI Systems</h2>
+            <div class="explanation">
+                <strong>RAG (Retrieval-Augmented Generation)</strong> = Enhancing LLM responses by retrieving relevant
+                external knowledge before generating.<br><br>
+                <strong>DAG (Directed Acyclic Graph)</strong> = A graph structure where flows only move forward (no
+                cycles) — the backbone of AI pipelines and workflows.
+            </div>
+            <div class="grid-2">
+                <div class="visual-item">
+                    <strong>📚 RAG</strong>
+                    Retrieve → Augment → Generate<br><br>
+                    "Give the LLM relevant context before asking it to answer"
+                </div>
+                <div class="visual-item">
+                    <strong>🔀 DAG</strong>
+                    Directed + Acyclic + Graph<br><br>
+                    "One-way flow with no loops — always terminates"
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. Why This Matters -->
+        <div class="section">
+            <h2>2️⃣ Why This Matters (AI / Agent Context)</h2>
+            <div class="why-matters">
+                <strong>🎯 RAG & DAG are everywhere in production AI:</strong><br><br>
+                • <strong>LangChain / LangGraph:</strong> Every agent workflow is a DAG of nodes and edges<br><br>
+                • <strong>RAG Pipelines:</strong> Query → Embed → Search → Retrieve → Augment → Generate (a
+                DAG!)<br><br>
+                • <strong>MLOps (Airflow, Kubeflow):</strong> All training pipelines are DAGs<br><br>
+                • <strong>GraphRAG:</strong> Advanced RAG using knowledge graphs for relationship-aware
+                retrieval<br><br>
+                • <strong>Agentic RAG:</strong> Agents that decide when/how to retrieve dynamically
+            </div>
+            <div class="key-concept">
+                <strong>💡 Bottom Line:</strong> RAG solves the "LLM doesn't know your data" problem. DAG ensures your
+                AI workflows are reliable and always complete. Together, they power modern AI applications!
+            </div>
+        </div>
+
+        <!-- 3. Core Concept -->
+        <div class="section">
+            <h2>3️⃣ Core Concept: RAG (Visual Explanation)</h2>
+
+            <h3>What is RAG?</h3>
+            <div class="analogy-box">
+                <h4>📖 Real World Analogy: Open-Book Exam</h4>
+                Think of RAG like an <strong>open-book exam</strong>:<br><br>
+                • <strong>Without RAG:</strong> Student answers from memory only (LLM's training data)<br>
+                • <strong>With RAG:</strong> Student looks up relevant textbook pages first, then answers<br><br>
+                <em>RAG = Give the LLM a "cheat sheet" of relevant information before it answers!</em>
+            </div>
+
+            <div class="diagram-dark">
+                <pre>
+╔═══════════════════════════════════════════════════════════════════ ╗
+║                    THE RAG PIPELINE VISUALIZED                     ║
+╠═══════════════════════════════════════════════════════════════════ ╣
+║                                                                    ║
+║   User Query                                                       ║
+║   "What is our refund policy?"                                     ║
+║         │                                                          ║
+║         ▼                                                          ║
+║   ┌─────────────┐                                                  ║
+║   │  EMBEDDING  │ ← Convert query to vector [0.2, 0.8, -0.1, ...]  ║
+║   └─────────────┘                                                  ║
+║         │                                                          ║
+║         ▼                                                          ║
+║   ┌─────────────┐     ┌──────────────────────────┐                 ║
+║   │   SEARCH    │ ──▶ │    VECTOR DATABASE       │                 ║
+║   │  (Retrieve) │     │  • Doc 1: Refund terms   │                 ║
+║   └─────────────┘     │  • Doc 2: Return policy  │                 ║
+║         │             │  • Doc 3: FAQ section    │                 ║
+║         │             └──────────────────────────┘                 ║
+║         ▼                                                          ║
+║   ┌─────────────┐                                                  ║
+║   │   AUGMENT   │ ← Combine: "Context: {docs}" + "Query: {input}"  ║
+║   └─────────────┘                                                  ║
+║         │                                                          ║
+║         ▼                                                          ║
+║   ┌─────────────┐                                                  ║
+║   │  GENERATE   │ ← LLM generates answer using retrieved context   ║
+║   └─────────────┘                                                  ║
+║         │                                                          ║
+║         ▼                                                          ║
+║   Response: "Our refund policy allows returns within 30 days..."   ║
+║                                                                    ║
+╚═══════════════════════════════════════════════════════════════════╝
+                </pre>
+            </div>
+
+            <h3>The 5 Stages of RAG</h3>
+            <div class="grid-3">
+                <div class="visual-item">
+                    <strong>1️⃣ Indexing</strong>
+                    Documents → Chunks → Embeddings<br><br>
+                    <span class="highlight-blue">Done once, offline</span>
+                </div>
+                <div class="visual-item">
+                    <strong>2️⃣ Embedding</strong>
+                    Query → Vector<br><br>
+                    <span class="highlight-blue">Real-time</span>
+                </div>
+                <div class="visual-item">
+                    <strong>3️⃣ Retrieval</strong>
+                    Find similar vectors<br><br>
+                    <span class="highlight-green">Cosine similarity</span>
+                </div>
+            </div>
+            <div class="grid-2">
+                <div class="visual-item">
+                    <strong>4️⃣ Augmentation</strong>
+                    Combine context + query<br><br>
+                    <span class="highlight-orange">Prompt engineering</span>
+                </div>
+                <div class="visual-item">
+                    <strong>5️⃣ Generation</strong>
+                    LLM creates response<br><br>
+                    <span class="highlight-green">Uses retrieved context</span>
+                </div>
+            </div>
+
+            <div class="rag-box">
+                <h4>🔍 Why RAG Works</h4>
+                <table class="table">
+                    <tr>
+                        <th>Problem</th>
+                        <th>How RAG Solves It</th>
+                    </tr>
+                    <tr>
+                        <td>LLM knowledge is outdated</td>
+                        <td>Retrieve fresh data from up-to-date sources</td>
+                    </tr>
+                    <tr>
+                        <td>LLM hallucinates facts</td>
+                        <td>Ground answers in retrieved documents</td>
+                    </tr>
+                    <tr>
+                        <td>LLM doesn't know private data</td>
+                        <td>Search your company's internal docs</td>
+                    </tr>
+                    <tr>
+                        <td>Fine-tuning is expensive</td>
+                        <td>Just update the vector database</td>
+                    </tr>
+                    <tr>
+                        <td>Need source citations</td>
+                        <td>Return retrieved docs as references</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <!-- 4. DAG Core Concept -->
+        <div class="section">
+            <h2>4️⃣ Core Concept: DAG (Visual Explanation)</h2>
+
+            <h3>What is a DAG?</h3>
+            <div class="explanation">
+                <strong>DAG = Directed Acyclic Graph</strong><br><br>
+                • <strong>Directed:</strong> Edges have direction (A → B means "A leads to B")<br>
+                • <strong>Acyclic:</strong> No cycles — you can't follow edges back to where you started<br>
+                • <strong>Graph:</strong> Nodes (vertices) connected by edges<br><br>
+                <em>Think: A river that only flows downstream — water never flows back uphill!</em>
+            </div>
+
+            <div class="diagram-dark">
+                <pre>
+╔══════════════════════════════════════════════════════════════════════════════════════════╗
+║                          🔀 DAG — DIRECTED ACYCLIC GRAPH                                 ║
+╠══════════════════════════════════════════════════════════════════════════════════════════╣
+║                                                                                          ║
+║  ┌────────────────────────────────────────────────────────────────────────────────────┐  ║
+║  │  📖 TERMINOLOGY BREAKDOWN                                                          │  ║
+║  ├────────────────────────────────────────────────────────────────────────────────────┤  ║
+║  │  D = DIRECTED     → Edges have direction (A → B ≠ B → A)                           │  ║
+║  │  A = ACYCLIC      → No cycles (can never return to a visited node)                 │  ║
+║  │  G = GRAPH        → Collection of Nodes (vertices) + Edges (connections)           │  ║
+║  └────────────────────────────────────────────────────────────────────────────────────┘  ║
+║                                                                                          ║
+╠══════════════════════════════════════════════════════════════════════════════════════════╣
+║                                                                                          ║
+║    ✅ THIS IS A DAG                           ❌ THIS IS NOT A DAG (HAS CYCLE)           ║
+║    ─────────────────                          ────────────────────────────────           ║
+║                                                                                          ║
+║         ┌───────┐                                   ┌───────┐                            ║
+║         │   A   │ ◄── Entry Point                   │   A   │ ◄─────────────┐            ║
+║         │ START │                                   │ START │               │            ║
+║         └───┬───┘                                   └───┬───┘               │            ║
+║             │                                           │                   │            ║
+║      ┌──────┴──────┐   (Parallel                 ┌──────┴──────┐            │            ║
+║      │             │    Execution)               │             │            │            ║
+║      ▼             ▼                             ▼             ▼            │            ║
+║  ┌───────┐     ┌───────┐                     ┌───────┐     ┌───────┐        │            ║
+║  │   B   │     │   C   │  ← B & C can        │   B   │     │   C   │        │            ║
+║  │ Task1 │     │ Task2 │    run together     │ Task1 │     │ Task2 │        │            ║
+║  └───┬───┘     └───┬───┘                     └───┬───┘     └───┬───┘        │            ║
+║      │             │                             │             │            │            ║
+║      └──────┬──────┘   (Merge Point)             └──────┬──────┘            │            ║
+║             ▼                                           ▼                   │            ║
+║         ┌───────┐                                   ┌───────┐               │            ║
+║         │   D   │  ← Waits for B & C                │   D   │               │            ║
+║         │ Merge │                                   │ Merge │               │            ║
+║         └───┬───┘                                   └───┬───┘               │            ║
+║             │                                           │                   │            ║
+║             ▼                                           │                   │            ║
+║         ┌───────┐                                       │   ┌───────────┐   │            ║
+║         │   E   │                                       └──▶│  LOOPS   │───┘            ║
+║         │  END  │ ◄── Always Terminates                     │  BACK!   │                 ║
+║         └───────┘                                           └───────────┘                ║
+║                                                                                          ║
+║      ✓ Clear start → end                          ✗ Can run forever!                    ║
+║      ✓ Guaranteed termination                     ✗ A→B→D→A→B→D→A...                    ║
+║      ✓ Predictable execution                      ✗ Infinite loop risk                  ║
+║      ✓ Perfect for AI pipelines                   ✗ Unpredictable behavior              ║
+║                                                                                          ║
+╠══════════════════════════════════════════════════════════════════════════════════════════╣
+║                                                                                          ║
+║  🚀 REAL-WORLD DAG EXAMPLE: AI TEST AUTOMATION PIPELINE                                 ║
+║  ────────────────────────────────────────────────────────                                ║
+║                                                                                          ║
+║  ┌──────────┐    ┌──────────┐    ┌──────────┐    ┌──────────┐    ┌──────────┐           ║
+║  │  FETCH   │───▶│  PARSE   │───▶│ VALIDATE │───▶│   RUN    │───▶│  REPORT  │           ║
+║  │ TEST REQ │    │   DATA   │    │  INPUT   │    │  TESTS   │    │ RESULTS  │           ║
+║  └──────────┘    └──────────┘    └────┬─────┘    └────┬─────┘    └──────────┘           ║
+║                                       │               │                                  ║
+║                                       │               ▼                                  ║
+║                                       │         ┌──────────┐                             ║
+║                                       └────────▶│  LOG TO  │                             ║
+║                                                 │    DB    │                             ║
+║                                                 └──────────┘                             ║
+║                                                                                          ║
+║  → Each step depends on the previous one                                                 ║
+║  → No step can be skipped or repeated out of order                                       ║
+║  → Pipeline ALWAYS completes (success or failure)                                        ║
+║                                                                                          ║
+╚══════════════════════════════════════════════════════════════════════════════════════════╝
+                </pre>
+            </div>
+
+            <h3>DAG Properties</h3>
+            <div class="grid-3">
+                <div class="visual-item">
+                    <strong>🎯 Deterministic Order</strong>
+                    Nodes execute in dependency order<br><br>
+                    B waits for A to finish
+                </div>
+                <div class="visual-item">
+                    <strong>✅ Guaranteed Termination</strong>
+                    No cycles = always ends<br><br>
+                    No infinite loops!
+                </div>
+                <div class="visual-item">
+                    <strong>⚡ Parallelizable</strong>
+                    Independent branches run together<br><br>
+                    B and C can run simultaneously
+                </div>
+            </div>
+
+            <div class="dag-box">
+                <h4>🏗️ Why AI Pipelines Use DAGs</h4>
+                <table class="table">
+                    <tr>
+                        <th>Benefit</th>
+                        <th>Explanation</th>
+                        <th>Example</th>
+                    </tr>
+                    <tr>
+                        <td><strong>Order Guarantee</strong></td>
+                        <td>Dependencies respected automatically</td>
+                        <td>Embedding must complete before search</td>
+                    </tr>
+                    <tr>
+                        <td><strong>No Infinite Loops</strong></td>
+                        <td>Workflow always terminates</td>
+                        <td>Agent won't get stuck forever</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Clear Debugging</strong></td>
+                        <td>Know exactly what ran when</td>
+                        <td>Trace errors to specific node</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Parallel Execution</strong></td>
+                        <td>Independent paths run concurrently</td>
+                        <td>Query multiple APIs at once</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Checkpointing</strong></td>
+                        <td>Resume from any completed node</td>
+                        <td>Retry from last success</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <!-- 5. RAG as a DAG -->
+        <div class="section">
+            <h2>5️⃣ RAG IS a DAG (Connecting the Concepts)</h2>
+
+            <div class="mental-model">
+                <h4>🧠 The Key Insight: RAG Pipeline = DAG Execution</h4>
+                Every RAG pipeline is actually a DAG! The nodes are processing steps, and edges define the flow.
+            </div>
+
+            <div class="diagram-dark">
+                <pre>
+╔══════════════════════════════════════════════════════════════════════╗
+║                  RAG PIPELINE AS A DAG                                ║
+╠══════════════════════════════════════════════════════════════════════╣
+║                                                                       ║
+║     ┌──────────────┐                                                  ║
+║     │    START     │ (Entry Point)                                    ║
+║     └──────┬───────┘                                                  ║
+║            │                                                          ║
+║            ▼                                                          ║
+║     ┌──────────────┐                                                  ║
+║     │ Parse Query  │ ───────────────────────────────┐                 ║
+║     └──────┬───────┘                                │                 ║
+║            │                                        │                 ║
+║            ▼                                        ▼                 ║
+║     ┌──────────────┐                         ┌──────────────┐         ║
+║     │ Embed Query  │                         │ Check Cache  │         ║
+║     └──────┬───────┘                         └──────┬───────┘         ║
+║            │                                        │                 ║
+║            ▼                                        │                 ║
+║     ┌──────────────┐                                │                 ║
+║     │Vector Search │ ◄──────────────────────────────┘                 ║
+║     └──────┬───────┘       (merge point)                              ║
+║            │                                                          ║
+║            ▼                                                          ║
+║     ┌──────────────┐                                                  ║
+║     │    Rank      │ (by relevance score)                             ║
+║     └──────┬───────┘                                                  ║
+║            │                                                          ║
+║            ▼                                                          ║
+║     ┌──────────────┐                                                  ║
+║     │   Filter     │ (threshold: similarity > 0.75)                   ║
+║     └──────┬───────┘                                                  ║
+║            │                                                          ║
+║            ▼                                                          ║
+║     ┌──────────────┐                                                  ║
+║     │   Augment    │ (build prompt with context)                      ║
+║     └──────┬───────┘                                                  ║
+║            │                                                          ║
+║            ▼                                                          ║
+║     ┌──────────────┐                                                  ║
+║     │   Generate   │ (LLM call)                                       ║
+║     └──────┬───────┘                                                  ║
+║            │                                                          ║
+║            ▼                                                          ║
+║     ┌──────────────┐                                                  ║
+║     │     END      │ (Response returned)                              ║
+║     └──────────────┘                                                  ║
+║                                                                       ║
+║    • Each box = Node (processing step)                                ║
+║    • Each arrow = Edge (data flows one way)                           ║
+║    • No cycles = Guaranteed to finish                                 ║
+║                                                                       ║
+╚══════════════════════════════════════════════════════════════════════╝
+                </pre>
+            </div>
+
+            <div class="key-concept">
+                <strong>🔥 This is exactly what LangGraph does!</strong><br><br>
+                • <code>add_node("embed_query", embed_function)</code> — Add processing step<br>
+                • <code>add_edge("parse_query", "embed_query")</code> — Connect steps<br>
+                • <code>compile().invoke()</code> — Execute the DAG from START to END
+            </div>
+        </div>
+
+        <!-- 6. Advanced RAG Patterns -->
+        <div class="section">
+            <h2>6️⃣ Advanced RAG Patterns</h2>
+
+            <h3>Pattern 1: Naive RAG</h3>
+            <div class="diagram">
+                <pre>
+    Query → Embed → Search → Top-K → Augment → Generate
+    
+    Simple, but limited:
+    ❌ No query rewriting
+    ❌ No re-ranking
+    ❌ No source validation
+                </pre>
+            </div>
+
+            <h3>Pattern 2: Advanced RAG</h3>
+            <div class="diagram">
+                <pre>
+                    ┌─────────────────┐
+                    │  Query Rewrite  │ ← Improve search terms
+                    └────────┬────────┘
+                             │
+           ┌─────────────────┼─────────────────┐
+           ▼                 ▼                 ▼
+    ┌─────────────┐   ┌─────────────┐   ┌─────────────┐
+    │   Hybrid    │   │   Keyword   │   │   Vector    │
+    │   Search    │   │   Search    │   │   Search    │
+    └──────┬──────┘   └──────┬──────┘   └──────┬──────┘
+           └─────────────────┼─────────────────┘
+                             ▼
+                    ┌─────────────────┐
+                    │    Fusion +     │ ← Combine results
+                    │    Re-Rank      │
+                    └────────┬────────┘
+                             ▼
+                    ┌─────────────────┐
+                    │   Compress &    │ ← Fit token budget
+                    │     Filter      │
+                    └────────┬────────┘
+                             ▼
+                    ┌─────────────────┐
+                    │    Generate     │
+                    └─────────────────┘
+                </pre>
+            </div>
+
+            <h3>Pattern 3: Agentic RAG (Self-Reflective)</h3>
+            <div class="diagram-dark">
+                <pre>
+╔════════════════════════════════════════════════════════════════════╗
+║                     AGENTIC RAG PATTERN                             ║
+╠════════════════════════════════════════════════════════════════════╣
+║                                                                     ║
+║     Query                                                           ║
+║       │                                                             ║
+║       ▼                                                             ║
+║   ┌───────────────┐                                                 ║
+║   │  Plan Search  │ ← Agent decides: what to search for?            ║
+║   └───────┬───────┘                                                 ║
+║           │                                                         ║
+║           ▼                                                         ║
+║   ┌───────────────┐                                                 ║
+║   │   Retrieve    │                                                 ║
+║   └───────┬───────┘                                                 ║
+║           │                                                         ║
+║           ▼                                                         ║
+║   ┌───────────────┐     ╔═════════════════════╗                     ║
+║   │   Evaluate    │────▶║ Is context enough?  ║                     ║
+║   │   Results     │     ╚═════════════════════╝                     ║
+║   └───────┬───────┘             │                                   ║
+║           │                     │                                   ║
+║           │    ┌────────────────┴────────────────┐                  ║
+║           │    ▼ NO                              ▼ YES              ║
+║           │  ┌───────────────┐           ┌───────────────┐          ║
+║           │  │ Refine Query  │           │   Generate    │          ║
+║           │  └───────┬───────┘           │   Answer      │          ║
+║           │          │                   └───────┬───────┘          ║
+║           │          │                           │                  ║
+║           │          ▼                           │                  ║
+║           │    ┌───────────────┐                 │                  ║
+║           └───▶│   Retrieve    │ (loop back)     │                  ║
+║                │   Again       │                 │                  ║
+║                └───────────────┘                 │                  ║
+║                                                  │                  ║
+║                                                  ▼                  ║
+║                                          ┌───────────────┐          ║
+║                                          │ Verify Answer │          ║
+║                                          └───────┬───────┘          ║
+║                                                  │                  ║
+║                                                  ▼                  ║
+║                                               Response              ║
+║                                                                     ║
+╚════════════════════════════════════════════════════════════════════╝
+
+⚠️ NOTE: This has a CONDITIONAL loop — still a DAG because:
+   - The loop is bounded (max retries)
+   - There's guaranteed termination
+                </pre>
+            </div>
+
+            <h3>Pattern 4: GraphRAG (Knowledge Graph + RAG)</h3>
+            <div class="rag-box">
+                <h4>🕸️ GraphRAG: Adding Relationships</h4>
+                <p>Regular RAG: Find similar <strong>documents</strong></p>
+                <p>GraphRAG: Find similar documents <strong>AND their relationships</strong></p><br>
+                <strong>Example:</strong><br>
+                Query: "Who is the CEO of the company that acquired TechCorp?"<br><br>
+                • Vector search finds: "TechCorp was acquired by MegaCorp"<br>
+                • Graph traversal finds: "MegaCorp CEO is John Smith"<br>
+                • Combined context gives complete answer!
+            </div>
+        </div>
+
+        <!-- 7. RAG & DAG → Logic Mapping -->
+        <div class="section">
+            <h2>7️⃣ Concept → Programming Logic</h2>
+
+            <table class="table">
+                <tr>
+                    <th>Concept</th>
+                    <th>Programming Equivalent</th>
+                    <th>How It Works</th>
+                </tr>
+                <tr>
+                    <td><strong>DAG Node</strong></td>
+                    <td>Function / Processing step</td>
+                    <td>Receives input, returns output</td>
+                </tr>
+                <tr>
+                    <td><strong>DAG Edge</strong></td>
+                    <td>Data flow / Function call</td>
+                    <td>Output of A becomes input of B</td>
+                </tr>
+                <tr>
+                    <td><strong>Topological Sort</strong></td>
+                    <td>Execution order</td>
+                    <td>Determines which nodes run first</td>
+                </tr>
+                <tr>
+                    <td><strong>RAG Retrieval</strong></td>
+                    <td>Database query</td>
+                    <td>Search vector DB for similar items</td>
+                </tr>
+                <tr>
+                    <td><strong>RAG Augmentation</strong></td>
+                    <td>String concatenation</td>
+                    <td>Prompt = context + query</td>
+                </tr>
+                <tr>
+                    <td><strong>Similarity Score</strong></td>
+                    <td>Float between 0-1</td>
+                    <td>cosine_similarity(query_vec, doc_vec)</td>
+                </tr>
+                <tr>
+                    <td><strong>Threshold Filter</strong></td>
+                    <td>IF score >= threshold</td>
+                    <td>Keep only relevant documents</td>
+                </tr>
+            </table>
+
+            <div class="rag-box">
+                <h4>📚 RAG Pipeline Logic (Simple Meaning)</h4>
+
+                <h3 style="color: #0083b0; margin-top: 20px;">Stage 1 — Indexing (One-Time Setup)</h3>
+                <div class="explanation">
+                    • <strong>Split</strong> documents into small chunks.<br><br>
+                    • <strong>Convert</strong> each chunk into a vector embedding.<br><br>
+                    • <strong>Store</strong> chunks + vectors in a vector database.<br><br>
+                    <em style="color: #4776E6;"><strong>Purpose:</strong> Prepare knowledge so it can be searched fast
+                        later.</em>
+                </div>
+
+                <h3 style="color: #0083b0; margin-top: 20px;">Stage 2 — Query Time (Every User Request)</h3>
+                <div class="grid-3">
+                    <div class="visual-item">
+                        <strong>1️⃣ Embed Query</strong>
+                        Convert user question<br>into a vector
+                    </div>
+                    <div class="visual-item">
+                        <strong>2️⃣ Search</strong>
+                        Find similar chunks<br>in vector DB
+                    </div>
+                    <div class="visual-item">
+                        <strong>3️⃣ Filter</strong>
+                        Keep only highly<br>relevant results
+                    </div>
+                </div>
+                <div class="grid-2">
+                    <div class="visual-item">
+                        <strong>4️⃣ Augment</strong>
+                        Add context to prompt<br>using retrieved chunks
+                    </div>
+                    <div class="visual-item">
+                        <strong>5️⃣ Generate</strong>
+                        LLM creates answer<br>from that context
+                    </div>
+                </div>
+
+                <div class="key-concept" style="margin-top: 20px;">
+                    <strong>🎯 Meaning:</strong> Find relevant info → Give it to AI → AI answers correctly!
+                </div>
+            </div>
+
+            <div class="dag-box">
+                <h4>🔀 DAG Execution Logic (Simple Meaning)</h4>
+
+                <h3 style="color: #f2994a; margin-top: 20px;">What the DAG Shows</h3>
+                <div class="grid-3">
+                    <div class="visual-item">
+                        <strong>📦 Nodes</strong>
+                        Workflow is broken<br>into steps (units)
+                    </div>
+                    <div class="visual-item">
+                        <strong>➡️ Direction</strong>
+                        Steps follow fixed<br>direction, no loops
+                    </div>
+                    <div class="visual-item">
+                        <strong>⚡ Parallel</strong>
+                        Some steps can run<br>together, then merge
+                    </div>
+                </div>
+
+                <h3 style="color: #f2994a; margin-top: 20px;">How Execution Works</h3>
+                <div class="explanation">
+                    <strong>1.</strong> Arrange steps in <span class="highlight-blue">topological order</span> (correct
+                    sequence).<br><br>
+                    <strong>2.</strong> Wait for <span class="highlight-orange">dependencies</span> before running each
+                    step.<br><br>
+                    <strong>3.</strong> Execute node → <span class="highlight-green">store output</span> → move
+                    forward.<br><br>
+                    <strong>4.</strong> Finish when the <span class="highlight-blue">end node</span> is reached.
+                </div>
+
+                <div class="key-concept" style="margin-top: 20px;">
+                    <strong>🎯 Meaning:</strong> A structured, one-way workflow that runs step-by-step until completion.
+                </div>
+            </div>
+        </div>
+
+        <!-- 8. AI Application -->
+        <div class="section">
+            <h2>8️⃣ AI / GenAI Application</h2>
+
+            <div class="mental-model">
+                <h4>🧠 Real-World RAG Use Cases</h4>
+                <table class="table">
+                    <tr>
+                        <th>Use Case</th>
+                        <th>What Gets Retrieved</th>
+                        <th>Why It Works</th>
+                    </tr>
+                    <tr>
+                        <td>Customer Support Bot</td>
+                        <td>FAQ docs, ticket history</td>
+                        <td>Answers from your knowledge base</td>
+                    </tr>
+                    <tr>
+                        <td>Code Assistant</td>
+                        <td>Codebase files, docs</td>
+                        <td>Understands YOUR code patterns</td>
+                    </tr>
+                    <tr>
+                        <td>Legal Research</td>
+                        <td>Case law, contracts</td>
+                        <td>Cites actual legal documents</td>
+                    </tr>
+                    <tr>
+                        <td>Medical Q&A</td>
+                        <td>Research papers, guidelines</td>
+                        <td>Evidence-based answers</td>
+                    </tr>
+                    <tr>
+                        <td>Enterprise Search</td>
+                        <td>Internal docs, Slack, email</td>
+                        <td>Finds info across silos</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="diagram-dark">
+                <pre>
+╔══════════════════════════════════════════════════════════════════════╗
+║               LANGGRAPH RAG WORKFLOW (CONCEPTUAL)                     ║
+╠══════════════════════════════════════════════════════════════════════╣
+║                                                                       ║
+║   StateGraph Definition:                                              ║
+║   ─────────────────────                                               ║
+║                                                                       ║
+║   graph.add_node("retrieve", retrieve_documents)                      ║
+║   graph.add_node("grade_docs", grade_document_relevance)              ║
+║   graph.add_node("generate", generate_response)                       ║
+║   graph.add_node("check_hallucination", verify_grounded)              ║
+║                                                                       ║
+║   graph.add_edge(START, "retrieve")                                   ║
+║   graph.add_edge("retrieve", "grade_docs")                            ║
+║                                                                       ║
+║   graph.add_conditional_edges(                                        ║
+║       "grade_docs",                                                   ║
+║       decide_next,                                                    ║
+║       {                                                               ║
+║           "relevant": "generate",                                     ║
+║           "not_relevant": "retrieve"  # retry with new query          ║
+║       }                                                               ║
+║   )                                                                   ║
+║                                                                       ║
+║   graph.add_edge("generate", "check_hallucination")                   ║
+║                                                                       ║
+║   graph.add_conditional_edges(                                        ║
+║       "check_hallucination",                                          ║
+║       verify_answer,                                                  ║
+║       {                                                               ║
+║           "grounded": END,                                            ║
+║           "hallucination": "generate"  # retry generation             ║
+║       }                                                               ║
+║   )                                                                   ║
+║                                                                       ║
+║   # Compile and run                                                   ║
+║   app = graph.compile()                                               ║
+║   result = app.invoke({"question": "What is our policy?"})            ║
+║                                                                       ║
+╚══════════════════════════════════════════════════════════════════════╝
+                </pre>
+            </div>
+
+            <div class="key-concept">
+                <strong>🎯 The Production Insight:</strong><br><br>
+                Real-world RAG isn't just "retrieve and generate." It's a sophisticated DAG with:<br>
+                • Conditional routing (is context good enough?)<br>
+                • Retry loops with limits (bounded, so still a DAG)<br>
+                • Validation steps (hallucination checks)<br>
+                • Error handling paths (fallback to simpler responses)
+            </div>
+        </div>
+
+        <!-- 9. Testing / SDET Angle -->
+        <div class="section">
+            <h2>9️⃣ Testing / SDET Angle</h2>
+
+            <div class="testing-box">
+                <h4>🧪 Testing RAG Pipelines</h4>
+            </div>
+
+            <table class="table">
+                <tr>
+                    <th>Test Category</th>
+                    <th>What to Test</th>
+                    <th>How to Verify</th>
+                </tr>
+                <tr>
+                    <td><strong>Retrieval Quality</strong></td>
+                    <td>Are relevant docs being found?</td>
+                    <td>Precision@K, Recall@K metrics</td>
+                </tr>
+                <tr>
+                    <td><strong>Threshold Logic</strong></td>
+                    <td>Similarity = 0.74 → excluded, 0.76 → included</td>
+                    <td>Boundary value testing</td>
+                </tr>
+                <tr>
+                    <td><strong>Empty Results</strong></td>
+                    <td>What if no docs match threshold?</td>
+                    <td>Should gracefully fallback</td>
+                </tr>
+                <tr>
+                    <td><strong>Token Budget</strong></td>
+                    <td>Does context fit in prompt limit?</td>
+                    <td>Count tokens, verify truncation</td>
+                </tr>
+                <tr>
+                    <td><strong>Hallucination Check</strong></td>
+                    <td>Is answer grounded in context?</td>
+                    <td>Claims should trace to source docs</td>
+                </tr>
+                <tr>
+                    <td><strong>Latency</strong></td>
+                    <td>Retrieval + LLM within SLA?</td>
+                    <td>P95 latency monitoring</td>
+                </tr>
+            </table>
+
+            <div class="testing-box">
+                <h4>🧪 Testing DAG Workflows</h4>
+            </div>
+
+            <table class="table">
+                <tr>
+                    <th>Test Category</th>
+                    <th>What to Test</th>
+                    <th>Why It Matters</th>
+                </tr>
+                <tr>
+                    <td><strong>Reachability</strong></td>
+                    <td>Every node reachable from START</td>
+                    <td>No orphan/dead code nodes</td>
+                </tr>
+                <tr>
+                    <td><strong>Termination</strong></td>
+                    <td>All paths eventually reach END</td>
+                    <td>No infinite loops</td>
+                </tr>
+                <tr>
+                    <td><strong>Conditional Routes</strong></td>
+                    <td>Each branch condition tested</td>
+                    <td>All paths executed in tests</td>
+                </tr>
+                <tr>
+                    <td><strong>Retry Limits</strong></td>
+                    <td>Loops have bounded iterations</td>
+                    <td>Max retries enforced</td>
+                </tr>
+                <tr>
+                    <td><strong>State Consistency</strong></td>
+                    <td>State propagates correctly between nodes</td>
+                    <td>No data loss in transitions</td>
+                </tr>
+                <tr>
+                    <td><strong>Error Handling</strong></td>
+                    <td>Node failures trigger fallback paths</td>
+                    <td>Graceful degradation</td>
+                </tr>
+            </table>
+
+            <div class="logic-block">TEST SCENARIO EXAMPLES:
+
+                # RAG Tests
+                TEST "relevant document retrieval":
+                query = "What is our refund policy?"
+                docs = retriever.search(query)
+                ASSERT docs[0].content CONTAINS "refund"
+                ASSERT docs[0].score >= 0.75
+
+                TEST "threshold boundary":
+                # Doc with score exactly at boundary
+                ASSERT doc_with_score_0.749 NOT IN filtered_results
+                ASSERT doc_with_score_0.751 IN filtered_results
+
+                TEST "empty results handling":
+                query = "xyzzy gibberish nonsense"
+                docs = retriever.search(query)
+                IF len(docs) == 0:
+                ASSERT response == "I couldn't find relevant information."
+
+                # DAG Tests
+                TEST "all paths reach END":
+                FOR each possible input state:
+                result = dag.execute(input)
+                ASSERT dag.current_node == "END"
+
+                TEST "retry limit enforced":
+                # Force failures
+                mock_llm.always_fail = True
+                result = dag.execute(query)
+                ASSERT dag.retry_count <= 3 ASSERT dag.status=="fallback_response" </div>
+            </div>
+
+            <!-- 10. Common Mistakes -->
+            <div class="section">
+                <h2>🔟 Common Mistakes</h2>
+
+                <h3>RAG Mistakes</h3>
+                <div class="mistake-box">
+                    <strong>❌ Chunk size too large:</strong> Retrieves irrelevant content, wastes tokens. Use 300-500
+                    tokens
+                    per chunk.
+                </div>
+                <div class="mistake-box">
+                    <strong>❌ No overlap in chunks:</strong> Context breaks at chunk boundaries. Use 50-100 token
+                    overlap.
+                </div>
+                <div class="mistake-box">
+                    <strong>❌ Wrong similarity threshold:</strong> Too high = misses relevant docs. Too low = noise.
+                    Start at
+                    0.75, tune from there.
+                </div>
+                <div class="mistake-box">
+                    <strong>❌ Ignoring metadata:</strong> Store source, date, category. Filter by metadata before vector
+                    search!
+                </div>
+                <div class="mistake-box">
+                    <strong>❌ Not measuring relevance:</strong> Track if users find answers helpful. RAG quality
+                    degrades
+                    silently.
+                </div>
+
+                <h3>DAG Mistakes</h3>
+                <div class="mistake-box">
+                    <strong>❌ Creating accidental cycles:</strong> If retry logic loops indefinitely, you've broken the
+                    "acyclic" promise.
+                </div>
+                <div class="mistake-box">
+                    <strong>❌ Orphan nodes:</strong> Nodes that can never be reached from START are dead code. Remove
+                    them!
+                </div>
+                <div class="mistake-box">
+                    <strong>❌ No termination path:</strong> Every conditional branch must eventually reach END.
+                </div>
+                <div class="mistake-box">
+                    <strong>❌ State not persisting:</strong> Ensure state passes correctly between nodes. LangGraph
+                    handles
+                    this via TypedDict.
+                </div>
+                <div class="mistake-box">
+                    <strong>❌ Not handling node failures:</strong> What happens if a node throws an exception? Add error
+                    edges!
+                </div>
+            </div>
+
+            <!-- 11. Summary -->
+            <div class="section">
+                <h2>1️⃣1️⃣ One-Line Summary</h2>
+                <div class="summary-box">
+                    💡 RAG retrieves relevant context to ground LLM responses, while DAG ensures AI workflows execute in
+                    order and always terminate — together they form the backbone of production AI systems like LangGraph
+                    agents.
+                </div>
+
+                <div class="comparison-card">
+                    <h3 style="text-align: center; margin-bottom: 20px;">Quick Reference</h3>
+                    <div class="grid-2">
+                        <div>
+                            <strong style="color: #0083b0; font-size: 1.3em;">📚 RAG</strong><br><br>
+                            ✅ Solves: LLM doesn't know your data<br>
+                            ✅ How: Retrieve → Augment → Generate<br>
+                            ✅ Key math: Cosine similarity<br>
+                            ✅ Key concept: Semantic search<br>
+                            ✅ Tools: Vector DBs, embeddings
+                        </div>
+                        <div>
+                            <strong style="color: #f2994a; font-size: 1.3em;">🔀 DAG</strong><br><br>
+                            ✅ Solves: Workflow execution order<br>
+                            ✅ How: Directed + Acyclic + Graph<br>
+                            ✅ Key property: No cycles = terminates<br>
+                            ✅ Key concept: Topological sort<br>
+                            ✅ Tools: LangGraph, Airflow
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</body>
+
+</html>

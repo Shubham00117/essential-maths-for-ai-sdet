@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Information Theory Basics</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #141e30 0%, #243b55 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: #00d9ff;
+            margin-bottom: 40px;
+            font-size: 2.5em;
+            text-shadow: 0 0 20px rgba(0, 217, 255, 0.5);
+        }
+
+        .section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .section h2 {
+            color: white;
+            background: linear-gradient(135deg, #ff512f 0%, #dd2476 100%);
+            padding: 20px;
+            border-radius: 10px;
+            margin: -40px -40px 30px -40px;
+            text-align: center;
+            font-size: 1.8em;
+        }
+
+        .section h3 {
+            color: #dd2476;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-size: 1.4em;
+            border-bottom: 3px solid #dd2476;
+            padding-bottom: 10px;
+        }
+
+        .explanation {
+            background: #fce4ec;
+            border-left: 5px solid #e91e63;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-size: 1.1em;
+            line-height: 1.8;
+        }
+
+        .why-matters {
+            background: linear-gradient(135deg, #ff512f15, #dd247615);
+            border-left: 5px solid #ff512f;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-size: 1.1em;
+            line-height: 1.8;
+        }
+
+        .key-concept {
+            background: #e8f5e9;
+            border-left: 5px solid #4caf50;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-size: 1.1em;
+            line-height: 1.8;
+        }
+
+        .formula-box {
+            background: linear-gradient(135deg, #ff512f 0%, #dd2476 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 12px;
+            margin: 25px 0;
+            font-size: 1.2em;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .example-box {
+            background: #fce4ec;
+            border: 3px solid #e91e63;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 25px 0;
+        }
+
+        .example-box h4 {
+            color: #c2185b;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        .mental-model {
+            background: linear-gradient(135deg, #fff3e0, #ffe0b2);
+            border: 3px solid #ff9800;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 25px 0;
+        }
+
+        .mental-model h4 {
+            color: #e65100;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        .logic-block {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 20px 0;
+            font-family: 'Consolas', monospace;
+            font-size: 1em;
+            line-height: 1.8;
+            white-space: pre-wrap;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .visual-item {
+            background: #f5f5f5;
+            padding: 20px;
+            border-radius: 10px;
+            border: 2px solid #dd2476;
+            text-align: center;
+        }
+
+        .visual-item strong {
+            color: #dd2476;
+            display: block;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        .testing-box {
+            background: linear-gradient(135deg, #00b89415, #00cec915);
+            border: 3px solid #00b894;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 25px 0;
+        }
+
+        .testing-box h4 {
+            color: #00b894;
+            margin-bottom: 15px;
+        }
+
+        .mistake-box {
+            background: linear-gradient(135deg, #e1726315, #fd797915);
+            border-left: 5px solid #e17263;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .summary-box {
+            background: linear-gradient(135deg, #ff512f 0%, #dd2476 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 12px;
+            margin: 25px 0;
+            font-size: 1.2em;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        .table th {
+            background: #dd2476;
+            color: white;
+            padding: 15px;
+            text-align: left;
+        }
+
+        .table td {
+            padding: 12px 15px;
+            border-bottom: 2px solid #ddd;
+        }
+
+        .diagram {
+            background: white;
+            border: 2px solid #dd2476;
+            border-radius: 12px;
+            padding: 30px;
+            margin: 20px 0;
+            text-align: center;
+            font-family: monospace;
+        }
+
+        @media (max-width: 768px) {
+
+            .grid-2,
+            .grid-3 {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>📊 Module 05: Information Theory Basics</h1>
+
+        <div class="section">
+            <h2>1️⃣ Topic: Information Theory</h2>
+            <div class="explanation">
+                <strong>Information Theory</strong> = The mathematical study of quantifying, storing, and communicating
+                information.<br><br>
+                In AI/LLM context: It explains how models learn, predict, and how we measure their performance.
+            </div>
+            <div class="grid-3">
+                <div class="visual-item"><strong>📏 Entropy</strong>Measures uncertainty<br>"How unpredictable?"</div>
+                <div class="visual-item"><strong>⚡ Surprisal</strong>Info from one event<br>"How surprising?"</div>
+                <div class="visual-item"><strong>📉 Cross-Entropy</strong>Model vs reality gap<br>"How wrong?"</div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>2️⃣ Why This Matters (AI / Agent Context)</h2>
+            <div class="why-matters">
+                <strong>🎯 Where Information Theory appears in AI:</strong><br><br>
+                • <strong>LLM Training:</strong> Cross-entropy loss is THE loss function for language models<br><br>
+                • <strong>Perplexity:</strong> Lower perplexity = model is more certain about predictions<br><br>
+                • <strong>Prompt Engineering:</strong> Information-dense prompts → better results with fewer
+                tokens<br><br>
+                • <strong>Token Efficiency:</strong> Repetitive text wastes tokens (low information content)<br><br>
+                • <strong>Model Comparison:</strong> Perplexity lets you compare model performance
+            </div>
+            <div class="key-concept">
+                <strong>💡 Key Insight:</strong> When people say "this LLM has low perplexity," they mean it's good at
+                predicting what comes next — fundamental to how language models work!
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>3️⃣ Core Concept (Simple Language)</h2>
+
+            <h3>Entropy: Measuring Uncertainty</h3>
+            <div class="explanation">
+                <strong>Entropy</strong> = Average "surprise" (or information) from all possible outcomes<br><br>
+                High entropy = High uncertainty = Hard to predict<br>
+                Low entropy = Low uncertainty = Easy to predict
+            </div>
+            <div class="formula-box">
+                H(X) = -Σ p(x) × log₂(p(x))<br><br>
+                Sum of: (probability × log of probability) for each outcome
+            </div>
+
+            <div class="example-box">
+                <h4>🪙 Coin Flip Examples</h4>
+                <table class="table">
+                    <tr>
+                        <th>Coin Type</th>
+                        <th>Probabilities</th>
+                        <th>Entropy</th>
+                        <th>Interpretation</th>
+                    </tr>
+                    <tr>
+                        <td>Fair coin</td>
+                        <td>P(H)=0.5, P(T)=0.5</td>
+                        <td>1 bit</td>
+                        <td>Max uncertainty</td>
+                    </tr>
+                    <tr>
+                        <td>Biased coin</td>
+                        <td>P(H)=0.9, P(T)=0.1</td>
+                        <td>0.47 bits</td>
+                        <td>Less uncertain</td>
+                    </tr>
+                    <tr>
+                        <td>Two-headed</td>
+                        <td>P(H)=1.0, P(T)=0</td>
+                        <td>0 bits</td>
+                        <td>No uncertainty at all</td>
+                    </tr>
+                </table>
+            </div>
+
+            <h3>Surprisal: Information from One Event</h3>
+            <div class="explanation">
+                <strong>Surprisal</strong> (also called "self-information") = How much information a single event
+                carries<br><br>
+                Rare events → High surprisal (very informative!)<br>
+                Common events → Low surprisal (not very informative)
+            </div>
+            <div class="formula-box">
+                I(x) = -log₂(p(x)) = log₂(1/p(x))<br><br>
+                Surprisal = log of (1 / probability)
+            </div>
+
+            <div class="mental-model">
+                <h4>🧠 Intuition: Rare = Informative</h4>
+                <strong>Tomorrow:</strong> "The sun will rise" (P ≈ 1.0) → 0 bits (you already knew that!)<br><br>
+                <strong>Tomorrow:</strong> "There will be a solar eclipse" (P ≈ 0.001) → 10 bits (very surprising!)
+            </div>
+
+            <h3>Cross-Entropy: The LLM Loss Function</h3>
+            <div class="explanation">
+                <strong>Cross-Entropy</strong> = Measures how well a model's predictions match reality<br><br>
+                Model predicts probabilities → Compare to actual outcomes<br>
+                Lower cross-entropy = Better model
+            </div>
+            <div class="formula-box">
+                H(p, q) = -Σ p(x) × log₂(q(x))<br><br>
+                Where p = true distribution, q = model's predictions
+            </div>
+
+            <div class="diagram">
+                <pre>Cross-Entropy Example:
+
+True next word: "cat" (100% in true distribution p)
+
+Model predictions (q):
+    P("cat") = 0.7    ← Model's guess for correct answer
+    P("dog") = 0.2
+    P("bird") = 0.1
+
+Cross-Entropy = -log₂(0.7) = 0.51 bits
+
+If model had said P("cat") = 0.99:
+    Cross-Entropy = -log₂(0.99) = 0.014 bits ← Much better!
+
+If model had said P("cat") = 0.01:
+    Cross-Entropy = -log₂(0.01) = 6.64 bits ← Very bad!</pre>
+            </div>
+
+            <h3>Perplexity: LLM Evaluation Metric</h3>
+            <div class="explanation">
+                <strong>Perplexity</strong> = 2^(cross-entropy)<br><br>
+                Intuition: "How many equally likely choices is the model considering?"
+            </div>
+            <div class="formula-box">
+                Perplexity = 2^(H(p,q))<br><br>
+                Lower = Better (model is more confident and correct)
+            </div>
+
+            <div class="example-box">
+                <h4>📊 Perplexity Examples</h4>
+                <table class="table">
+                    <tr>
+                        <th>Perplexity</th>
+                        <th>Cross-Entropy</th>
+                        <th>Meaning</th>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>0 bits</td>
+                        <td>Perfect prediction (impossible in practice)</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>1 bit</td>
+                        <td>Like choosing between 2 equally likely words</td>
+                    </tr>
+                    <tr>
+                        <td>10</td>
+                        <td>3.32 bits</td>
+                        <td>Like choosing between 10 equally likely words</td>
+                    </tr>
+                    <tr>
+                        <td>100</td>
+                        <td>6.64 bits</td>
+                        <td>Very uncertain (bad model or hard task)</td>
+                    </tr>
+                </table>
+                <br>
+                <strong>GPT models typically have perplexity 10-30 on test sets</strong>
+            </div>
+
+            <h3>Mutual Information: Measuring Shared Information</h3>
+            <div class="explanation">
+                <strong>Mutual Information (MI)</strong> = How much knowing one variable tells you about another<br><br>
+                High MI = Variables are strongly related (knowing X helps predict Y)<br>
+                Low MI = Variables are independent (knowing X tells nothing about Y)
+            </div>
+            <div class="formula-box">
+                I(X; Y) = H(X) + H(Y) - H(X, Y)<br><br>
+                Or equivalently: I(X; Y) = H(X) - H(X|Y)<br>
+                "Uncertainty about X minus uncertainty about X given Y"
+            </div>
+
+            <div class="example-box">
+                <h4>🔗 Mutual Information Examples</h4>
+                <table class="table">
+                    <tr>
+                        <th>Variables X, Y</th>
+                        <th>Mutual Information</th>
+                        <th>Interpretation</th>
+                    </tr>
+                    <tr>
+                        <td>Weather, Umbrella usage</td>
+                        <td>High MI</td>
+                        <td>Knowing weather strongly predicts umbrella use</td>
+                    </tr>
+                    <tr>
+                        <td>Height, Favorite color</td>
+                        <td>~0 (Low MI)</td>
+                        <td>Independent — no relationship</td>
+                    </tr>
+                    <tr>
+                        <td>Error rate, Code complexity</td>
+                        <td>Medium-High MI</td>
+                        <td>More complex code tends to have more bugs</td>
+                    </tr>
+                    <tr>
+                        <td>Test input, Test output</td>
+                        <td>High MI (ideally)</td>
+                        <td>Specific inputs should map to specific outputs</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="mental-model">
+                <h4>🧠 MI vs Correlation</h4>
+                <strong>Correlation:</strong> Only captures LINEAR relationships<br><br>
+                <strong>Mutual Information:</strong> Captures ANY type of relationship (linear, nonlinear,
+                complex)<br><br>
+                <em>This is why MI is preferred in ML feature selection — it finds hidden dependencies!</em>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>4️⃣ Information Theory → AI Logic</h2>
+            <table class="table">
+                <tr>
+                    <th>Concept</th>
+                    <th>AI/LLM Application</th>
+                    <th>What It Tells You</th>
+                </tr>
+                <tr>
+                    <td>Entropy</td>
+                    <td>Token probability distribution</td>
+                    <td>How uncertain is the model?</td>
+                </tr>
+                <tr>
+                    <td>Surprisal</td>
+                    <td>-log(P(token))</td>
+                    <td>How unexpected was this token?</td>
+                </tr>
+                <tr>
+                    <td>Cross-Entropy</td>
+                    <td>Training loss function</td>
+                    <td>How wrong are model predictions?</td>
+                </tr>
+                <tr>
+                    <td>Perplexity</td>
+                    <td>Model evaluation</td>
+                    <td>How good is this model overall?</td>
+                </tr>
+                <tr>
+                    <td>Low Entropy Output</td>
+                    <td>High temperature sampling</td>
+                    <td>Model is confident about choice</td>
+                </tr>
+                <tr>
+                    <td>High Entropy Output</td>
+                    <td>Low temperature sampling</td>
+                    <td>Model is uncertain (many options)</td>
+                </tr>
+                <tr>
+                    <td>Mutual Information</td>
+                    <td>Feature selection, input-output analysis</td>
+                    <td>Which inputs matter most for predictions?</td>
+                </tr>
+                <tr>
+                    <td>High MI Features</td>
+                    <td>Important model inputs</td>
+                    <td>These features strongly influence output</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="section">
+            <h2>5️⃣ Logical Flow (How to Think)</h2>
+
+            <h3>1️⃣ Why LLMs Use Cross-Entropy Loss</h3>
+            <div class="explanation">
+                <strong>Goal:</strong> Train the model to predict the correct next token.
+            </div>
+            <div class="key-concept">
+                <strong>How training works:</strong><br>
+                • Model guesses the next word and assigns probabilities.<br>
+                • Loss measures how wrong the guess is.<br>
+                • If the correct word has low probability → high loss.<br>
+                • Weights are updated repeatedly → model learns patterns.
+            </div>
+            <div class="why-matters">
+                <strong>Why cross-entropy is used:</strong><br>
+                • Strong penalty for confident wrong answers.<br>
+                • Rewards higher probability on the correct token.<br>
+                • Works with gradient descent optimization.<br><br>
+                👉 <strong>Result:</strong> Model becomes better at accurate next-word prediction.
+            </div>
+
+            <h3>2️⃣ Prompt Information Density</h3>
+            <div class="explanation">
+                <strong>Concept:</strong> Some prompts contain more useful information per token.
+            </div>
+            <div class="grid-2">
+                <div class="visual-item">
+                    <strong>❌ Low Density Prompt</strong>
+                    Many filler words.<br>
+                    Higher token cost, less clarity.
+                </div>
+                <div class="visual-item">
+                    <strong>✅ High Density Prompt</strong>
+                    Short, direct, clear instruction.<br>
+                    Lower cost, better response quality.
+                </div>
+            </div>
+            <div class="key-concept">
+                <strong>Principle:</strong> More information per token → better output per dollar.<br><br>
+                👉 <strong>Result:</strong> Write clear and concise prompts for efficiency.
+            </div>
+
+            <h3>3️⃣ Entropy & Surprisal</h3>
+            <div class="explanation">
+                <strong>Goal:</strong> Measure uncertainty and information content.
+            </div>
+            <div class="grid-2">
+                <div class="visual-item">
+                    <strong>📏 Entropy</strong>
+                    Average uncertainty in probabilities.<br>
+                    Higher entropy → more randomness.<br>
+                    Lower entropy → more certainty.
+                </div>
+                <div class="visual-item">
+                    <strong>⚡ Surprisal</strong>
+                    Measures how unexpected an event is.<br>
+                    Rare event → high surprisal → more information.<br>
+                    Common event → low surprisal → less information.
+                </div>
+            </div>
+            <div class="key-concept">
+                👉 <strong>Result:</strong> Information theory explains how LLMs learn and predict.
+            </div>
+
+            <h3>4️⃣ Mutual Information for Feature Analysis</h3>
+            <div class="explanation">
+                <strong>Goal:</strong> Find which inputs matter most for the output.
+            </div>
+            <div class="key-concept">
+                <strong>How it helps:</strong><br>
+                • High MI → strong influence on result.<br>
+                • Low MI → weak influence.
+            </div>
+            <div class="testing-box">
+                <h4>🧪 Practical Insight (SDET/Testing)</h4>
+                • Focus testing on high-impact parameters.<br>
+                • Reduce effort on low-impact inputs.<br>
+                • Improves test coverage and efficiency.<br><br>
+                👉 <strong>Result:</strong> Smarter testing and debugging decisions.
+            </div>
+
+            <div class="summary-box">
+                ✅ These concepts explain how LLMs become:<br><br>
+                <strong>Accurate</strong> → cross-entropy learning &nbsp;|&nbsp;
+                <strong>Efficient</strong> → high-density prompts<br>
+                <strong>Mathematically Grounded</strong> → entropy & surprisal &nbsp;|&nbsp;
+                <strong>Practical for Testing</strong> → mutual information analysis
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>6️⃣ AI / GenAI Application</h2>
+
+            <div class="diagram">
+                <pre>How LLMs Generate Text (Simplified):
+
+Input: "The weather today is"
+
+Model Output (probability distribution):
+    "sunny"    → 0.35
+    "cloudy"   → 0.25
+    "rainy"    → 0.20
+    "nice"     → 0.10
+    "terrible" → 0.05
+    ...others  → 0.05
+
+Entropy of this distribution ≈ 2.1 bits
+(Model is somewhat uncertain — multiple reasonable choices)
+
+If distribution was:
+    "sunny" → 0.95, all others → 0.05
+Then entropy ≈ 0.3 bits
+(Model is very confident)</pre>
+            </div>
+
+            <div class="mental-model">
+                <h4>🧠 Temperature & Entropy Connection</h4>
+                <table class="table">
+                    <tr>
+                        <th>Temperature</th>
+                        <th>Effect on Distribution</th>
+                        <th>Entropy</th>
+                        <th>Output Style</th>
+                    </tr>
+                    <tr>
+                        <td>Low (0.1)</td>
+                        <td>Sharpens probabilities</td>
+                        <td>Lower</td>
+                        <td>Predictable, repetitive</td>
+                    </tr>
+                    <tr>
+                        <td>Medium (0.7)</td>
+                        <td>Balanced</td>
+                        <td>Medium</td>
+                        <td>Natural, varied</td>
+                    </tr>
+                    <tr>
+                        <td>High (1.5)</td>
+                        <td>Flattens probabilities</td>
+                        <td>Higher</td>
+                        <td>Creative, random</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="key-concept">
+                <strong>🎯 The Core Insight:</strong><br><br>
+                Cross-entropy is how LLMs learn: minimize the "surprise" when seeing true tokens.<br>
+                Perplexity measures how "surprised" the model is on average.<br>
+                Lower perplexity = model learned the language patterns better!
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>7️⃣ Testing / SDET Angle</h2>
+            <div class="testing-box">
+                <h4>🧪 Information Theory Tests</h4>
+            </div>
+            <table class="table">
+                <tr>
+                    <th>Test Type</th>
+                    <th>What to Verify</th>
+                </tr>
+                <tr>
+                    <td>Entropy Bounds</td>
+                    <td>Result is never negative; max is log₂(n)</td>
+                </tr>
+                <tr>
+                    <td>Certainty Check</td>
+                    <td>P=[1,0,0] → Entropy = 0</td>
+                </tr>
+                <tr>
+                    <td>Max Uncertainty</td>
+                    <td>P=[0.5,0.5] → Entropy = 1 bit</td>
+                </tr>
+                <tr>
+                    <td>Perplexity Direction</td>
+                    <td>Lower cross-entropy → lower perplexity</td>
+                </tr>
+                <tr>
+                    <td>Edge Cases</td>
+                    <td>Handle P=0 (causes log(0) issues)</td>
+                </tr>
+                <tr>
+                    <td>Prompt Density</td>
+                    <td>Shorter dense prompt ≥ long sparse prompt in results</td>
+                </tr>
+                <tr>
+                    <td>Mutual Information Bounds</td>
+                    <td>0 ≤ MI(X;Y) ≤ min(H(X), H(Y))</td>
+                </tr>
+                <tr>
+                    <td>MI Symmetry</td>
+                    <td>MI(X;Y) = MI(Y;X) always</td>
+                </tr>
+                <tr>
+                    <td>Independence Test</td>
+                    <td>If X,Y independent → MI(X;Y) ≈ 0</td>
+                </tr>
+                <tr>
+                    <td>Feature Ranking</td>
+                    <td>Higher MI features → higher test priority</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="section">
+            <h2>8️⃣ Common Mistakes</h2>
+            <div class="mistake-box"><strong>❌ Confusing entropy with randomness:</strong> High entropy means
+                uncertainty, not necessarily randomness!</div>
+            <div class="mistake-box"><strong>❌ Ignoring log base:</strong> log₂ gives bits, logₑ (ln) gives nats — be
+                consistent!</div>
+            <div class="mistake-box"><strong>❌ Comparing perplexity across models:</strong> Only valid on same test set!
+            </div>
+            <div class="mistake-box"><strong>❌ Verbose prompts:</strong> More words ≠ more information. Be dense!</div>
+            <div class="mistake-box"><strong>❌ log(0) errors:</strong> Always add small epsilon to avoid log(0) =
+                -infinity</div>
+            <div class="mistake-box"><strong>❌ Confusing MI with correlation:</strong> MI captures nonlinear
+                relationships that correlation misses!</div>
+            <div class="mistake-box"><strong>❌ Ignoring MI for test design:</strong> Low MI features waste test cycles
+                when varied extensively!</div>
+        </div>
+
+        <div class="section">
+            <h2>9️⃣ One-Line Summary</h2>
+            <div class="summary-box">
+                💡 Information theory quantifies uncertainty (entropy) and prediction quality (cross-entropy) — forming
+                the mathematical foundation of how LLMs learn and how we evaluate them.
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

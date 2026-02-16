@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LLM Training Fundamentals - How LLMs Learn to Give Perfect Responses</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #0d0d0d 0%, #1a1a2e 50%, #16213e 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: #ff6b6b;
+            margin-bottom: 40px;
+            font-size: 2.5em;
+            text-shadow: 0 0 20px rgba(255, 107, 107, 0.5);
+        }
+
+        .section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .section h2 {
+            color: white;
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+            padding: 20px;
+            border-radius: 10px;
+            margin: -40px -40px 30px -40px;
+            text-align: center;
+            font-size: 1.8em;
+        }
+
+        .section h3 {
+            color: #ee5a24;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-size: 1.4em;
+            border-bottom: 3px solid #ee5a24;
+            padding-bottom: 10px;
+        }
+
+        .explanation {
+            background: #fff3e0;
+            border-left: 5px solid #ff9800;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-size: 1.1em;
+            line-height: 1.8;
+        }
+
+        .why-matters {
+            background: linear-gradient(135deg, #ff6b6b15, #ee5a2415);
+            border-left: 5px solid #ff6b6b;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-size: 1.1em;
+            line-height: 1.8;
+        }
+
+        .key-concept {
+            background: #e8f5e9;
+            border-left: 5px solid #4caf50;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-size: 1.1em;
+            line-height: 1.8;
+        }
+
+        .formula-box {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 12px;
+            margin: 25px 0;
+            font-size: 1.2em;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .example-box {
+            background: #ffebee;
+            border: 3px solid #f44336;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 25px 0;
+        }
+
+        .example-box h4 {
+            color: #c62828;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        .mental-model {
+            background: linear-gradient(135deg, #fff3e0, #ffe0b2);
+            border: 3px solid #ff9800;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 25px 0;
+        }
+
+        .mental-model h4 {
+            color: #e65100;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        .logic-block {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 20px 0;
+            font-family: 'Consolas', monospace;
+            font-size: 1em;
+            line-height: 1.8;
+            white-space: pre-wrap;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .visual-item {
+            background: #f5f5f5;
+            padding: 20px;
+            border-radius: 10px;
+            border: 2px solid #ff6b6b;
+            text-align: center;
+        }
+
+        .visual-item strong {
+            color: #ff6b6b;
+            display: block;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        .testing-box {
+            background: linear-gradient(135deg, #00b89415, #00cec915);
+            border: 3px solid #00b894;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 25px 0;
+        }
+
+        .testing-box h4 {
+            color: #00b894;
+            margin-bottom: 15px;
+        }
+
+        .mistake-box {
+            background: linear-gradient(135deg, #e1726315, #fd797915);
+            border-left: 5px solid #e17263;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .summary-box {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 12px;
+            margin: 25px 0;
+            font-size: 1.2em;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        .table th {
+            background: #ff6b6b;
+            color: white;
+            padding: 15px;
+            text-align: left;
+        }
+
+        .table td {
+            padding: 12px 15px;
+            border-bottom: 2px solid #ddd;
+        }
+
+        .diagram {
+            background: white;
+            border: 2px solid #ff6b6b;
+            border-radius: 12px;
+            padding: 30px;
+            margin: 20px 0;
+            text-align: center;
+            font-family: monospace;
+            font-size: 1.1em;
+            line-height: 1.4;
+        }
+
+        .diagram-dark {
+            background: #1a1a2e;
+            border: 2px solid #ff6b6b;
+            border-radius: 12px;
+            padding: 30px;
+            margin: 20px 0;
+            text-align: center;
+            font-family: monospace;
+            font-size: 1em;
+            line-height: 1.5;
+            color: #ff6b6b;
+        }
+
+        .idea-box {
+            background: linear-gradient(135deg, #667eea15, #764ba215);
+            border: 3px solid #667eea;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 25px 0;
+        }
+
+        .idea-box h4 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        .phase-box {
+            background: linear-gradient(135deg, #11998e15, #38ef7d15);
+            border: 3px solid #11998e;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 25px 0;
+        }
+
+        .phase-box h4 {
+            color: #11998e;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        @media (max-width: 768px) {
+
+            .grid-2,
+            .grid-3 {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>🧠 Module 07: LLM Training Fundamentals</h1>
+
+        <!-- 1. Topic Name -->
+        <div class="section">
+            <h2>1️⃣ How LLMs Learn: The Training Journey</h2>
+            <div class="explanation">
+                <strong>LLM Training</strong> = Teaching a neural network to predict text by showing it billions of
+                examples.<br><br>
+                <em>Think of it like teaching a child to speak: The more quality conversations they hear, the better
+                    they communicate!</em>
+            </div>
+            <div class="grid-3">
+                <div class="visual-item"><strong>📚 Pre-training</strong>Learn language patterns<br><br>From
+                    internet-scale data</div>
+                <div class="visual-item"><strong>🎯 Fine-tuning</strong>Learn specific tasks<br><br>Domain-specific data
+                </div>
+                <div class="visual-item"><strong>👨‍🏫 Alignment</strong>Learn human preferences<br><br>RLHF/DPO
+                    training</div>
+            </div>
+        </div>
+
+        <!-- 2. The Training Pipeline -->
+        <div class="section">
+            <h2>2️⃣ The Complete Training Pipeline</h2>
+
+            <div class="diagram-dark">
+                <pre>
+╔═══════════════════════════════════════════════════════════════════════════╗
+║                      THE LLM TRAINING PIPELINE                            ║
+╠═══════════════════════════════════════════════════════════════════════════╣
+║                                                                           ║
+║   PHASE 1: PRE-TRAINING (Base Model Creation)                             ║
+║   ─────────────────────────────────────────────                           ║
+║   Internet Data → Clean → Tokenize → Train on "Predict Next Token"        ║
+║                                                                           ║
+║   Result: Model knows language, facts, patterns                           ║
+║   BUT: Can't follow instructions well, may be toxic                       ║
+║                                                                           ║
+║   PHASE 2: SUPERVISED FINE-TUNING (SFT)                                   ║
+║   ─────────────────────────────────────                                   ║
+║   Curated Q&A Pairs → Train model to respond helpfully                    ║
+║                                                                           ║
+║   Result: Model follows instructions, gives structured answers            ║
+║   BUT: May not match human preferences perfectly                          ║
+║                                                                           ║
+║   PHASE 3: ALIGNMENT (RLHF / DPO)                                         ║
+║   ─────────────────────────────                                           ║
+║   Human Feedback → Train to prefer good responses over bad ones           ║
+║                                                                           ║
+║   Result: Model is helpful, harmless, and honest                          ║
+║   This is what makes ChatGPT "feel" intelligent!                          ║
+║                                                                           ║
+╚═══════════════════════════════════════════════════════════════════════════╝
+                </pre>
+            </div>
+
+            <div class="key-concept">
+                <strong>💡 The Secret:</strong> Pre-training gives knowledge, SFT teaches format, Alignment teaches
+                values. All three are essential for a "perfect" response!
+            </div>
+        </div>
+
+        <!-- 3. Pre-training Deep Dive -->
+        <div class="section">
+            <h2>3️⃣ Phase 1: Pre-training (Building the Brain)</h2>
+
+            <h3>How Next-Token Prediction Works</h3>
+            <div class="explanation">
+                The model sees: <strong>"The cat sat on the ___"</strong><br><br>
+                It learns to predict: <strong>"mat"</strong> (or "floor", "couch", etc.)<br><br>
+                After billions of examples, it learns language patterns, facts, reasoning!
+            </div>
+
+            <div class="formula-box">
+                Loss = -log(P(correct_token | previous_tokens))<br><br>
+                Goal: Maximize probability of correct next token = Minimize cross-entropy loss
+            </div>
+
+            <h3>Pre-training Data Quality Matters</h3>
+            <div class="phase-box">
+                <h4>📊 Data Quality → Model Quality</h4>
+                <table class="table">
+                    <tr>
+                        <th>Data Characteristic</th>
+                        <th>Impact on Model</th>
+                        <th>Training Idea</th>
+                    </tr>
+                    <tr>
+                        <td><strong>Diverse domains</strong></td>
+                        <td>Better generalization</td>
+                        <td>Include code, science, literature, conversation</td>
+                    </tr>
+                    <tr>
+                        <td><strong>High quality writing</strong></td>
+                        <td>Better output quality</td>
+                        <td>Prioritize books, papers over social media</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Factually accurate</strong></td>
+                        <td>Less hallucination</td>
+                        <td>Verify facts in training data</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Recent data</strong></td>
+                        <td>Up-to-date knowledge</td>
+                        <td>Include recent articles, papers</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Safety filtered</strong></td>
+                        <td>Safer outputs</td>
+                        <td>Remove toxic, harmful content</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="idea-box">
+                <h4>💡 Training Idea #1: Data Curation</h4>
+                <strong>Garbage In = Garbage Out</strong><br><br>
+                • Spend 70% of effort on data quality, 30% on model architecture<br>
+                • Create domain-specific datasets for specialized models<br>
+                • Remove duplicates, fix encoding issues, validate formats<br>
+                • Weight high-quality sources higher in training
+            </div>
+        </div>
+
+        <!-- 4. Supervised Fine-Tuning -->
+        <div class="section">
+            <h2>4️⃣ Phase 2: Supervised Fine-Tuning (SFT)</h2>
+
+            <h3>Teaching the Model "How to Respond"</h3>
+            <div class="explanation">
+                Pre-trained model knows language but outputs messy text.<br><br>
+                SFT teaches: <strong>When asked X, respond in format Y</strong>
+            </div>
+
+            <div class="diagram">
+                <pre>
+    SFT Training Example:
+    
+    INPUT:  "Explain quantum computing in simple terms"
+    OUTPUT: "Quantum computing uses quantum bits (qubits) instead of 
+             regular bits. While regular bits are either 0 or 1, 
+             qubits can be both at the same time (superposition). 
+             This allows quantum computers to..."
+    
+    The model learns:
+    ✅ Start with a clear explanation
+    ✅ Use simple language when asked
+    ✅ Structure response logically
+    ✅ Stay on topic
+                </pre>
+            </div>
+
+            <h3>SFT Data Format: Instruction-Response Pairs</h3>
+            <div class="logic-block">
+                TYPICAL SFT DATASET FORMAT:
+
+                {
+                "instruction": "Write a Python function to reverse a string",
+                "input": "",
+                "output": "def reverse_string(s):\n return s[::-1]"
+                }
+
+                {
+                "instruction": "Explain the concept",
+                "input": "Machine learning",
+                "output": "Machine learning is a subset of AI where..."
+                }
+
+                KEY INSIGHT: Quality of instruction-response pairs
+                directly determines response quality!</div>
+
+            <div class="idea-box">
+                <h4>💡 Training Idea #2: High-Quality SFT Data</h4>
+                <strong>Create Perfect Examples for Your Use Case</strong><br><br>
+                • Write 1000+ perfect Q&A pairs for your domain<br>
+                • Include edge cases and error handling examples<br>
+                • Show the exact response format you want<br>
+                • Add "chain of thought" examples for reasoning tasks<br>
+                • Include multi-turn conversation examples
+            </div>
+        </div>
+
+        <!-- 5. Alignment Training -->
+        <div class="section">
+            <h2>5️⃣ Phase 3: Alignment (RLHF & DPO)</h2>
+
+            <h3>Teaching Human Preferences</h3>
+            <div class="explanation">
+                SFT model follows instructions but might prefer verbose, incorrect, or unsafe responses.<br><br>
+                <strong>Alignment teaches:</strong> "This response is BETTER than that response"
+            </div>
+
+            <div class="grid-2">
+                <div class="visual-item">
+                    <strong>🔄 RLHF</strong>
+                    Reinforcement Learning from Human Feedback<br><br>
+                    Train reward model → Use RL to optimize policy
+                </div>
+                <div class="visual-item">
+                    <strong>⚡ DPO</strong>
+                    Direct Preference Optimization<br><br>
+                    Skip reward model → Directly optimize on preferences
+                </div>
+            </div>
+
+            <h3>RLHF: The Classic Approach</h3>
+            <div class="diagram-dark">
+                <pre>
+╔═════════════════════════════════════════════════════════════════╗
+║                        RLHF PIPELINE                            ║
+╠═════════════════════════════════════════════════════════════════╣
+║                                                                 ║
+║   Step 1: COLLECT COMPARISONS                                   ║
+║   ─────────────────────────                                     ║
+║   For each prompt, generate 2 responses                         ║
+║   Human labels: Response A > Response B (or vice versa)         ║
+║                                                                 ║
+║   Step 2: TRAIN REWARD MODEL                                    ║
+║   ───────────────────────                                       ║
+║   Neural network that scores responses                          ║
+║   Higher score = More preferred by humans                       ║
+║                                                                 ║
+║   Step 3: RL OPTIMIZATION (PPO)                                 ║
+║   ─────────────────────────                                     ║
+║   Generate responses → Score with reward model                  ║
+║   Update policy to maximize reward                              ║
+║   Add KL penalty to prevent drift from base model               ║
+║                                                                 ║
+║   Result: Model outputs what humans prefer!                     ║
+║                                                                 ║
+╚═════════════════════════════════════════════════════════════════╝
+                </pre>
+            </div>
+
+            <h3>DPO: The Simpler Alternative</h3>
+            <div class="phase-box">
+                <h4>⚡ Why DPO is Popular (2024-2026)</h4>
+                <table class="table">
+                    <tr>
+                        <th>RLHF</th>
+                        <th>DPO</th>
+                    </tr>
+                    <tr>
+                        <td>Requires reward model training</td>
+                        <td>No reward model needed</td>
+                    </tr>
+                    <tr>
+                        <td>Complex RL loop (PPO)</td>
+                        <td>Simple supervised learning</td>
+                    </tr>
+                    <tr>
+                        <td>Unstable training</td>
+                        <td>Stable, predictable</td>
+                    </tr>
+                    <tr>
+                        <td>Expensive compute</td>
+                        <td>Cheaper, faster</td>
+                    </tr>
+                    <tr>
+                        <td>Industry standard (GPT-4)</td>
+                        <td>Growing adoption (Llama, Mistral)</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="idea-box">
+                <h4>💡 Training Idea #3: Preference Data Collection</h4>
+                <strong>Quality Preferences = Quality Alignment</strong><br><br>
+                • Create comparison datasets: (prompt, chosen, rejected)<br>
+                • Use domain experts for specialized tasks<br>
+                • Include safety preferences (refuse harmful requests)<br>
+                • Add format preferences (JSON output, bullet points, etc.)<br>
+                • Consider Constitutional AI: Use AI to help rate responses
+            </div>
+        </div>
+
+        <!-- 6. Training for Accuracy -->
+        <div class="section">
+            <h2>6️⃣ How to Train LLMs for Accurate Results</h2>
+
+            <h3>The Accuracy Triangle</h3>
+            <div class="grid-3">
+                <div class="visual-item">
+                    <strong>📚 Knowledge</strong>
+                    Train on factually accurate data<br><br>
+                    Verify sources, remove misinformation
+                </div>
+                <div class="visual-item">
+                    <strong>🎯 Calibration</strong>
+                    Model knows what it knows<br><br>
+                    Says "I don't know" appropriately
+                </div>
+                <div class="visual-item">
+                    <strong>✅ Verification</strong>
+                    Self-check capabilities<br><br>
+                    Chain-of-thought reasoning
+                </div>
+            </div>
+
+            <h3>Techniques for Accurate Responses</h3>
+            <div class="idea-box">
+                <h4>🎓 Technique 1: Chain-of-Thought Training</h4>
+                Train model to "show its work" before answering:<br><br>
+                <strong>Without CoT:</strong> "Q: 23 * 17 = ? A: 391"<br>
+                <strong>With CoT:</strong> "Q: 23 * 17 = ? Let me calculate step by step: 23 × 17 = 23 × 10 + 23 × 7 =
+                230 + 161 = 391. A: 391"<br><br>
+                <em>Result: Fewer calculation errors, better reasoning!</em>
+            </div>
+
+            <div class="idea-box">
+                <h4>🎓 Technique 2: Retrieval-Augmented Training</h4>
+                Train model to use retrieved context effectively:<br><br>
+                • Include examples where model uses provided context<br>
+                • Teach model to cite sources<br>
+                • Train on "context says X, so answer is Y" patterns<br><br>
+                <em>Result: Better RAG performance, fewer hallucinations!</em>
+            </div>
+
+            <div class="idea-box">
+                <h4>🎓 Technique 3: Uncertainty Expression</h4>
+                Train model to express confidence levels:<br><br>
+                <strong>High confidence:</strong> "The capital of France is Paris."<br>
+                <strong>Low confidence:</strong> "I'm not certain, but I believe the population might be around..."<br>
+                <strong>Unknown:</strong> "I don't have information about events after my training date."<br><br>
+                <em>Result: Users know when to trust the response!</em>
+            </div>
+
+            <div class="idea-box">
+                <h4>🎓 Technique 4: Self-Consistency Training</h4>
+                Train model to verify its own answers:<br><br>
+                1. Generate multiple reasoning paths<br>
+                2. Check if they all reach the same answer<br>
+                3. If not, reconsider the problem<br><br>
+                <em>Result: More reliable answers for complex problems!</em>
+            </div>
+        </div>
+
+        <!-- 7. Practical Training Ideas -->
+        <div class="section">
+            <h2>7️⃣ Practical Ideas for Training Better LLMs</h2>
+
+            <h3>For SDET/Testing Use Cases</h3>
+            <div class="testing-box">
+                <h4>🧪 Test-Specific Training Data</h4>
+                <table class="table">
+                    <tr>
+                        <th>Use Case</th>
+                        <th>Training Data Idea</th>
+                        <th>Expected Improvement</th>
+                    </tr>
+                    <tr>
+                        <td>Test case generation</td>
+                        <td>Pairs of (requirements, comprehensive test cases)</td>
+                        <td>Better edge case coverage</td>
+                    </tr>
+                    <tr>
+                        <td>Bug report analysis</td>
+                        <td>Pairs of (bug report, root cause + fix)</td>
+                        <td>Faster debugging</td>
+                    </tr>
+                    <tr>
+                        <td>Test script writing</td>
+                        <td>Pairs of (test intent, working Playwright/Selenium code)</td>
+                        <td>More reliable scripts</td>
+                    </tr>
+                    <tr>
+                        <td>Flaky test detection</td>
+                        <td>Examples of flaky vs stable test patterns</td>
+                        <td>Proactive flake prevention</td>
+                    </tr>
+                    <tr>
+                        <td>API test generation</td>
+                        <td>Pairs of (API spec, comprehensive test suites)</td>
+                        <td>Better API coverage</td>
+                    </tr>
+                </table>
+            </div>
+
+            <h3>The Training Checklist</h3>
+            <div class="logic-block">
+                BEFORE TRAINING:
+                □ Collect diverse, high-quality data
+                □ Clean and deduplicate dataset
+                □ Validate data format and labels
+                □ Create train/validation/test splits
+                □ Define evaluation metrics
+
+                DURING TRAINING:
+                □ Monitor loss curves (should decrease smoothly)
+                □ Check for overfitting (val loss increasing)
+                □ Adjust learning rate if needed
+                □ Save checkpoints regularly
+                □ Evaluate on held-out test set
+
+                AFTER TRAINING:
+                □ Compare against baseline model
+                □ Test on edge cases
+                □ Check for regressions
+                □ Validate safety behavior
+                □ A/B test with users</div>
+
+            <h3>Quick Training Tips</h3>
+            <div class="grid-2">
+                <div class="phase-box">
+                    <h4>✅ DO</h4>
+                    • Start with small experiments<br>
+                    • Use quality over quantity in data<br>
+                    • Include diverse examples<br>
+                    • Test frequently during training<br>
+                    • Document everything<br>
+                    • Version control your datasets
+                </div>
+                <div class="example-box">
+                    <h4>❌ DON'T</h4>
+                    • Train on unverified data<br>
+                    • Skip data cleaning<br>
+                    • Ignore validation metrics<br>
+                    • Train too long (overfitting)<br>
+                    • Forget safety testing<br>
+                    • Use biased/toxic data
+                </div>
+            </div>
+        </div>
+
+        <!-- 8. Evaluation Metrics -->
+        <div class="section">
+            <h2>8️⃣ How to Measure Training Success</h2>
+
+            <table class="table">
+                <tr>
+                    <th>Metric</th>
+                    <th>What It Measures</th>
+                    <th>Good Value</th>
+                </tr>
+                <tr>
+                    <td><strong>Perplexity</strong></td>
+                    <td>How "surprised" the model is by test data</td>
+                    <td>Lower is better (10-30 typical)</td>
+                </tr>
+                <tr>
+                    <td><strong>BLEU Score</strong></td>
+                    <td>N-gram overlap with reference</td>
+                    <td>Higher is better (0-100)</td>
+                </tr>
+                <tr>
+                    <td><strong>ROUGE Score</strong></td>
+                    <td>Recall of reference content</td>
+                    <td>Higher is better (0-1)</td>
+                </tr>
+                <tr>
+                    <td><strong>Human Eval</strong></td>
+                    <td>Human ratings of quality</td>
+                    <td>Higher preference rate</td>
+                </tr>
+                <tr>
+                    <td><strong>Task-Specific Accuracy</strong></td>
+                    <td>Correct answers on benchmarks</td>
+                    <td>Higher % correct</td>
+                </tr>
+                <tr>
+                    <td><strong>Safety Scores</strong></td>
+                    <td>Refusal of harmful requests</td>
+                    <td>Higher refusal rate</td>
+                </tr>
+            </table>
+
+            <div class="key-concept">
+                <strong>🎯 The Ultimate Test:</strong> Does the model help users accomplish their goals?<br><br>
+                All metrics are proxies — real-world performance is what matters!
+            </div>
+        </div>
+
+        <!-- 9. Common Mistakes -->
+        <div class="section">
+            <h2>9️⃣ Common Training Mistakes</h2>
+            <div class="mistake-box"><strong>❌ Training on too little data:</strong> Need thousands to millions of
+                examples for meaningful improvement</div>
+            <div class="mistake-box"><strong>❌ Poor data quality:</strong> Model learns from mistakes in training
+                data — garbage in, garbage out!</div>
+            <div class="mistake-box"><strong>❌ Overfitting:</strong> Model memorizes training data instead of
+                learning patterns — always use validation set!</div>
+            <div class="mistake-box"><strong>❌ Ignoring alignment:</strong> Without RLHF/DPO, model may be
+                knowledgeable but unhelpful or unsafe</div>
+            <div class="mistake-box"><strong>❌ No baseline comparison:</strong> Always compare against base model to
+                measure actual improvement</div>
+            <div class="mistake-box"><strong>❌ Skipping safety testing:</strong> Model might learn harmful behaviors
+                from training data</div>
+        </div>
+
+        <!-- 10. Summary -->
+        <div class="section">
+            <h2>🔟 One-Line Summary</h2>
+            <div class="summary-box">
+                💡 LLMs become accurate through a 3-phase journey: Pre-training builds knowledge, SFT teaches format,
+                and Alignment instills values — with data quality being the most important factor at every stage!
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
